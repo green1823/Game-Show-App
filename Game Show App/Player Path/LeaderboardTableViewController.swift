@@ -20,6 +20,10 @@ class LeaderboardTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
+    /* Dismisses the leaderboard */
+    @IBAction func closeButton(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
