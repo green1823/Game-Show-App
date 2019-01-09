@@ -4,8 +4,13 @@
 //
 //  Created by Green, Jackie on 10/22/18.
 //  Copyright © 2018 Green, Jackie. All rights reserved.
-// Here is a link to multipeer stuff https://www.hackingwithswift.com/example-code/system/how-to-/create-a-peer-to-peer-network-using-the-multipeer-connectivity-framework
 
+
+
+/*
+ TODO:
+ N/A
+ */
 import UIKit
 
 extension UISegmentedControl {

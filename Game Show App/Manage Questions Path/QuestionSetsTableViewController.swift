@@ -6,9 +6,9 @@
 //  Copyright © 2018 Green, Jackie. All rights reserved.
 //
 
-/* We have no way of deleting any question sets or questions at the moment. We should add that as a feature. We also need to add permanence to the app. Somehow taking the array of QuestionSet from this view controller and saving it to storage. Currently reading section 4.7 of the book to find a way to do this.
- UPDATE: We can choose between NSCoding (currently partially implemented but not working in Question and QuestionSet classes) and Codable (can be implemented on a class, see https://medium.com/if-let-swift-programming/migrating-to-codable-from-nscoding-ddc2585f28a4 ) which is supposedly more modern. Both require retrieveProducts method somewhere, but I'm not sure if this is in the view controllers or the classes.
- -Jackie
+/*
+ TODO:
+ Add a delete QuestionSet option. This must not only remove the object from the list, but also the version stored with codable.
  */
 import UIKit
 

@@ -6,6 +6,14 @@
 //  Copyright © 2018 Green, Jackie. All rights reserved.
 //
 
+
+
+
+/*
+ TODO:
+ On hold for now. This view controller's interface and purpose may need to be rethought.
+ Depending on the how starting a game and allowing others to join with Multipeer we may need to do something other than a room code.
+ */
 import UIKit
 
 class RoomCodeViewController: UIViewController {

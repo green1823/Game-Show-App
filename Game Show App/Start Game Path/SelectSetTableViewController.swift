@@ -6,6 +6,13 @@
 //  Copyright © 2018 Green, Jackie and ya boi. All rights reserved.
 //
 
+
+
+
+/*
+ TODO:
+ Need to send the selected QuestionSet object to ManageGameTableViewController.
+ */
 import UIKit
 
 class SelectSetTableViewController: UITableViewController {

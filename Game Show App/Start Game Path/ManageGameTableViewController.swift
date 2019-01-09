@@ -9,13 +9,16 @@
 
 /*
  TODO:
- We need multipeer to work for this viewcontroller's functionality.
+ We need Multipeer to work for this viewcontroller's functionality.
  Recieve the user names from all the users and store them in an array of User objects.
  We need to create this User object with two elements: a String for their name and an Int for the number of points they have.
  The view controller will recieve all the strings and then create an array of these user name strings, with all their points initialized to zero.
  The table cells will fill with all these array elements.
  The plus and minus buttons will add and subtract the amount of points the current question is worth from that User object's points.
  The view controller will also use multipeer to send the array of Users to the leaderboard when students select it, as well as to send the current question to the players' screens.
+ 
+ Needs to recieve a QuestionSet object from SelectSetTableViewController.
+ The question will be sent to users through Multipeer.
  Hitting next will increment the array of questions to the next.
  
  https://www.hackingwithswift.com/example-code/system/how-to-create-a-peer-to-peer-network-using-the-multipeer-connectivity-framework

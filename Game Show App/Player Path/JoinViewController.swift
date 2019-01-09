@@ -6,6 +6,14 @@
 //  Copyright © 2019 Green, Jackie. All rights reserved.
 //
 
+
+
+/*
+ TODO:
+ Need Multipeer
+ If room codes are necessary to join a game they will be entered here. If not anything else needed to join the game will be done.
+ Send name to host in ManageGameTableViewController
+ */
 import UIKit
 
 class JoinViewController: UIViewController {

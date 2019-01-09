@@ -6,6 +6,17 @@
 //  Copyright © 2019 Green, Jackie. All rights reserved.
 //
 
+
+
+/*
+ Multipeer needed
+ Recieve Question object from array of questions in ManageGameTableViewController
+ Enable correct answer view based on question type
+ Change questionLabel text to question
+ If MC question - change button labels to answers
+ Add images for buttons and buzzer
+ Program animations for buttons and buzzer pressing (last priority, images will be provided when we get here)
+ */
 import UIKit
 
 class GameViewController: UIViewController {

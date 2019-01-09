@@ -6,6 +6,15 @@
 //  Copyright © 2019 Green, Jackie. All rights reserved.
 //
 
+
+
+/*
+ TODO:
+ Needs Multipeer
+ Request array of names and scores from ManageGameTableViewController of host
+ Display the names and scores in the table view
+ Highlight the user's row? (optional)
+ */
 import UIKit
 
 class LeaderboardTableViewController: UITableViewController {
