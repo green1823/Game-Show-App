@@ -185,7 +185,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pc7-NM-HXx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1919" y="-553"/>
+            <point key="canvasLocation" x="1917" y="-482"/>
         </scene>
         <!--Question Sets Table View Controller-->
         <scene sceneID="K8T-10-tDS">
@@ -272,7 +272,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ngz-vr-jd7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3862" y="-900"/>
+            <point key="canvasLocation" x="3861" y="-900"/>
         </scene>
         <!--Manage Game Table View Controller-->
         <scene sceneID="Wei-Ms-jUs">
@@ -358,7 +358,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="40L-4b-cm1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4803" y="-900"/>
+            <point key="canvasLocation" x="4703" y="-900"/>
         </scene>
         <!--Room Code View Controller-->
         <scene sceneID="BUM-Tr-b1u">
@@ -510,7 +510,7 @@
             </objects>
             <point key="canvasLocation" x="1917.3913043478262" y="725.89285714285711"/>
         </scene>
-        <!--Title-->
+        <!--Game View Controller-->
         <scene sceneID="oD1-Ww-QoG">
             <objects>
                 <viewController id="J6Q-cl-R4c" customClass="GameViewController" customModule="Game_Show_App" customModuleProvider="target" sceneMemberID="viewController">
@@ -552,6 +552,12 @@
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vhV-SE-RPS" userLabel="BView">
                                 <rect key="frame" x="20.5" y="229" width="373" height="448"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8KV-rD-4XZ">
+                                        <rect key="frame" x="-0.5" y="0.0" width="373" height="448"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wzy-Ll-arr" userLabel="MCView">
@@ -650,7 +656,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="hT8-r1-9ds">
+                    <navigationItem key="navigationItem" id="hT8-r1-9ds">
                         <barButtonItem key="rightBarButtonItem" title="Leaderboard" id="SFF-6D-PIx">
                             <connections>
                                 <segue destination="fo6-g2-3VR" kind="popoverPresentation" popoverAnchorBarButtonItem="SFF-6D-PIx" id="1yA-BI-HYi">
@@ -662,7 +668,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c7p-FS-6nk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2928.90625" y="724.8046875"/>
+            <point key="canvasLocation" x="2929" y="725"/>
         </scene>
         <!--Leaderboard Table View Controller-->
         <scene sceneID="JnW-af-ZGj">
@@ -717,7 +723,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eKA-ZY-HP2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3860" y="725"/>
+            <point key="canvasLocation" x="3861" y="725"/>
         </scene>
         <!--Question List Table View Controller-->
         <scene sceneID="a7u-RE-Zvb">
@@ -1103,7 +1109,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cF4-GM-sRr" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="OMS-hn-8eG" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4707.2463768115949" y="-56.250000000000007"/>
+            <point key="canvasLocation" x="4704" y="-50"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zox-G7-qxd">

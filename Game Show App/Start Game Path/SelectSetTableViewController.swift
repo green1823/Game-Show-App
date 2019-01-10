@@ -62,6 +62,7 @@ class SelectSetTableViewController: UITableViewController {
         return cell
     }
 
+    /* Sends the selected question set to ManageGameTableViewController */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let ManageGameViewController = segue.destination as? ManageGameTableViewController else {return}
         

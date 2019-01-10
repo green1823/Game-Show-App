@@ -17,8 +17,7 @@
  The plus and minus buttons will add and subtract the amount of points the current question is worth from that User object's points.
  The view controller will also use multipeer to send the array of Users to the leaderboard when students select it, as well as to send the current question to the players' screens.
  
- Needs to recieve a QuestionSet object from SelectSetTableViewController.
- The question will be sent to users through Multipeer.
+ Needs to send the current question to users through Multipeer.
  Hitting next will increment the array of questions to the next.
  
  https://www.hackingwithswift.com/example-code/system/how-to-create-a-peer-to-peer-network-using-the-multipeer-connectivity-framework
@@ -28,6 +27,7 @@ import UIKit
 
 class ManageGameTableViewController: UITableViewController {
 
+    //The question set for this game
     var questionSet: QuestionSet?
     
     override func viewDidLoad() {
