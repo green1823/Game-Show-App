@@ -387,6 +387,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Enter"/>
                                 <connections>
+                                    <action selector="createSession:" destination="8oQ-ne-clN" eventType="touchUpInside" id="qJg-ji-ND6"/>
                                     <segue destination="700-di-8PX" kind="show" id="Cxa-ZN-6wh"/>
                                 </connections>
                             </button>
