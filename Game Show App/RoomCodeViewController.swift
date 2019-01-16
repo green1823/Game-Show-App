@@ -14,6 +14,8 @@
  On hold for now. This view controller's interface and purpose may need to be rethought.
  Depending on the how starting a game and allowing others to join with Multipeer we may need to do something other than a room code.
  https://www.hackingwithswift.com/example-code/networking/how-to-create-a-peer-to-peer-network-using-the-multipeer-connectivity-framework
+ 
+ https://www.youtube.com/watch?v=H5c4vo6p5Fg
  */
 import UIKit
 //import multipeer
@@ -21,7 +23,6 @@ import MultipeerConnectivity
 
 class RoomCodeViewController: UIViewController, MCSessionDelegate, MCBrowserViewControllerDelegate {
     
-
     //multipeer variables
     var peerID: MCPeerID!
     var mcSession: MCSession!
@@ -30,14 +31,24 @@ class RoomCodeViewController: UIViewController, MCSessionDelegate, MCBrowserView
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        //multipeer attempt
+        setUpConnectivity()
+    }
+    
+    func setUpConnectivity() {
         peerID = MCPeerID(displayName: UIDevice.current.name)
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
         mcSession.delegate = self
     }
     
     /* Methods to conform to multipeer protocols */
+    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+        
+    }
+    
+    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+        
+    }
+    
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
         
     }
@@ -51,33 +62,11 @@ class RoomCodeViewController: UIViewController, MCSessionDelegate, MCBrowserView
     }
     
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
-        dismiss(animated: true)
+        
     }
     
     func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
-        dismiss(animated: true)
-    }
-    
-    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-        switch state {
-        case MCSessionState.connected:
-            print("Connected: \(peerID.displayName)")
-            
-        case MCSessionState.connecting:
-            print("Connecting: \(peerID.displayName)")
-            
-        case MCSessionState.notConnected:
-            print("Not Connected: \(peerID.displayName)")
-        }
-    }
-    
-    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        //might need code? haven't checked
-    }
-    
-    
-    //
-    @IBAction func createSession(_ sender: Any) {
+        
     }
     
 
