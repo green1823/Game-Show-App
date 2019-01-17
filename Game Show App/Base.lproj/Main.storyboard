@@ -363,6 +363,7 @@
         <!--Join View Controller-->
         <scene sceneID="8nB-A5-Lvc">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X5h-a2-Npq" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="8iE-DL-cVy" customClass="JoinViewController" customModule="Game_Show_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="G0z-5u-Xee">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -405,7 +406,6 @@
                                 </variation>
                                 <connections>
                                     <action selector="enterButton:" destination="8iE-DL-cVy" eventType="touchUpInside" id="gUf-fc-J3j"/>
-                                    <segue destination="J6Q-cl-R4c" kind="show" id="ALH-w0-A1q"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FOx-zH-Tt0" userLabel="spacer">
@@ -441,9 +441,9 @@
                     <connections>
                         <outlet property="enterButton" destination="dhu-Xl-gIp" id="l9a-QI-1ym"/>
                         <outlet property="nameTextField" destination="g1a-tJ-huV" id="zId-OW-1wX"/>
+                        <segue destination="J6Q-cl-R4c" kind="show" identifier="JoinGame" id="2I0-An-vJm"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="X5h-a2-Npq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1917.3913043478262" y="725.89285714285711"/>
         </scene>
@@ -1073,6 +1073,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="5ud-UA-ZnV"/>
-        <segue reference="zx7-AP-v13"/>
+        <segue reference="bfY-6c-lwH"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -50,7 +50,7 @@ class JoinViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
     
     @IBAction func enterButton(_ sender: Any) {
         setUpConnectivity()
-        let mcBrowser = MCBrowserViewController(serviceType: "ba-td", session: self.mcSession)
+        let mcBrowser = MCBrowserViewController(serviceType: "connect", session: self.mcSession)
         mcBrowser.delegate = self
         self.present(mcBrowser, animated: true, completion: nil)
     }
@@ -83,11 +83,11 @@ class JoinViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
     }
     
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
-        
+        performSegue(withIdentifier: "JoinGame", sender: self)
     }
     
     func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
-        
+        dismiss(animated: true, completion: nil)
     }
     
 
