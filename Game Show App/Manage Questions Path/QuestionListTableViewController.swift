@@ -2,8 +2,8 @@
 
 /*
  TODO:
- Need an option to delete individual questions. Must delete from the list AND the version stored with codable.
  Find a better solution to the save button. Possibly remove the automatic back button
+            We could do a solution where you drag down from the top of the screen to save?
  */
 import UIKit
 
@@ -65,15 +65,18 @@ class QuestionListTableViewController: UITableViewController {
         if (editingStyle == .delete) {
             self.questions.remove(at: indexPath.row)
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            /*
+            This saves the whole question/questionSet file structure not just the idividual
+            questions on the screen
+             */
+            let archiveUrl = documentsDirectory.appendingPathComponent("set_test").appendingPathExtension("plist")
+            let propertyListEncoder = PropertyListEncoder()
+            let encodedQuestionSet = try? propertyListEncoder.encode(questions);
+            try? encodedQuestionSet?.write(to: archiveUrl, options: .noFileProtection);
             tableView.reloadData()
         }
     }
     func updateSaveButtonState(){
-        //        if let _: String = setNameTextField.text {
-        //            SaveButton.isEnabled = true
-        //        } else {
-        //            SaveButton.isEnabled = false
-        //        }
         if(setNameTextField.text != ""){
             SaveButton.isEnabled = true;
         }else{
