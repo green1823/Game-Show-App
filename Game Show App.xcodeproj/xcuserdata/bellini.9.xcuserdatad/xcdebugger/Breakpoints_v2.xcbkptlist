@@ -17,38 +17,6 @@
             endingLineNumber = "12"
             landmarkName = "PropertyKeys"
             landmarkType = "14">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "globalinit_014_965D29D7402A0C17ABE56097A1775081E_func0"
-                  moduleName = "test game show interfaces"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/Groups03/HS/Shared/old%20stuff/StudioCT/NAS/StudioCT/StudioCT%20Staff/Jackie/AU18-SP19%20Projects/test%20game%20show%20interfaces/test%20game%20show%20interfaces/QuestionSet.swift"
-                  timestampString = "565296985.731402"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "13"
-                  endingLineNumber = "13"
-                  offsetFromSymbolStart = "23">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "test_game_show_interfaces.QuestionSet.PropertyKeys.questions.unsafeMutableAddressor : Swift.String"
-                  moduleName = "test game show interfaces"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/Groups03/HS/Shared/old%20stuff/StudioCT/NAS/StudioCT/StudioCT%20Staff/Jackie/AU18-SP19%20Projects/test%20game%20show%20interfaces/test%20game%20show%20interfaces/QuestionSet.swift"
-                  timestampString = "565296985.734388"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "13"
-                  endingLineNumber = "13"
-                  offsetFromSymbolStart = "4">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

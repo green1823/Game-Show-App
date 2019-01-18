@@ -13,7 +13,7 @@
 import UIKit
 
 class QuestionSetsTableViewController: UITableViewController {
-
+    
     struct PropertyKeys {
         static let questionSetCell = "QuestionSetCell"
         static let addQuestionSetSegue = "AddQuestionSet"
@@ -31,7 +31,7 @@ class QuestionSetsTableViewController: UITableViewController {
     //end
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Uncomment the following line to preserve selection between presentations
         self.clearsSelectionOnViewWillAppear = false
         
@@ -53,22 +53,37 @@ class QuestionSetsTableViewController: UITableViewController {
         tableView.reloadData()
         
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return questionSets.count
     }
-
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            self.questionSets.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            let archiveUrl = documentsDirectory.appendingPathComponent("set_test").appendingPathExtension("plist")
+            let propertyListEncoder = PropertyListEncoder()
+            let encodedQuestionSet = try? propertyListEncoder.encode(questionSets);
+            try? encodedQuestionSet?.write(to: archiveUrl, options: .noFileProtection);
+            tableView.reloadData()
+        }
+    }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: PropertyKeys.questionSetCell, for: indexPath)
-
+        
         let questionSet = questionSets[indexPath.row]
         cell.textLabel?.text = questionSet.name
-
+        
         return cell
     }
-
+    
     @IBAction func unwindToQuestionSet(segue: UIStoryboardSegue) {
         guard let source = segue.source as? QuestionListTableViewController, let set = source.set else {return}
         if let indexPath = tableView.indexPathForSelectedRow {
@@ -98,5 +113,5 @@ class QuestionSetsTableViewController: UITableViewController {
             QuestionListTableViewController.set = questionSets[indexPath.row]
         }
     }
-
+    
 }

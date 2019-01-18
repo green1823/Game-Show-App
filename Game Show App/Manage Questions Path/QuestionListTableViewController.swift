@@ -3,7 +3,7 @@
 /*
  TODO:
  Need an option to delete individual questions. Must delete from the list AND the version stored with codable.
- Find a better solution to the save button. Possibly remove the automatic back button 
+ Find a better solution to the save button. Possibly remove the automatic back button
  */
 import UIKit
 
@@ -15,15 +15,15 @@ class QuestionListTableViewController: UITableViewController {
         static let editQuestionSegue = "EditQuestion"
         static let unwind = "UnwindToQuestionSetTable"
     }
-
+    
     var questions: [Question] = []
     var set: QuestionSet?
     
-//    var questionArchiveURL: URL {
-//        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-//        return documentsURL.appendingPathComponent("questions")
-//    }
-
+    //    var questionArchiveURL: URL {
+    //        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+    //        return documentsURL.appendingPathComponent("questions")
+    //    }
+    
     let documentsDirectory = FileManager.default.urls(for: . documentDirectory, in: .userDomainMask).first!
     
     @IBOutlet weak var setNameTextField: UITextField!
@@ -41,7 +41,7 @@ class QuestionListTableViewController: UITableViewController {
         performSegue(withIdentifier: PropertyKeys.unwind, sender: self)
         
         /* CODABLE ATTEMPT: wrong method? maybe move to the method that recieves unwind and creates an array of question sets in question sets list view controller */
-
+        
     }
     
     override func viewDidLoad() {
@@ -57,13 +57,23 @@ class QuestionListTableViewController: UITableViewController {
         setNameTextField.text = set.name
         questions = set.questions
     }
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
     
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            self.questions.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.reloadData()
+        }
+    }
     func updateSaveButtonState(){
-//        if let _: String = setNameTextField.text {
-//            SaveButton.isEnabled = true
-//        } else {
-//            SaveButton.isEnabled = false
-//        }
+        //        if let _: String = setNameTextField.text {
+        //            SaveButton.isEnabled = true
+        //        } else {
+        //            SaveButton.isEnabled = false
+        //        }
         if(setNameTextField.text != ""){
             SaveButton.isEnabled = true;
         }else{
@@ -76,7 +86,7 @@ class QuestionListTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
- 
+        
         tableView.reloadData()
     }
     
@@ -99,18 +109,18 @@ class QuestionListTableViewController: UITableViewController {
     
     // MARK: - Navigation
     
-//    @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
-//        guard let source = segue.source as? QuestionCreationViewController,
-//            let question = source.currentQuestion else {return}
-//
-//        if let indexPath = tableView.indexPathForSelectedRow {
-//            questions.remove(at: indexPath.row)
-//            questions.insert(question, at: indexPath.row)
-//            tableView.deselectRow(at: indexPath, animated: true)
-//        } else {
-//            questions.append(question)
-//        }
-//    }
+    //    @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
+    //        guard let source = segue.source as? QuestionCreationViewController,
+    //            let question = source.currentQuestion else {return}
+    //
+    //        if let indexPath = tableView.indexPathForSelectedRow {
+    //            questions.remove(at: indexPath.row)
+    //            questions.insert(question, at: indexPath.row)
+    //            tableView.deselectRow(at: indexPath, animated: true)
+    //        } else {
+    //            questions.append(question)
+    //        }
+    //    }
     
     @IBAction func unwindToQuestionList(segue: UIStoryboardSegue) {
         guard let source = segue.source as? QuestionCreationViewController, let currentQuestion = source.currentQuestion else {return}
