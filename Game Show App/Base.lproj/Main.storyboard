@@ -182,6 +182,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rEW-Uo-Wa0"/>
                     </view>
+                    <connections>
+                        <segue destination="700-di-8PX" kind="show" identifier="StartGame" id="E4y-t3-FNb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pc7-NM-HXx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -272,7 +275,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ngz-vr-jd7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3861" y="-900"/>
+            <point key="canvasLocation" x="2929" y="-900"/>
         </scene>
         <!--Manage Game Table View Controller-->
         <scene sceneID="Wei-Ms-jUs">
@@ -358,12 +361,11 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="40L-4b-cm1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4703" y="-900"/>
+            <point key="canvasLocation" x="3861" y="-900"/>
         </scene>
         <!--Join View Controller-->
         <scene sceneID="8nB-A5-Lvc">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="X5h-a2-Npq" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="8iE-DL-cVy" customClass="JoinViewController" customModule="Game_Show_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="G0z-5u-Xee">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -444,6 +446,7 @@
                         <segue destination="J6Q-cl-R4c" kind="show" identifier="JoinGame" id="2I0-An-vJm"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X5h-a2-Npq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1917.3913043478262" y="725.89285714285711"/>
         </scene>

@@ -32,7 +32,9 @@ class HostViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
     
     @IBAction func startGameButtonPressed(_ sender: Any) {
         setUpConnectivity()
-        //...
+        self.mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "connect", discoveryInfo: nil, session: self.mcSession)
+        self.mcAdvertiserAssistant.start()
+        performSegue(withIdentifier: "StartGame", sender: self)
     }
     
     func setUpConnectivity() {
