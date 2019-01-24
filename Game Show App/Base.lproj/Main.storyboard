@@ -731,7 +731,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="Rph-Im-5hI" kind="show" identifier="EditQuestion" id="5ud-UA-ZnV"/>
+                                    <segue destination="Rph-Im-5hI" kind="showDetail" identifier="EditQuestion" id="5ud-UA-ZnV"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -743,7 +743,7 @@
                     <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="aDE-Oz-Cgv">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="eh9-f5-2Bt">
                             <connections>
-                                <segue destination="Rph-Im-5hI" kind="show" identifier="AddQuestion" id="Y1i-Ja-cLQ"/>
+                                <segue destination="Rph-Im-5hI" kind="showDetail" identifier="AddQuestion" id="Y1i-Ja-cLQ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -767,7 +767,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z9p-ep-jTT" userLabel="questionLabel">
-                                <rect key="frame" x="167.5" y="120" width="79" height="107.5"/>
+                                <rect key="frame" x="167.5" y="76" width="79" height="107.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -776,7 +776,7 @@
                                 </variation>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="z3l-7s-hKD" userLabel="questionTextField">
-                                <rect key="frame" x="20.5" y="227.5" width="373" height="30"/>
+                                <rect key="frame" x="20.5" y="183.5" width="373" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -785,7 +785,7 @@
                                 </variation>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="etu-J2-XaA" userLabel="pointValueView">
-                                <rect key="frame" x="0.0" y="257.5" width="207" height="134.5"/>
+                                <rect key="frame" x="0.0" y="213.5" width="207" height="134.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Point Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KFm-Tv-WW3" userLabel="pointValueLabel">
                                         <rect key="frame" x="94.5" y="0.0" width="96.5" height="134.5"/>
@@ -805,7 +805,7 @@
                                 </constraints>
                             </view>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DhS-yd-G1E" userLabel="pointValueTextField">
-                                <rect key="frame" x="223" y="312.5" width="96.5" height="30"/>
+                                <rect key="frame" x="223" y="268.5" width="96.5" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="96.5" id="VwZ-0i-bh2"/>
                                 </constraints>
@@ -966,10 +966,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sGP-zF-CSr">
-                                <rect key="frame" x="0.0" y="392" width="414" height="103.5"/>
+                                <rect key="frame" x="0.0" y="348" width="414" height="147.5"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3FB-so-mLG">
-                                        <rect key="frame" x="16.5" y="25" width="381" height="54.5"/>
+                                        <rect key="frame" x="16.5" y="47" width="381" height="54.5"/>
                                         <segments>
                                             <segment title="True/False"/>
                                             <segment title="Buzzer"/>
@@ -987,7 +987,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="75g-fA-ytH">
-                                <rect key="frame" x="372" y="96" width="34" height="30"/>
+                                <rect key="frame" x="360" y="52" width="34" height="30"/>
                                 <state key="normal" title="Save"/>
                                 <variation key="heightClass=regular-widthClass=regular">
                                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
@@ -996,15 +996,23 @@
                                     <action selector="save:" destination="Rph-Im-5hI" eventType="touchUpInside" id="shK-RG-W7P"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f3n-jt-jwM">
+                                <rect key="frame" x="20" y="52" width="48" height="30"/>
+                                <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="cancel:" destination="Rph-Im-5hI" eventType="touchUpInside" id="Pm3-cV-DKs"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="DhS-yd-G1E" firstAttribute="centerY" secondItem="etu-J2-XaA" secondAttribute="centerY" constant="3" id="0dG-fy-YiI"/>
-                            <constraint firstItem="zht-Gg-p0c" firstAttribute="trailing" secondItem="75g-fA-ytH" secondAttribute="trailing" constant="8" id="1ig-b5-LIx"/>
+                            <constraint firstItem="zht-Gg-p0c" firstAttribute="trailing" secondItem="75g-fA-ytH" secondAttribute="trailing" constant="20" id="1ig-b5-LIx"/>
                             <constraint firstItem="etu-J2-XaA" firstAttribute="leading" secondItem="zht-Gg-p0c" secondAttribute="leading" id="2Vc-xM-tKE"/>
                             <constraint firstItem="CFR-PK-Hxf" firstAttribute="leading" secondItem="zht-Gg-p0c" secondAttribute="leading" constant="16" id="4yu-u3-3Lf"/>
                             <constraint firstItem="sGP-zF-CSr" firstAttribute="leading" secondItem="zht-Gg-p0c" secondAttribute="leading" id="5gH-4R-dhg"/>
                             <constraint firstItem="75g-fA-ytH" firstAttribute="top" secondItem="zht-Gg-p0c" secondAttribute="top" constant="8" id="6XJ-0v-9En"/>
+                            <constraint firstItem="f3n-jt-jwM" firstAttribute="leading" secondItem="zht-Gg-p0c" secondAttribute="leading" constant="20" id="74J-Si-Qdw"/>
                             <constraint firstItem="zht-Gg-p0c" firstAttribute="trailing" secondItem="CFR-PK-Hxf" secondAttribute="trailing" constant="16" id="Boz-T3-jQZ"/>
                             <constraint firstItem="3FB-so-mLG" firstAttribute="height" secondItem="PHr-Up-lX2" secondAttribute="height" multiplier="0.06" id="Cfn-ub-elL"/>
                             <constraint firstItem="z3l-7s-hKD" firstAttribute="centerX" secondItem="zht-Gg-p0c" secondAttribute="centerX" id="Ese-lD-5CF"/>
@@ -1017,6 +1025,7 @@
                             <constraint firstItem="zht-Gg-p0c" firstAttribute="bottom" secondItem="aIG-jt-hgv" secondAttribute="bottom" constant="8" id="cLe-a8-b4O"/>
                             <constraint firstItem="3FB-so-mLG" firstAttribute="width" secondItem="PHr-Up-lX2" secondAttribute="width" multiplier="0.92" id="coI-q8-Jag"/>
                             <constraint firstItem="Z9p-ep-jTT" firstAttribute="height" secondItem="PHr-Up-lX2" secondAttribute="height" multiplier="0.12" id="dFV-1i-dc1"/>
+                            <constraint firstItem="f3n-jt-jwM" firstAttribute="top" secondItem="zht-Gg-p0c" secondAttribute="top" constant="8" id="dfz-Qu-mFY"/>
                             <constraint firstItem="zht-Gg-p0c" firstAttribute="trailing" secondItem="aIG-jt-hgv" secondAttribute="trailing" constant="16" id="f4Z-kF-aF1"/>
                             <constraint firstItem="DhS-yd-G1E" firstAttribute="leading" secondItem="etu-J2-XaA" secondAttribute="trailing" constant="16" id="jmQ-El-ELw"/>
                             <constraint firstItem="Z9p-ep-jTT" firstAttribute="top" secondItem="zht-Gg-p0c" secondAttribute="top" constant="32" id="jsZ-P0-ve9"/>
@@ -1043,7 +1052,8 @@
                         <outlet property="saveButton" destination="75g-fA-ytH" id="sVn-I0-9oY"/>
                         <outlet property="tfSwitch" destination="gcq-4Z-XOI" id="SgW-pN-gVN"/>
                         <outlet property="trueFalseView" destination="CFR-PK-Hxf" id="HfH-bS-Ix7"/>
-                        <segue destination="OMS-hn-8eG" kind="unwind" identifier="UnwindToQuestionListTable" unwindAction="unwindToQuestionListWithSegue:" id="bXx-dH-vEr"/>
+                        <segue destination="OMS-hn-8eG" kind="unwind" identifier="UnwindToQuestionListTableWithCancel" unwindAction="unwindToQuestionListWithCancelWithSegue:" id="E8j-tF-kIJ"/>
+                        <segue destination="OMS-hn-8eG" kind="unwind" identifier="UnwindToQuestionListTableWithSave" unwindAction="unwindToQuestionListWithSaveWithSegue:" id="Ib8-h8-h2T"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cF4-GM-sRr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1075,7 +1085,7 @@
         <image name="Spotlight" width="750" height="1334"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="5ud-UA-ZnV"/>
+        <segue reference="Y1i-Ja-cLQ"/>
         <segue reference="bfY-6c-lwH"/>
     </inferredMetricsTieBreakers>
 </document>

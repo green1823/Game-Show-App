@@ -8,7 +8,7 @@
 
 /*
  TODO:
- Add a delete QuestionSet option. This must not only remove the object from the list, but also the version stored with codable.
+ N/A
  */
 import UIKit
 

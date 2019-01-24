@@ -125,7 +125,7 @@ class QuestionListTableViewController: UITableViewController {
     //        }
     //    }
     
-    @IBAction func unwindToQuestionList(segue: UIStoryboardSegue) {
+    @IBAction func unwindToQuestionListWithSave(segue: UIStoryboardSegue) {
         guard let source = segue.source as? QuestionCreationViewController, let currentQuestion = source.currentQuestion else {return}
         if let indexPath = tableView.indexPathForSelectedRow {
             questions.remove(at: indexPath.row)
@@ -134,6 +134,11 @@ class QuestionListTableViewController: UITableViewController {
         } else {
             questions.append(currentQuestion)
         }
+    }
+    
+    @IBAction func unwindToQuestionListWithCancel(segue: UIStoryboardSegue) {
+        guard let source = segue.source as? QuestionCreationViewController else {return}
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

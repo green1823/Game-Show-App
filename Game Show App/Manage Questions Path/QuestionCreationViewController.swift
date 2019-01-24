@@ -1,6 +1,6 @@
 //
 //  QuestionCreationViewController.swift
-//  test game show interfaces
+//  Game Show App
 //
 //  Created by Green, Jackie on 10/22/18.
 //  Copyright © 2018 Green, Jackie. All rights reserved.
@@ -36,25 +36,26 @@ extension UISegmentedControl {
 class QuestionCreationViewController: UIViewController {
 
     struct PropertyKeys {
-        static let unwind = "UnwindToQuestionListTable"
+        
+        static let unwindSave = "UnwindToQuestionListTableWithSave"
+        static let unwindCancel = "UnwindToQuestionListTableWithCancel"
     }
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
+        //Changes the size of text in questionType when on an iPad
         if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
             questionType.setFontSize(fontSize: 30)
         }
+        
+        //Sets up the initial view
         trueFalseView.isHidden = false
         multipleChoiceView.isHidden = true
         updateView()
         updateSaveButtonState()
-        
-        
-        // Do any additional setup after loading the view.
     }
-    
-    //we need a sender of a Question type from the last table with the
-    //information that is needed to fill the screen with already stored data
     
     @IBOutlet weak var answerField1: UITextField!
     @IBOutlet weak var answerField2: UITextField!
@@ -67,16 +68,17 @@ class QuestionCreationViewController: UIViewController {
     @IBOutlet weak var trueFalseView: UIView!
     @IBOutlet weak var multipleChoiceView: UIView!
     @IBOutlet weak var saveButton: UIButton!
-    //declares currentQuestion as a question
+
     var currentQuestion: Question?
-    //we need to give currentQuestion data
     
     /* Updates view when the question is sent in from tableView before it */
     func updateView() {
+        
         //checks to make sure question is not null
         guard let currentQuestion = currentQuestion else {return}
         questionTextField.text = currentQuestion.question
         pointValueTextField.text = String(currentQuestion.pointValue)
+        
         //switch case to determine what to do for each question
         switch (currentQuestion.type) {
         case .trueOrFalse:
@@ -161,20 +163,14 @@ class QuestionCreationViewController: UIViewController {
                 break;
             }
             currentQuestion = Question(question: question, pointValue: points, type: qType, mcAnswers: mcAns, tfAnswer: tfAns)
-            performSegue(withIdentifier: PropertyKeys.unwind, sender: self)
+            performSegue(withIdentifier: PropertyKeys.unwindSave, sender: self)
+        }
     }
     
-        
-        
-    
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-        //not sending data through for some reason
-
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func cancel(_ sender: Any) {
+        performSegue(withIdentifier: PropertyKeys.unwindCancel, sender: self)
     }
+    
  
         
 }
