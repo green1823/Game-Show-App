@@ -18,12 +18,10 @@ import UIKit
 //import multipeer
 import MultipeerConnectivity
 
-class JoinViewController: UIViewController, MCSessionDelegate, MCBrowserViewControllerDelegate {
+class JoinViewController: UIViewController{
     
     //multipeer variables
-    var peerID: MCPeerID!
-    var mcSession: MCSession!
-    var mcAdvertiserAssistant: MCAdvertiserAssistant!
+
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var enterButton: UIButton!
@@ -49,45 +47,15 @@ class JoinViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
     }
     
     @IBAction func enterButton(_ sender: Any) {
-        setUpConnectivity()
-        let mcBrowser = MCBrowserViewController(serviceType: "connect", session: self.mcSession)
-        mcBrowser.delegate = self
-        self.present(mcBrowser, animated: true, completion: nil)
-    }
-    
-    func setUpConnectivity() {
-        peerID = MCPeerID(displayName: nameTextField.text!)
-        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
-        mcSession.delegate = self
-    }
-    
-    /* Methods to conform to multipeer protocols */
-    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-        
-    }
-    
-    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        
-    }
-    
-    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
-        
-    }
-    
-    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
-        
-    }
-    
-    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
-        
-    }
-    
-    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
         performSegue(withIdentifier: "JoinGame", sender: self)
     }
     
-    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
-        dismiss(animated: true, completion: nil)
+
+    override func prepare(for segue: UIStoryboardSegue, sender: (Any)?){
+        if segue.destination is GameViewController {
+            let vc = segue.destination as? GameViewController
+            vc?.name = nameTextField.text!;
+        }
     }
     
 
