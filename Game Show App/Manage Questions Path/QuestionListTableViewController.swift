@@ -1,9 +1,6 @@
-
-
 /*
  TODO:
- Find a better solution to the save button. Possibly remove the automatic back button
-            We could do a solution where you drag down from the top of the screen to save?
+ N/A
  */
 import UIKit
 
@@ -14,41 +11,35 @@ class QuestionListTableViewController: UITableViewController {
         static let addQuestionSegue = "AddQuestion"
         static let editQuestionSegue = "EditQuestion"
         static let unwind = "UnwindToQuestionSetTable"
+        static let unwindCancel = "UnwindToQuestionSetTableCancel"
     }
     
     var questions: [Question] = []
     var set: QuestionSet?
     
-    //    var questionArchiveURL: URL {
-    //        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-    //        return documentsURL.appendingPathComponent("questions")
-    //    }
-    
     let documentsDirectory = FileManager.default.urls(for: . documentDirectory, in: .userDomainMask).first!
     
     @IBOutlet weak var setNameTextField: UITextField!
     
-    
-    @IBOutlet weak var SaveButton: UIButton!
-    
-    @IBAction func textFieldEdited(_ sender: UITextField) {
-        updateSaveButtonState()
-    }
-    
-    @IBAction func SaveButton(_ sender: Any) {
-        guard let name = setNameTextField.text else {return}
-        set = QuestionSet(questions: questions, name: name)
-        performSegue(withIdentifier: PropertyKeys.unwind, sender: self)
+    @IBAction func BackButton(_ sender: Any) {
         
-        /* CODABLE ATTEMPT: wrong method? maybe move to the method that recieves unwind and creates an array of question sets in question sets list view controller */
-        
+        if(setNameTextField.text != ""){
+            // If the set has a title, save it
+            guard let name = setNameTextField.text else {return}
+            set = QuestionSet(questions: questions, name: name)
+            performSegue(withIdentifier: PropertyKeys.unwind, sender: self)
+        }else if (questions.count > 0){
+            // If a set has questions and no title, shake the text field to alert
+            setNameTextField.shake()
+        } else {
+            // If set has no questions or title, cancel
+            performSegue(withIdentifier: PropertyKeys.unwindCancel, sender: self)
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         updateView()
-        updateSaveButtonState()
-        
     }
     
     func updateView() {
@@ -57,6 +48,7 @@ class QuestionListTableViewController: UITableViewController {
         setNameTextField.text = set.name
         questions = set.questions
     }
+    
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
@@ -76,16 +68,6 @@ class QuestionListTableViewController: UITableViewController {
             tableView.reloadData()
         }
     }
-    func updateSaveButtonState(){
-        if(setNameTextField.text != ""){
-            SaveButton.isEnabled = true;
-        }else{
-            SaveButton.isEnabled = false;
-        }
-    }
-    @IBAction func setNameTextEditingChanged(_ sender: UITextField) {
-        updateSaveButtonState()
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -100,7 +82,7 @@ class QuestionListTableViewController: UITableViewController {
         return questions.count
     }
     
-    //I think that this constructs each cell
+    /* Constructs each cell */
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: PropertyKeys.questionCell, for: indexPath)
         let question = questions[indexPath.row]
@@ -111,19 +93,6 @@ class QuestionListTableViewController: UITableViewController {
     }
     
     // MARK: - Navigation
-    
-    //    @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
-    //        guard let source = segue.source as? QuestionCreationViewController,
-    //            let question = source.currentQuestion else {return}
-    //
-    //        if let indexPath = tableView.indexPathForSelectedRow {
-    //            questions.remove(at: indexPath.row)
-    //            questions.insert(question, at: indexPath.row)
-    //            tableView.deselectRow(at: indexPath, animated: true)
-    //        } else {
-    //            questions.append(question)
-    //        }
-    //    }
     
     @IBAction func unwindToQuestionListWithSave(segue: UIStoryboardSegue) {
         guard let source = segue.source as? QuestionCreationViewController, let currentQuestion = source.currentQuestion else {return}
@@ -150,4 +119,17 @@ class QuestionListTableViewController: UITableViewController {
         }
     }
     
+}
+
+/* Enables shake animation */
+extension UITextField {
+    func shake() {
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.05
+        animation.repeatCount = 5
+        animation.autoreverses = true
+        animation.fromValue = CGPoint(x: self.center.x - 4.0, y: self.center.y)
+        animation.toValue = CGPoint(x: self.center.x + 4.0, y: self.center.y)
+        layer.add(animation, forKey: "position")
+    }
 }

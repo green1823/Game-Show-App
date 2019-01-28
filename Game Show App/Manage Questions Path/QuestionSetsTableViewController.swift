@@ -104,6 +104,11 @@ class QuestionSetsTableViewController: UITableViewController {
         //end
     }
     
+    @IBAction func unwindToQuestionSetCancel(segue: UIStoryboardSegue) {
+        guard let source = segue.source as? QuestionListTableViewController, let set = source.set else {return}
+    }
+
+    
     /* Sends the selected Question Set to QuestionListTableViewController IFF an existing set is selected */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let QuestionListTableViewController = segue.destination as? QuestionListTableViewController else {return}

@@ -101,11 +101,6 @@ class QuestionCreationViewController: UIViewController {
         questionTypeChanged(questionType)
     }
     
-    func saveCurrentUserData(){
-        //should be called in viewWillDisappear?
-        //maybe long term storage will be done in willResignActive
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
