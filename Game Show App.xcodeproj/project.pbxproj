@@ -21,6 +21,7 @@
 		49AEC51721669B39008A6C52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49AEC51621669B39008A6C52 /* Assets.xcassets */; };
 		49AEC51A21669B39008A6C52 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49AEC51821669B39008A6C52 /* LaunchScreen.storyboard */; };
 		560E295E21B074DF00E10F5E /* SelectSetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560E295D21B074DF00E10F5E /* SelectSetTableViewController.swift */; };
+		567151AA2204C24E00A68BB4 /* SelectQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567151A92204C24E00A68BB4 /* SelectQuestionViewController.swift */; };
 		56C2D66A219F3D0100D9CD33 /* QuestionSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C2D669219F3D0100D9CD33 /* QuestionSet.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 		49AEC51921669B39008A6C52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		49AEC51B21669B39008A6C52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		560E295D21B074DF00E10F5E /* SelectSetTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSetTableViewController.swift; sourceTree = "<group>"; };
+		567151A92204C24E00A68BB4 /* SelectQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectQuestionViewController.swift; sourceTree = "<group>"; };
 		56C2D669219F3D0100D9CD33 /* QuestionSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,6 +114,7 @@
 		560E296121B080F400E10F5E /* Start Game Path */ = {
 			isa = PBXGroup;
 			children = (
+				567151A92204C24E00A68BB4 /* SelectQuestionViewController.swift */,
 				560E295D21B074DF00E10F5E /* SelectSetTableViewController.swift */,
 				49ACE16F21B70357007541A2 /* ManageGameTableViewController.swift */,
 			);
@@ -193,6 +196,7 @@
 			files = (
 				495BA7B12177E41900DDC1C7 /* Question.swift in Sources */,
 				56C2D66A219F3D0100D9CD33 /* QuestionSet.swift in Sources */,
+				567151AA2204C24E00A68BB4 /* SelectQuestionViewController.swift in Sources */,
 				4988E84421E3CC9D00482A2C /* JoinViewController.swift in Sources */,
 				4954C85B21823C44005083AE /* QuestionSetsTableViewController.swift in Sources */,
 				4988E84621E3CFBA00482A2C /* GameViewController.swift in Sources */,
