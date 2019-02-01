@@ -11,6 +11,7 @@
 
 /*
  TODO:
+ Crashes when a set is selected. Need to fix.
  Need to send the selected QuestionSet object to ManageGameTableViewController.
  */
 import UIKit
@@ -19,7 +20,6 @@ class SelectSetTableViewController: UITableViewController {
     
     var questionSets: [QuestionSet] = []
     
-    //Do we need this var??? if we are doing editing i think so
     var questionSetArchiveURL: URL {
         let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         return documentsURL.appendingPathComponent("questionSets")

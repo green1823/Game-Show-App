@@ -50,11 +50,12 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
     }
     
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
-        
+        dismiss(animated: true, completion: nil)
     }
     
     func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
         dismiss(animated: true, completion: nil)
+        performSegue(withIdentifier: "UnwindToJoin", sender: self)
     }
     
 
@@ -64,9 +65,9 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
         let mcBrowser = MCBrowserViewController(serviceType: "connect", session: self.mcSession)
         mcBrowser.delegate = self
         self.present(mcBrowser, animated: true, completion: nil)
-        if(mcSession.connectedPeers.count == 0){
-            performSegue(withIdentifier: "EnterName", sender: self)
-        }
+//        if(mcSession.connectedPeers.count == 0){
+//            performSegue(withIdentifier: "EnterName", sender: self)
+//        }
         // Do any additional setup after loading the view.
     }
     func setUpConnectivity() {

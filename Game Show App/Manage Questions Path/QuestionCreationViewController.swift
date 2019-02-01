@@ -9,7 +9,7 @@
 
 /*
  TODO:
- N/A
+ When the keyboard comes up it blocks the bottom half of the screen. We need to make the screen pop upwards on top of the keyboard, with some sort of scroll view. Otherwise the question answers cant be filled in or the true/false value changed. Also, we should be able to dismiss the keyboard by clicking off the text field.
  */
 import UIKit
 

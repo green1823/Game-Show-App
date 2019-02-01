@@ -15,13 +15,8 @@
  Send name to host in ManageGameTableViewController
  */
 import UIKit
-//import multipeer
-import MultipeerConnectivity
 
 class JoinViewController: UIViewController{
-    
-    //multipeer variables
-
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var enterButton: UIButton!
@@ -56,6 +51,11 @@ class JoinViewController: UIViewController{
             let vc = segue.destination as? GameViewController
             vc?.name = nameTextField.text!;
         }
+    }
+    
+    @IBAction func unwindToJoin(segue: UIStoryboardSegue) {
+        guard segue.source is QuestionCreationViewController else {return}
+        
     }
     
 
