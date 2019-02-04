@@ -70,6 +70,8 @@ class SelectSetTableViewController: UITableViewController {
         if let indexPath = tableView.indexPathForSelectedRow {
             SelectQuestionTableViewController.set = questionSets[indexPath.row]
         }
+        let vc = segue.destination as? SelectQuestionTableViewController
+        vc!.setUpSession = true;
         
 //        if segue.destination is SelectQuestionTableViewController {
 //            let vc = segue.destination as? SelectQuestionTableViewController
