@@ -1,85 +1,47 @@
 //
-//  SelectSetTableViewController.swift
-//  test game show interfaces
+//  SelectQuestionViewController.swift
+//  Game Show App
 //
-//  Created by Bellini, Dan on 11/29/18.
-//  Copyright © 2018 Green, Jackie and ya boi. All rights reserved.
+//  Created by Bellini, Dan on 2/1/19.
+//  Copyright © 2019 Green, Jackie. All rights reserved.
 //
 
-
-
-
-/*
- TODO:
- Crashes when a set is selected. Need to fix.
- Need to send the selected QuestionSet object to ManageGameTableViewController.
- */
 import UIKit
 
-class SelectSetTableViewController: UITableViewController {
-    
-    var questionSets: [QuestionSet] = []
-    
-    var questionSetArchiveURL: URL {
-        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        return documentsURL.appendingPathComponent("questionSets")
-    }
-    
+class TableViewController: UITableViewController {
+    var questions: [Question] = []
+    var set: QuestionSet?
     let documentsDirectory = FileManager.default.urls(for: . documentDirectory, in: .userDomainMask).first!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Uncomment the following line to preserve selection between presentations
-        self.clearsSelectionOnViewWillAppear = false
-        
+        // self.clearsSelectionOnViewWillAppear = false
+
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        let archiveUrl = documentsDirectory.appendingPathComponent("set_test").appendingPathExtension("plist")
-        let propertyListDecoder2 = PropertyListDecoder();
-        if let retrievedQuestionSetData = try? Data(contentsOf: archiveUrl), let decodedQuestionSet = try? propertyListDecoder2.decode([QuestionSet].self,from: retrievedQuestionSetData){
-            questionSets = decodedQuestionSet
-        }
-        tableView.reloadData()
     }
 
     // MARK: - Table view data source
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return questionSets.count
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 0
     }
-    
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        return questions.count;
+    }
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SetCell", for: indexPath)
-        
-        let questionSet = questionSets[indexPath.row]
-        cell.textLabel?.text = questionSet.name
+        let cell = tableView.dequeueReusableCell(withIdentifier: "questionCell", for: indexPath)
+        let question = questions[indexPath.row]
+        cell.textLabel?.text = "Question \(String(indexPath.row + 1))"
+        cell.detailTextLabel?.text = question.question
         
         return cell
     }
-
-    /* Sends the selected question set to SelectQuestionViewController */
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.destination is SelectQuestionViewController {
-            let vc = segue.destination as? SelectQuestionViewController
-            vc?.set = questionSets[tableView.indexPathForSelectedRow];
-        }
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)

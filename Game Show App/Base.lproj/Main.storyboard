@@ -233,10 +233,10 @@
             </objects>
             <point key="canvasLocation" x="2929" y="-49"/>
         </scene>
-        <!--Select Set Table View Controller-->
+        <!--Select Question Set-->
         <scene sceneID="QpP-mQ-u6e">
             <objects>
-                <tableViewController id="700-di-8PX" customClass="SelectSetTableViewController" customModule="Game_Show_App" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Select Question Set" id="700-di-8PX" customClass="SelectSetTableViewController" customModule="Game_Show_App" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="nQF-FP-9N1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -259,7 +259,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="Oqv-fd-73S" kind="show" identifier="StartGame" id="ZjM-2M-s0G"/>
+                                    <segue destination="1fb-7A-qgN" kind="show" identifier="SelectQuestionSegue" id="qoy-nh-XUL"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -272,6 +272,33 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ngz-vr-jd7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2929" y="-900"/>
+        </scene>
+        <!--Select Question-->
+        <scene sceneID="aQj-dy-fZ2">
+            <objects>
+                <tableViewController title="Select Question" id="1fb-7A-qgN" customClass="SelectSetTableViewController" customModule="Game_Show_App" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="YAF-qy-Xdt" customClass="SelectQuestionViewController" customModule="Game_Show_App">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="h9H-Y9-BWZ">
+                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="h9H-Y9-BWZ" id="qHo-g4-KEg">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="Oqv-fd-73S" kind="show" id="uuD-uL-Soy"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6B1-Ka-Yar" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3790" y="-900"/>
         </scene>
         <!--Manage Game Table View Controller-->
         <scene sceneID="Wei-Ms-jUs">
@@ -357,7 +384,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="40L-4b-cm1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3861" y="-900"/>
+            <point key="canvasLocation" x="4612" y="-900"/>
         </scene>
         <!--Join View Controller-->
         <scene sceneID="8nB-A5-Lvc">
