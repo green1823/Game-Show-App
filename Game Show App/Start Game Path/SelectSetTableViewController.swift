@@ -64,10 +64,17 @@ class SelectSetTableViewController: UITableViewController {
 
     /* Sends the selected question set to SelectQuestionViewController */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.destination is SelectQuestionViewController {
-            let vc = segue.destination as? SelectQuestionViewController
-            vc?.set = questionSets[tableView.indexPathForSelectedRow];
+        
+        guard let SelectQuestionTableViewController = segue.destination as? SelectQuestionTableViewController else {return}
+        
+        if let indexPath = tableView.indexPathForSelectedRow {
+            SelectQuestionTableViewController.set = questionSets[indexPath.row]
         }
+        
+//        if segue.destination is SelectQuestionTableViewController {
+//            let vc = segue.destination as? SelectQuestionTableViewController
+//            //vc?.set = questionSets[tableView.indexPathForSelectedRow];
+//        }
     }
     
     

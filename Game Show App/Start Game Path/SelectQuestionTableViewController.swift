@@ -1,19 +1,25 @@
 //
-//  SelectQuestionViewController.swift
+//  SelectQuestionTableViewController.swift
 //  Game Show App
 //
-//  Created by Bellini, Dan on 2/1/19.
+//  Created by Green, Jackie on 2/4/19.
 //  Copyright © 2019 Green, Jackie. All rights reserved.
 //
 
 import UIKit
 
-class TableViewController: UITableViewController {
+class SelectQuestionTableViewController: UITableViewController {
+
     var questions: [Question] = []
     var set: QuestionSet?
+    
     let documentsDirectory = FileManager.default.urls(for: . documentDirectory, in: .userDomainMask).first!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        guard let set = set else {return}
+        questions = set.questions
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -21,36 +27,29 @@ class TableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
+    }
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return questions.count;
+        return questions.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "questionCell", for: indexPath)
         let question = questions[indexPath.row]
         cell.textLabel?.text = "Question \(String(indexPath.row + 1))"
         cell.detailTextLabel?.text = question.question
-        
-        return cell
-    }
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
 
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
