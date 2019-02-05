@@ -7,37 +7,84 @@
 //
 
 import UIKit
+import MultipeerConnectivity
 
-class SelectQuestionTableViewController: UITableViewController {
-
-    var questions: [Question] = []
-    var set: QuestionSet?
+class SelectQuestionTableViewController: UITableViewController, MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate {
+    func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
+        peerIDs.append(peerID);
+    }
     
+    func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
+        <#code#>
+    }
+    
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
+        <#code#>
+    }
+    
+    var questions: [Question] = []
+    var peerIDs:[MCPeerID] = []
+    var set: QuestionSet?
+    var peerID: MCPeerID!
+    var mcSession: MCSession!
+    var mcAdvertiserAssistant: MCAdvertiserAssistant!
+    var setUpSession = false
     let documentsDirectory = FileManager.default.urls(for: . documentDirectory, in: .userDomainMask).first!
+    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController){
+        
+    }
+    
+    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+        
+    }
+    
+    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+        
+    }
+    
+    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
+        
+    }
+    
+    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
+        
+    }
+    
+    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
+        
+    }
+
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        guard let set = set else {return}
-        questions = set.questions
+        if(setUpSession){
+            setUpConnectivity()
+            self.mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "connect", discoveryInfo: nil, session: self.mcSession)
+            self.mcAdvertiserAssistant.start()
+        }
+        setUpSession = false
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+    
         tableView.reloadData()
     }
 
+    func setUpConnectivity() {
+        peerID = MCPeerID(displayName: "HOST" + UIDevice.current.name)
+        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
+        mcSession.delegate = self
+    }
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return questions.count
     }
 
