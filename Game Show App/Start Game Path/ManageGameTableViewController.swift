@@ -28,14 +28,15 @@ import UIKit
 import MultipeerConnectivity
 
 class ManageGameTableViewController: UITableViewController {
-
-    //multipeer variables
-
+    
+    var names: [String] = []
+    var question: Question?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
- 
+        self.navigationItem.setHidesBackButton(true, animated:true)
+
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -53,6 +54,11 @@ class ManageGameTableViewController: UITableViewController {
         return 0
     }
 
+    @IBAction func Next(_ sender: Any) {
+        
+        performSegue(withIdentifier: "UnwindToSelectQuestionTableViewController", sender: self)
+    }
+    
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)

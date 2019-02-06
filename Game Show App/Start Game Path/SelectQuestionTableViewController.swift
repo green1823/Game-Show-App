@@ -10,17 +10,6 @@ import UIKit
 import MultipeerConnectivity
 
 class SelectQuestionTableViewController: UITableViewController, MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate {
-    func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
-        peerIDs.append(peerID);
-    }
-    
-    func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
-        <#code#>
-    }
-    
-    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
-        <#code#>
-    }
     
     var questions: [Question] = []
     var peerIDs:[MCPeerID] = []
@@ -30,6 +19,19 @@ class SelectQuestionTableViewController: UITableViewController, MCSessionDelegat
     var mcAdvertiserAssistant: MCAdvertiserAssistant!
     var setUpSession = false
     let documentsDirectory = FileManager.default.urls(for: . documentDirectory, in: .userDomainMask).first!
+    
+    func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
+        peerIDs.append(peerID);
+    }
+    
+    func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
+        
+    }
+    
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
+        
+    }
+    
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController){
         
     }
@@ -68,14 +70,18 @@ class SelectQuestionTableViewController: UITableViewController, MCSessionDelegat
             self.mcAdvertiserAssistant.start()
         }
         setUpSession = false
-
+        
+        //Fills cells with questions
+        guard let set = set else {return}
+        questions = set.questions
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    
-        tableView.reloadData()
-    }
+    //may not need this - TBD
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//        tableView.reloadData()
+//    }
 
     func setUpConnectivity() {
         peerID = MCPeerID(displayName: "HOST" + UIDevice.current.name)
@@ -97,6 +103,24 @@ class SelectQuestionTableViewController: UITableViewController, MCSessionDelegat
 
         return cell
     }
+    
+    @IBAction func EndGame(_ sender: Any) {
+        performSegue(withIdentifier: "UnwindToSelectSet", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let QuestionCreationViewController = segue.destination as? QuestionCreationViewController else {return}
+        
+        if let indexPath = tableView.indexPathForSelectedRow {
+            //gotta fix this somehow to send the question. Also send the multipeer variables here
+            ManageGameTableViewController.question = questions[indexPath.row]
+        }
+    }
+    
+    @IBAction func unwindToSelectQuestionTableViewController(segue: UIStoryboardSegue) {
+        guard segue.source is ManageGameTableViewController else {return}
+    }
+    
 
     /*
     // Override to support conditional editing of the table view.

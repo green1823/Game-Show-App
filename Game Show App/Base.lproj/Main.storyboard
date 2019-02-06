@@ -273,7 +273,7 @@
             </objects>
             <point key="canvasLocation" x="2929" y="-900"/>
         </scene>
-        <!--Select Question Table View Controller-->
+        <!--Select Question-->
         <scene sceneID="aQj-dy-fZ2">
             <objects>
                 <tableViewController id="1fb-7A-qgN" customClass="SelectQuestionTableViewController" customModule="Game_Show_App" customModuleProvider="target" sceneMemberID="viewController">
@@ -306,17 +306,29 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="Oqv-fd-73S" kind="show" id="uuD-uL-Soy"/>
+                                    <segue destination="Oqv-fd-73S" kind="show" identifier="QuestionSelected" id="uuD-uL-Soy"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Select Question" id="sQC-vj-bdX">
+                        <barButtonItem key="leftBarButtonItem" title="End Game" id="hkM-c9-9l6">
+                            <connections>
+                                <action selector="EndGame:" destination="1fb-7A-qgN" id="Ns0-ks-ll9"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <segue destination="T75-Gq-o0f" kind="unwind" identifier="UnwindToSelectSet" unwindAction="unwindToSelectSetTableViewControllerWithSegue:" id="UsU-WL-E0g"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6B1-Ka-Yar" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="T75-Gq-o0f" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3790" y="-900"/>
         </scene>
-        <!--Manage Game Table View Controller-->
+        <!--Assign Points-->
         <scene sceneID="Wei-Ms-jUs">
             <objects>
                 <tableViewController id="Oqv-fd-73S" customClass="ManageGameTableViewController" customModule="Game_Show_App" customModuleProvider="target" sceneMemberID="viewController">
@@ -324,69 +336,46 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="Y3T-uX-Xer">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap Winner" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aXb-gI-KBh">
-                                    <rect key="frame" x="146" y="7" width="122" height="30"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Gq-Ns-wHV">
-                                    <rect key="frame" x="367" y="7" width="32" height="30"/>
-                                    <state key="normal" title="Next"/>
-                                </button>
-                            </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <constraints>
-                                <constraint firstItem="aXb-gI-KBh" firstAttribute="centerX" secondItem="Y3T-uX-Xer" secondAttribute="centerX" id="4lG-fo-ojH"/>
-                                <constraint firstItem="7Gq-Ns-wHV" firstAttribute="centerY" secondItem="Y3T-uX-Xer" secondAttribute="centerY" id="5Vq-xi-NPd"/>
-                                <constraint firstAttribute="trailing" secondItem="7Gq-Ns-wHV" secondAttribute="trailing" constant="15" id="IA1-0G-JN0"/>
-                                <constraint firstItem="aXb-gI-KBh" firstAttribute="centerY" secondItem="Y3T-uX-Xer" secondAttribute="centerY" id="Zzd-Wh-7x4"/>
-                            </constraints>
-                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlayerCell" id="Yvj-Ts-E0i">
-                                <rect key="frame" x="0.0" y="72" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Yvj-Ts-E0i" id="A2a-Qu-nae">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R9g-Nd-Rar">
-                                            <rect key="frame" x="301" y="7" width="83" height="30"/>
-                                            <nil key="textColor"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                        </textField>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sgN-LM-2qA">
-                                            <rect key="frame" x="221" y="-2.5" width="30" height="48.5"/>
+                                            <rect key="frame" x="201" y="-2.5" width="30" height="48.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                             <state key="normal" title="+"/>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GSr-8U-Kyw">
-                                            <rect key="frame" x="261" y="-2.5" width="30" height="48.5"/>
+                                            <rect key="frame" x="241" y="-2.5" width="30" height="48.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                             <state key="normal" title="-"/>
                                         </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aw0-QN-pzI">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aw0-QN-pzI" userLabel="Name">
                                             <rect key="frame" x="20" y="10" width="48" height="24"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mAd-rS-kRV" userLabel="Score">
+                                            <rect key="frame" x="281" y="11.5" width="83" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="Aw0-QN-pzI" firstAttribute="centerY" secondItem="A2a-Qu-nae" secondAttribute="centerY" id="48o-1u-D0U"/>
-                                        <constraint firstItem="R9g-Nd-Rar" firstAttribute="width" secondItem="A2a-Qu-nae" secondAttribute="width" multiplier="0.2" id="JG2-BN-YwS"/>
-                                        <constraint firstAttribute="trailing" secondItem="R9g-Nd-Rar" secondAttribute="trailing" constant="30" id="JJm-Rh-FDP"/>
+                                        <constraint firstItem="mAd-rS-kRV" firstAttribute="leading" secondItem="GSr-8U-Kyw" secondAttribute="trailing" constant="10" id="4zw-tw-Zqy"/>
+                                        <constraint firstItem="mAd-rS-kRV" firstAttribute="width" secondItem="A2a-Qu-nae" secondAttribute="width" multiplier="0.2" id="7xM-OU-zWJ"/>
                                         <constraint firstItem="GSr-8U-Kyw" firstAttribute="centerY" secondItem="A2a-Qu-nae" secondAttribute="centerY" id="PfZ-9K-CNS"/>
-                                        <constraint firstItem="R9g-Nd-Rar" firstAttribute="centerY" secondItem="A2a-Qu-nae" secondAttribute="centerY" id="Sh6-Ar-9ub"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="mAd-rS-kRV" secondAttribute="trailing" constant="30" id="SHp-ks-QYl"/>
                                         <constraint firstItem="GSr-8U-Kyw" firstAttribute="leading" secondItem="sgN-LM-2qA" secondAttribute="trailing" constant="10" id="Vl6-zQ-rM2"/>
-                                        <constraint firstItem="R9g-Nd-Rar" firstAttribute="leading" secondItem="GSr-8U-Kyw" secondAttribute="trailing" constant="10" id="kWw-wO-ifH"/>
                                         <constraint firstItem="sgN-LM-2qA" firstAttribute="centerY" secondItem="A2a-Qu-nae" secondAttribute="centerY" id="nZV-9t-2MF"/>
+                                        <constraint firstItem="mAd-rS-kRV" firstAttribute="centerY" secondItem="A2a-Qu-nae" secondAttribute="centerY" id="qAE-7s-A8h"/>
                                         <constraint firstItem="Aw0-QN-pzI" firstAttribute="leading" secondItem="A2a-Qu-nae" secondAttribute="leadingMargin" id="uq9-kz-FAB"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -397,8 +386,20 @@
                             <outlet property="delegate" destination="Oqv-fd-73S" id="P3B-bS-GhJ"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Assign Points" id="2oY-4f-Qgc">
+                        <barButtonItem key="rightBarButtonItem" title="Next" id="8eW-RS-P5z">
+                            <connections>
+                                <action selector="Next:" destination="Oqv-fd-73S" id="ILV-4M-3Ke"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <segue destination="8i2-oo-PmR" kind="unwind" identifier="UnwindToSelectQuestionTableViewController" unwindAction="unwindToSelectQuestionTableViewControllerWithSegue:" id="z6C-m3-DS9"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="40L-4b-cm1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="8i2-oo-PmR" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4612" y="-900"/>
         </scene>
