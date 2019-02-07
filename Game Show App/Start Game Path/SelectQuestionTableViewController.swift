@@ -109,11 +109,15 @@ class SelectQuestionTableViewController: UITableViewController, MCSessionDelegat
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let QuestionCreationViewController = segue.destination as? QuestionCreationViewController else {return}
+        guard let ManageGameTableViewController = segue.destination as? ManageGameTableViewController else {return}
         
         if let indexPath = tableView.indexPathForSelectedRow {
-            //gotta fix this somehow to send the question. Also send the multipeer variables here
-            ManageGameTableViewController.question = questions[indexPath.row]
+            //Send variables to 
+            ManageGameTableViewController.currentQuestion = questions[indexPath.row]
+            ManageGameTableViewController.peerIDs = peerIDs
+            ManageGameTableViewController.peerID = peerID
+            ManageGameTableViewController.mcSession = mcSession
+            ManageGameTableViewController.mcAdvertiserAssistant = mcAdvertiserAssistant
         }
     }
     

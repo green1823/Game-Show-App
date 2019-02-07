@@ -30,7 +30,12 @@ import MultipeerConnectivity
 class ManageGameTableViewController: UITableViewController {
     
     var names: [String] = []
-    var question: Question?
+    var currentQuestion: Question?
+    
+    var peerIDs:[MCPeerID] = []
+    var peerID: MCPeerID!
+    var mcSession: MCSession!
+    var mcAdvertiserAssistant: MCAdvertiserAssistant!
     
     override func viewDidLoad() {
         super.viewDidLoad()
