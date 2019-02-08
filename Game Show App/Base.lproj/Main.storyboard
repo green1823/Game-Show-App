@@ -231,7 +231,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="chp-Kh-blk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2929" y="-49"/>
+            <point key="canvasLocation" x="2929" y="-50"/>
         </scene>
         <!--Select Set Table View Controller-->
         <scene sceneID="QpP-mQ-u6e">
@@ -488,7 +488,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X5h-a2-Npq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1917.3913043478262" y="725.89285714285711"/>
+            <point key="canvasLocation" x="1916" y="725"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="oD1-Ww-QoG">
@@ -707,7 +707,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eKA-ZY-HP2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3861" y="725"/>
+            <point key="canvasLocation" x="3790" y="725"/>
         </scene>
         <!--Question List Table View Controller-->
         <scene sceneID="a7u-RE-Zvb">
@@ -796,7 +796,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rOw-Op-F2L" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="tja-Xs-xeL" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3860.8695652173915" y="-49.553571428571423"/>
+            <point key="canvasLocation" x="3790" y="-50"/>
         </scene>
         <!--Question Creation View Controller-->
         <scene sceneID="hst-cO-aEi">
@@ -1099,7 +1099,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cF4-GM-sRr" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="OMS-hn-8eG" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4704" y="-50"/>
+            <point key="canvasLocation" x="4612" y="-50"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zox-G7-qxd">

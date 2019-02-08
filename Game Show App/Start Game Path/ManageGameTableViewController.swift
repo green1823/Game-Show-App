@@ -37,10 +37,14 @@ class ManageGameTableViewController: UITableViewController {
     var mcSession: MCSession!
     var mcAdvertiserAssistant: MCAdvertiserAssistant!
     
+    let cafe: Data = "Café".data(using: .utf8)! // non-nil
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //hides back button
         self.navigationItem.setHidesBackButton(true, animated:true)
+        //send the question to players
+        mcSession.send(cafe, toPeers: peerIDs, with: .reliable)
 
 
         // Uncomment the following line to preserve selection between presentations
@@ -49,7 +53,6 @@ class ManageGameTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-    
 
 
     // MARK: - Table view data source
