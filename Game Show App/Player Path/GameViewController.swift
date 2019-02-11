@@ -39,6 +39,7 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         var info = String(decoding: data, as: UTF8.self)
         if info.hasPrefix("Q") {
+            print(info)
             info.remove(at: info.startIndex)
             questionLabel.text = info
         } else if (info.hasPrefix("TF")) {
@@ -93,7 +94,9 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
         mcSession.delegate = self
     }
     
-
+    func respond(){
+        
+    }
     /*
     // MARK: - Navigation
 

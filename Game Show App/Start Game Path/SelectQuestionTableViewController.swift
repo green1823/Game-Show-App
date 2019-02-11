@@ -94,33 +94,7 @@ class SelectQuestionTableViewController: UITableViewController, MCSessionDelegat
         } catch let error{
             print(error)
         }
-//        let type = currQuestion.type
-//        var options: [String] = [];
-//        var tfAns = true
-//        var typeString = ""
-//        if(type == .multipleChoice){
-//            options = currQuestion.mcAnswers!
-//            typeString = "MC:"
-//            var i = 0
-//            while(i < options.count){
-//                typeString = typeString + options[i] + ","
-//                i = i + 1;
-//            }
-//        }
-//        if(type == .trueOrFalse){
-//            tfAns = currQuestion.tfAnswer!
-//            let tfAnsString = String(tfAns)
-//            typeString = "TF:"+tfAnsString;
-//        }
-//        if type == .buzzer {
-//            typeString = "BZ"
-//        }
-//        let stringData = typeString.data(using: .utf8)
-//        do{
-//            try mcSession.send(stringData!, toPeers: peerIDs, with: .reliable)
-//        } catch let error{
-//            print(error)
-//        }
+
         
         
     }
@@ -176,7 +150,8 @@ class SelectQuestionTableViewController: UITableViewController, MCSessionDelegat
         guard let ManageGameTableViewController = segue.destination as? ManageGameTableViewController else {return}
         
         if let indexPath = tableView.indexPathForSelectedRow {
-            //Send variables to 
+            //Send variables to
+            sendQuestion(currQuestion: questions[indexPath.row])
             ManageGameTableViewController.currentQuestion = questions[indexPath.row]
             ManageGameTableViewController.peerIDs = peerIDs
             ManageGameTableViewController.peerID = peerID
