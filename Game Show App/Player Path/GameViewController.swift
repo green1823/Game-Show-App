@@ -24,6 +24,9 @@ import UIKit
 import MultipeerConnectivity
 
 class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewControllerDelegate {
+    
+    @IBOutlet weak var questionLabel: UILabel!
+    
     var peerID: MCPeerID!
     var mcSession: MCSession!
     var mcAdvertiserAssistant: MCAdvertiserAssistant!
@@ -34,7 +37,20 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        
+        var info = String(decoding: data, as: UTF8.self)
+        if info.hasPrefix("Q") {
+            info.remove(at: info.startIndex)
+            questionLabel.text = info
+        } else if (info.hasPrefix("TF")) {
+            info.remove(at: info.startIndex)
+            info.remove(at: info.startIndex)
+        } else if (info.hasPrefix("BZ")) {
+            info.remove(at: info.startIndex)
+            info.remove(at: info.startIndex)
+        } else if (info.hasPrefix("MC")) {
+            info.remove(at: info.startIndex)
+            info.remove(at: info.startIndex)
+        }
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {

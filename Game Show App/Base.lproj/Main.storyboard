@@ -646,6 +646,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="questionLabel" destination="ztb-Za-wLa" id="53T-wE-xvZ"/>
                         <segue destination="lXV-uC-Sbc" kind="unwind" identifier="UnwindToJoin" unwindAction="unwindToJoinWithSegue:" id="HoX-fp-thc"/>
                     </connections>
                 </viewController>

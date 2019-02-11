@@ -62,13 +62,17 @@ class SelectQuestionTableViewController: UITableViewController, MCSessionDelegat
     }
 
     func sendQuestion(currQuestion: Question){
+        
+        let question = "Q" + currQuestion.question
+        let questionData = question.data(using: .utf8)
+        
         let type = currQuestion.type
         var options: [String] = [];
         var tfAns = true
         var typeString = ""
         if(type == .multipleChoice){
             options = currQuestion.mcAnswers!
-            typeString = "MC:"
+            typeString = "MC"
             var i = 0
             while(i < options.count){
                 typeString = typeString + options[i] + ","
@@ -78,17 +82,45 @@ class SelectQuestionTableViewController: UITableViewController, MCSessionDelegat
         if(type == .trueOrFalse){
             tfAns = currQuestion.tfAnswer!
             let tfAnsString = String(tfAns)
-            typeString = "TF:"+tfAnsString;
+            typeString = "TF"+tfAnsString;
         }
         if type == .buzzer {
             typeString = "BZ"
         }
-        let stringData = typeString.data(using: .utf8)
+        let typeData = typeString.data(using: .utf8)
         do{
-            try mcSession.send(stringData!, toPeers: peerIDs, with: .reliable)
+            try mcSession.send(questionData!, toPeers: peerIDs, with: .reliable)
+            try mcSession.send(typeData!, toPeers: peerIDs, with: .reliable)
         } catch let error{
             print(error)
         }
+//        let type = currQuestion.type
+//        var options: [String] = [];
+//        var tfAns = true
+//        var typeString = ""
+//        if(type == .multipleChoice){
+//            options = currQuestion.mcAnswers!
+//            typeString = "MC:"
+//            var i = 0
+//            while(i < options.count){
+//                typeString = typeString + options[i] + ","
+//                i = i + 1;
+//            }
+//        }
+//        if(type == .trueOrFalse){
+//            tfAns = currQuestion.tfAnswer!
+//            let tfAnsString = String(tfAns)
+//            typeString = "TF:"+tfAnsString;
+//        }
+//        if type == .buzzer {
+//            typeString = "BZ"
+//        }
+//        let stringData = typeString.data(using: .utf8)
+//        do{
+//            try mcSession.send(stringData!, toPeers: peerIDs, with: .reliable)
+//        } catch let error{
+//            print(error)
+//        }
         
         
     }
