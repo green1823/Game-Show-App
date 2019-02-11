@@ -44,7 +44,7 @@ class ManageGameTableViewController: UITableViewController {
         //hides back button
         self.navigationItem.setHidesBackButton(true, animated:true)
         //send the question to players
-        mcSession.send(cafe, toPeers: peerIDs, with: .reliable)
+        //mcSession.send(cafe, toPeers: peerIDs, with: .reliable)
 
 
         // Uncomment the following line to preserve selection between presentations

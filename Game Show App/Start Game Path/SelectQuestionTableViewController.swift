@@ -5,7 +5,8 @@
 //  Created by Green, Jackie on 2/4/19.
 //  Copyright © 2019 Green, Jackie. All rights reserved.
 //
-
+//created send data function needs to be called when the question is selected
+//converts Question to string this needs to be converted back to a question when it gets to the other side
 import UIKit
 import MultipeerConnectivity
 
@@ -60,11 +61,42 @@ class SelectQuestionTableViewController: UITableViewController, MCSessionDelegat
         
     }
 
-
+    func sendQuestion(currQuestion: Question){
+        let type = currQuestion.type
+        var options: [String] = [];
+        var tfAns = true
+        var typeString = ""
+        if(type == .multipleChoice){
+            options = currQuestion.mcAnswers!
+            typeString = "MC:"
+            var i = 0
+            while(i < options.count){
+                typeString = typeString + options[i] + ","
+                i = i + 1;
+            }
+        }
+        if(type == .trueOrFalse){
+            tfAns = currQuestion.tfAnswer!
+            let tfAnsString = String(tfAns)
+            typeString = "TF:"+tfAnsString;
+        }
+        if type == .buzzer {
+            typeString = "BZ"
+        }
+        let stringData = typeString.data(using: .utf8)
+        do{
+            try mcSession.send(stringData!, toPeers: peerIDs, with: .reliable)
+        } catch let error{
+            print(error)
+        }
+        
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         if(setUpSession){
+            print("here")
             setUpConnectivity()
             self.mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "connect", discoveryInfo: nil, session: self.mcSession)
             self.mcAdvertiserAssistant.start()
