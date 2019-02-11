@@ -45,10 +45,30 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
         } else if (info.hasPrefix("TF")) {
             info.remove(at: info.startIndex)
             info.remove(at: info.startIndex)
+            a3Outlet.isEnabled = true
+            a2Outlet.isEnabled = true;
+            a1Outlet.isEnabled = false;
+            a4Outlet.isEnabled = false;
+            a3Outlet.titleLabel!.text = "false";
+            a2Outlet.titleLabel!.text = "true";
         } else if (info.hasPrefix("BZ")) {
+            a3Outlet.isEnabled = false
+            a2Outlet.isEnabled = false;
+            a1Outlet.isEnabled = false;
+            a4Outlet.isEnabled = false;
+
             info.remove(at: info.startIndex)
             info.remove(at: info.startIndex)
         } else if (info.hasPrefix("MC")) {
+            a3Outlet.isEnabled = true
+            a2Outlet.isEnabled = true;
+            a1Outlet.isEnabled = true;
+            a4Outlet.isEnabled = true;
+            var tempString = info
+//this is me learning that substrings in swift are a bitch and I don't want to have to write 5 lines of code to take a fucking substring oh sorry its 7
+            //this man will save us
+            //https://github.com/iamjono/SwiftString/blob/master/README.md
+            
             info.remove(at: info.startIndex)
             info.remove(at: info.startIndex)
         }
@@ -65,6 +85,19 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
         
     }
+    @IBAction func a1Pressed(_ sender: Any) {
+    }
+    @IBAction func a2Pressed(_ sender: Any) {
+    }
+    @IBAction func a3Pressed(_ sender: Any) {
+    }
+    @IBAction func a4Pressed(_ sender: Any) {
+    }
+    @IBOutlet weak var a1Outlet: UIButton!
+    @IBOutlet weak var a2Outlet: UIButton!
+    @IBOutlet weak var a3Outlet: UIButton!
+    @IBOutlet weak var a4Outlet: UIButton!
+    
     
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
         dismiss(animated: true, completion: nil)

@@ -34,7 +34,7 @@ class SelectQuestionTableViewController: UITableViewController, MCSessionDelegat
     }
     
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController){
-        
+        dismiss(animated: true, completion: nil)
     }
     
     func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {

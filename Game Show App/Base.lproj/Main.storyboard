@@ -547,21 +547,33 @@
                                         <rect key="frame" x="0.0" y="0.0" width="373" height="95"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="a1Pressed:" destination="J6Q-cl-R4c" eventType="touchUpInside" id="G3r-jg-oQJ"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gWy-xj-3Hv" userLabel="a2Button">
                                         <rect key="frame" x="0.0" y="117.5" width="373" height="95.5"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="a2Pressed:" destination="J6Q-cl-R4c" eventType="touchUpInside" id="HUP-m9-0Hn"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yJ0-aB-BqF" userLabel="a3Button">
                                         <rect key="frame" x="0.0" y="235" width="373" height="95.5"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="a3Pressed:" destination="J6Q-cl-R4c" eventType="touchUpInside" id="ipE-h1-aNc"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R5I-yA-YEy" userLabel="a4Button">
                                         <rect key="frame" x="0.0" y="353" width="373" height="95"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="a4Pressed:" destination="J6Q-cl-R4c" eventType="touchUpInside" id="ppJ-cl-g0x"/>
+                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q99-OD-Oaa" userLabel="spacer">
                                         <rect key="frame" x="0.0" y="95" width="373" height="22.5"/>
@@ -646,6 +658,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="a1Outlet" destination="sMd-dX-bKy" id="zhZ-9E-nde"/>
+                        <outlet property="a2Outlet" destination="gWy-xj-3Hv" id="PYh-Uk-GnX"/>
+                        <outlet property="a3Outlet" destination="yJ0-aB-BqF" id="bqK-HR-rxM"/>
+                        <outlet property="a4Outlet" destination="R5I-yA-YEy" id="a6H-n6-oKC"/>
                         <outlet property="questionLabel" destination="ztb-Za-wLa" id="53T-wE-xvZ"/>
                         <segue destination="lXV-uC-Sbc" kind="unwind" identifier="UnwindToJoin" unwindAction="unwindToJoinWithSegue:" id="HoX-fp-thc"/>
                     </connections>
