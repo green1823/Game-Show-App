@@ -530,7 +530,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vhV-SE-RPS" userLabel="BView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vhV-SE-RPS" userLabel="BZView">
                                 <rect key="frame" x="20.5" y="229" width="373" height="448"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8KV-rD-4XZ">
@@ -658,6 +658,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="BZView" destination="vhV-SE-RPS" id="GRP-2G-Hgi"/>
+                        <outlet property="MCView" destination="wzy-Ll-arr" id="iag-ee-hGt"/>
+                        <outlet property="TFView" destination="CJk-KY-qLK" id="9Fy-N4-mwf"/>
                         <outlet property="a1Outlet" destination="sMd-dX-bKy" id="zhZ-9E-nde"/>
                         <outlet property="a2Outlet" destination="gWy-xj-3Hv" id="PYh-Uk-GnX"/>
                         <outlet property="a3Outlet" destination="yJ0-aB-BqF" id="bqK-HR-rxM"/>

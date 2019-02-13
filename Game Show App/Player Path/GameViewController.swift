@@ -31,6 +31,10 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
     var mcSession: MCSession!
     var mcAdvertiserAssistant: MCAdvertiserAssistant!
     var name: String = "";
+    @IBOutlet weak var MCView: UIView!
+    @IBOutlet weak var TFView: UIView!
+    @IBOutlet weak var BZView: UIView!
+    
     
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
 
@@ -45,25 +49,34 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
         } else if (info.hasPrefix("TF")) {
             info.remove(at: info.startIndex)
             info.remove(at: info.startIndex)
-            a3Outlet.isEnabled = true
-            a2Outlet.isEnabled = true;
-            a1Outlet.isEnabled = false;
-            a4Outlet.isEnabled = false;
-            a3Outlet.titleLabel!.text = "false";
-            a2Outlet.titleLabel!.text = "true";
+            MCView.isHidden = true
+            TFView.isHidden = false
+            BZView.isHidden = true
+//            a3Outlet.isEnabled = true
+//            a2Outlet.isEnabled = true;
+//            a1Outlet.isEnabled = false;
+//            a4Outlet.isEnabled = false;
+//            a3Outlet.titleLabel!.text = "false";
+//            a2Outlet.titleLabel!.text = "true";
         } else if (info.hasPrefix("BZ")) {
-            a3Outlet.isEnabled = false
-            a2Outlet.isEnabled = false;
-            a1Outlet.isEnabled = false;
-            a4Outlet.isEnabled = false;
+            MCView.isHidden = true
+            TFView.isHidden = true
+            BZView.isHidden = false
+//            a3Outlet.isEnabled = false
+//            a2Outlet.isEnabled = false;
+//            a1Outlet.isEnabled = false;
+//            a4Outlet.isEnabled = false;
 
             info.remove(at: info.startIndex)
             info.remove(at: info.startIndex)
         } else if (info.hasPrefix("MC")) {
-            a3Outlet.isEnabled = true
-            a2Outlet.isEnabled = true;
-            a1Outlet.isEnabled = true;
-            a4Outlet.isEnabled = true;
+            MCView.isHidden = false
+            TFView.isHidden = true
+            BZView.isHidden = true
+//            a3Outlet.isEnabled = true
+//            a2Outlet.isEnabled = true;
+//            a1Outlet.isEnabled = true;
+//            a4Outlet.isEnabled = true;
             var tempString = info
 //this is me learning that substrings in swift are a bitch and I don't want to have to write 5 lines of code to take a fucking substring oh sorry its 7
             //this man will save us
@@ -115,6 +128,9 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
         let mcBrowser = MCBrowserViewController(serviceType: "connect", session: self.mcSession)
         mcBrowser.delegate = self
         self.present(mcBrowser, animated: true, completion: nil)
+        MCView.isHidden = true
+        TFView.isHidden = true
+        BZView.isHidden = true
 //        if(mcSession.connectedPeers.count == 0){
 //            performSegue(withIdentifier: "EnterName", sender: self)
 //        }

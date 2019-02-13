@@ -49,7 +49,7 @@ class JoinViewController: UIViewController{
     override func prepare(for segue: UIStoryboardSegue, sender: (Any)?){
         if segue.destination is GameViewController {
             let vc = segue.destination as? GameViewController
-            vc?.name = nameTextField.text!;
+            vc?.name = nameTextField.text!
         }
     }
     
