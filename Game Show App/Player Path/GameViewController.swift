@@ -5,9 +5,6 @@
 //  Created by Green, Jackie on 1/7/19.
 //  Copyright © 2019 Green, Jackie. All rights reserved.
 //
-
-
-
 /*
  Multipeer needed
  Recieve Question object from array of questions in ManageGameTableViewController
@@ -22,7 +19,16 @@ My thought is that we are going to ahve to set up the MCSession and connect in t
 */
 import UIKit
 import MultipeerConnectivity
-
+//let s = "hello"
+//s[0..<3] // "hel"
+//s[3..<s.count] // "lo"
+extension String {
+    subscript(_ range: CountableRange<Int>) -> String {
+        let idx1 = index(startIndex, offsetBy: max(0, range.lowerBound))
+        let idx2 = index(startIndex, offsetBy: min(self.count, range.upperBound))
+        return String(self[idx1..<idx2])
+    }
+}
 class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewControllerDelegate {
     
     @IBOutlet weak var questionLabel: UILabel!
@@ -34,7 +40,7 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
     @IBOutlet weak var MCView: UIView!
     @IBOutlet weak var TFView: UIView!
     @IBOutlet weak var BZView: UIView!
-    
+
     
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
 
@@ -78,9 +84,9 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
 //            a1Outlet.isEnabled = true;
 //            a4Outlet.isEnabled = true;
             var tempString = info
-//this is me learning that substrings in swift are a bitch and I don't want to have to write 5 lines of code to take a fucking substring oh sorry its 7
-            //this man will save us
+
             //https://github.com/iamjono/SwiftString/blob/master/README.md
+            //thanks jono this is now installed all the methods in the readme should work as intended
             
             info.remove(at: info.startIndex)
             info.remove(at: info.startIndex)

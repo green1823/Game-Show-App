@@ -7,6 +7,5 @@ target 'Game Show App' do
   use_frameworks!
 
   # Pods for Game Show App
-	pod "String-Extensions"
-
+pod "String+Extensions"
 end
