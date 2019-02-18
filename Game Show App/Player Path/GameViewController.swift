@@ -31,16 +31,35 @@ extension String {
 }
 class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewControllerDelegate {
     
-    @IBOutlet weak var questionLabel: UILabel!
-    
+    //Multipeer Variables
     var peerID: MCPeerID!
     var mcSession: MCSession!
     var mcAdvertiserAssistant: MCAdvertiserAssistant!
     var name: String = "";
+    //Outlet Variables
+    @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var MCView: UIView!
     @IBOutlet weak var TFView: UIView!
     @IBOutlet weak var BZView: UIView!
 
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setUpConnectivity()
+        let mcBrowser = MCBrowserViewController(serviceType: "connect", session: self.mcSession)
+        mcBrowser.delegate = self
+        self.present(mcBrowser, animated: true, completion: nil)
+        MCView.isHidden = true
+        TFView.isHidden = true
+        BZView.isHidden = true
+        //        if(mcSession.connectedPeers.count == 0){
+        //            performSegue(withIdentifier: "EnterName", sender: self)
+        //        }
+        // Do any additional setup after loading the view.
+    }
+    
+    
+    //MARK: - Multipeer delegate functions
     
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
 
@@ -104,19 +123,6 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
         
     }
-    @IBAction func a1Pressed(_ sender: Any) {
-    }
-    @IBAction func a2Pressed(_ sender: Any) {
-    }
-    @IBAction func a3Pressed(_ sender: Any) {
-    }
-    @IBAction func a4Pressed(_ sender: Any) {
-    }
-    @IBOutlet weak var a1Outlet: UIButton!
-    @IBOutlet weak var a2Outlet: UIButton!
-    @IBOutlet weak var a3Outlet: UIButton!
-    @IBOutlet weak var a4Outlet: UIButton!
-    
     
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
         dismiss(animated: true, completion: nil)
@@ -127,21 +133,8 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
         performSegue(withIdentifier: "UnwindToJoin", sender: self)
     }
     
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setUpConnectivity()
-        let mcBrowser = MCBrowserViewController(serviceType: "connect", session: self.mcSession)
-        mcBrowser.delegate = self
-        self.present(mcBrowser, animated: true, completion: nil)
-        MCView.isHidden = true
-        TFView.isHidden = true
-        BZView.isHidden = true
-//        if(mcSession.connectedPeers.count == 0){
-//            performSegue(withIdentifier: "EnterName", sender: self)
-//        }
-        // Do any additional setup after loading the view.
-    }
+    //MARK: - Additional Multipeer functions
+    
     func setUpConnectivity() {
         print(name);
         peerID = MCPeerID(displayName: name)
@@ -157,6 +150,22 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
     func respond(){
         
     }
+    
+    @IBAction func a1Pressed(_ sender: Any) {
+    }
+    @IBAction func a2Pressed(_ sender: Any) {
+    }
+    @IBAction func a3Pressed(_ sender: Any) {
+    }
+    @IBAction func a4Pressed(_ sender: Any) {
+    }
+    @IBOutlet weak var a1Outlet: UIButton!
+    @IBOutlet weak var a2Outlet: UIButton!
+    @IBOutlet weak var a3Outlet: UIButton!
+    @IBOutlet weak var a4Outlet: UIButton!
+    
+    
+    
     /*
     // MARK: - Navigation
 

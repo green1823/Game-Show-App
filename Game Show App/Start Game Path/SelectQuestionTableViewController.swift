@@ -12,14 +12,50 @@ import MultipeerConnectivity
 
 class SelectQuestionTableViewController: UITableViewController, MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate {
     
+    //Question Variables
     var questions: [Question] = []
-    var peerIDs:[MCPeerID] = []
     var set: QuestionSet?
+    let documentsDirectory = FileManager.default.urls(for: . documentDirectory, in: .userDomainMask).first!
+    //Multipeer Variables
+    var peerIDs:[MCPeerID] = []
     var peerID: MCPeerID!
     var mcSession: MCSession!
     var mcAdvertiserAssistant: MCAdvertiserAssistant!
     var setUpSession = false
-    let documentsDirectory = FileManager.default.urls(for: . documentDirectory, in: .userDomainMask).first!
+
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if(setUpSession){
+            print("here")
+            setUpConnectivity()
+            self.mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "connect", discoveryInfo: nil, session: self.mcSession)
+            self.mcAdvertiserAssistant.start()
+        }
+        setUpSession = false
+        
+        //Fills cells with questions
+        guard let set = set else {return}
+        questions = set.questions
+    }
+    
+    // MARK: - Table view data source
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return questions.count
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "questionCell", for: indexPath)
+        let question = questions[indexPath.row]
+        cell.textLabel?.text = "Question \(String(indexPath.row + 1))"
+        cell.detailTextLabel?.text = question.question
+
+        return cell
+    }
+    
+    // MARK: - Multipeer delegate functions
     
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         peerIDs.append(peerID);
@@ -60,7 +96,20 @@ class SelectQuestionTableViewController: UITableViewController, MCSessionDelegat
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
         
     }
-
+    
+    //MARK: - Additional Multipeer functions
+    
+    func setUpConnectivity() {
+        peerID = MCPeerID(displayName: UIDevice.current.name)
+        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
+        mcSession.delegate = self
+    }
+    
+    //trying to fix connectivity error - might delete
+    func session(_ session: MCSession, didReceiveCertificate certificate: [Any]?, fromPeer peerID: MCPeerID, certificateHandler: @escaping (Bool) -> Void) {
+        certificateHandler(true)
+    }
+    
     func sendQuestion(currQuestion: Question){
         
         let question = "Q" + currQuestion.question
@@ -70,16 +119,16 @@ class SelectQuestionTableViewController: UITableViewController, MCSessionDelegat
         var options: [String] = [];
         var tfAns = true
         var typeString = ""
-        if(type == .multipleChoice){
+        if (type == .multipleChoice) {
             options = currQuestion.mcAnswers!
             typeString = "MC"
             var i = 0
-            while(i < options.count){
+            while (i < options.count) {
                 typeString = typeString + options[i] + ","
                 i = i + 1;
             }
         }
-        if(type == .trueOrFalse){
+        if (type == .trueOrFalse) {
             tfAns = currQuestion.tfAnswer!
             let tfAnsString = String(tfAns)
             typeString = "TF"+tfAnsString;
@@ -88,63 +137,12 @@ class SelectQuestionTableViewController: UITableViewController, MCSessionDelegat
             typeString = "BZ"
         }
         let typeData = typeString.data(using: .utf8)
-        do{
+        do {
             try mcSession.send(questionData!, toPeers: peerIDs, with: .reliable)
             try mcSession.send(typeData!, toPeers: peerIDs, with: .reliable)
-        } catch let error{
+        } catch let error {
             print(error)
         }
-
-        
-        
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        if(setUpSession){
-            print("here")
-            setUpConnectivity()
-            self.mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "connect", discoveryInfo: nil, session: self.mcSession)
-            self.mcAdvertiserAssistant.start()
-        }
-        setUpSession = false
-        
-        //Fills cells with questions
-        guard let set = set else {return}
-        questions = set.questions
-    }
-    
-    //may not need this - TBD
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//
-//        tableView.reloadData()
-//    }
-
-    func setUpConnectivity() {
-        peerID = MCPeerID(displayName: UIDevice.current.name)
-        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
-        mcSession.delegate = self
-    }
-    // MARK: - Table view data source
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return questions.count
-    }
-    
-    //trying to fix connectivity error
-    func session(_ session: MCSession, didReceiveCertificate certificate: [Any]?, fromPeer peerID: MCPeerID, certificateHandler: @escaping (Bool) -> Void) {
-        certificateHandler(true)
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "questionCell", for: indexPath)
-        let question = questions[indexPath.row]
-        cell.textLabel?.text = "Question \(String(indexPath.row + 1))"
-        cell.detailTextLabel?.text = question.question
-
-        return cell
     }
     
     @IBAction func EndGame(_ sender: Any) {
@@ -170,6 +168,16 @@ class SelectQuestionTableViewController: UITableViewController, MCSessionDelegat
     }
     
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
