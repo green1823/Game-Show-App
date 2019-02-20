@@ -138,8 +138,8 @@ class SelectQuestionTableViewController: UITableViewController, MCSessionDelegat
         }
         let typeData = typeString.data(using: .utf8)
         do {
-            try mcSession.send(questionData!, toPeers: peerIDs, with: .reliable)
-            try mcSession.send(typeData!, toPeers: peerIDs, with: .reliable)
+            try mcSession.send(questionData!, toPeers: mcSession.connectedPeers, with: .reliable)
+            try mcSession.send(typeData!, toPeers: mcSession.connectedPeers, with: .reliable)
         } catch let error {
             print(error)
         }

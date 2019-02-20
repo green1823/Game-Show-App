@@ -66,50 +66,44 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        var info = String(decoding: data, as: UTF8.self)
-        if info.hasPrefix("Q") {
-            print(info)
-            info.remove(at: info.startIndex)
-            questionLabel.text = info
-        } else if (info.hasPrefix("TF")) {
-            info.remove(at: info.startIndex)
-            info.remove(at: info.startIndex)
-            MCView.isHidden = true
-            TFView.isHidden = false
-            BZView.isHidden = true
-//            a3Outlet.isEnabled = true
-//            a2Outlet.isEnabled = true;
-//            a1Outlet.isEnabled = false;
-//            a4Outlet.isEnabled = false;
-//            a3Outlet.titleLabel!.text = "false";
-//            a2Outlet.titleLabel!.text = "true";
-        } else if (info.hasPrefix("BZ")) {
-            MCView.isHidden = true
-            TFView.isHidden = true
-            BZView.isHidden = false
-//            a3Outlet.isEnabled = false
-//            a2Outlet.isEnabled = false;
-//            a1Outlet.isEnabled = false;
-//            a4Outlet.isEnabled = false;
-
-            info.remove(at: info.startIndex)
-            info.remove(at: info.startIndex)
-        } else if (info.hasPrefix("MC")) {
-            MCView.isHidden = false
-            TFView.isHidden = true
-            BZView.isHidden = true
-//            a3Outlet.isEnabled = true
-//            a2Outlet.isEnabled = true;
-//            a1Outlet.isEnabled = true;
-//            a4Outlet.isEnabled = true;
-            var tempString = info
-
-            //https://github.com/iamjono/SwiftString/blob/master/README.md
-            //thanks jono this is now installed all the methods in the readme should work as intended
-            
-            info.remove(at: info.startIndex)
-            info.remove(at: info.startIndex)
-        }
+        //NOTE: I think maybe we need to use the didFinishReceivingResourceWithName method since we're sending strings instead of data
+//        do {
+//            let info = String(decoding: data, as: UTF8.self)
+//        } catch {
+//            fatalError()
+//        }
+//
+//
+//        var info = String(decoding: data, as: UTF8.self)
+//        if info.hasPrefix("Q") {
+//            print(info)
+//            info.remove(at: info.startIndex)
+//            questionLabel.text = info
+//        } else if (info.hasPrefix("TF")) {
+//            info.remove(at: info.startIndex)
+//            info.remove(at: info.startIndex)
+//            MCView.isHidden = true
+//            TFView.isHidden = false
+//            BZView.isHidden = true
+//        } else if (info.hasPrefix("BZ")) {
+//            MCView.isHidden = true
+//            TFView.isHidden = true
+//            BZView.isHidden = false
+//
+//            info.remove(at: info.startIndex)
+//            info.remove(at: info.startIndex)
+//        } else if (info.hasPrefix("MC")) {
+//            MCView.isHidden = false
+//            TFView.isHidden = true
+//            BZView.isHidden = true
+//            var tempString = info
+//
+//            //https://github.com/iamjono/SwiftString/blob/master/README.md
+//            //thanks jono this is now installed all the methods in the readme should work as intended
+//
+//            info.remove(at: info.startIndex)
+//            info.remove(at: info.startIndex)
+//        }
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
@@ -121,7 +115,44 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
     }
     
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
+        do {
+            let info = String(decoding: resourceName, as: UTF8.self)
+        } catch {
+            fatalError()
+        }
         
+        
+        var info = String(decoding: resourceName, as: UTF8.self)
+        if info.hasPrefix("Q") {
+            print(info)
+            info.remove(at: info.startIndex)
+            questionLabel.text = info
+        } else if (info.hasPrefix("TF")) {
+            info.remove(at: info.startIndex)
+            info.remove(at: info.startIndex)
+            MCView.isHidden = true
+            TFView.isHidden = false
+            BZView.isHidden = true
+        } else if (info.hasPrefix("BZ")) {
+            MCView.isHidden = true
+            TFView.isHidden = true
+            BZView.isHidden = false
+            
+            info.remove(at: info.startIndex)
+            info.remove(at: info.startIndex)
+        } else if (info.hasPrefix("MC")) {
+            MCView.isHidden = false
+            TFView.isHidden = true
+            BZView.isHidden = true
+            var tempString = info
+            
+            //https://github.com/iamjono/SwiftString/blob/master/README.md
+            //thanks jono this is now installed all the methods in the readme should work as intended
+            
+            info.remove(at: info.startIndex)
+            info.remove(at: info.startIndex)
+        }
+
     }
     
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
@@ -159,10 +190,6 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
     }
     @IBAction func a4Pressed(_ sender: Any) {
     }
-    @IBOutlet weak var a1Outlet: UIButton!
-    @IBOutlet weak var a2Outlet: UIButton!
-    @IBOutlet weak var a3Outlet: UIButton!
-    @IBOutlet weak var a4Outlet: UIButton!
     
     
     
