@@ -115,14 +115,12 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
     }
     
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
-        do {
-            let info = String(decoding: resourceName, as: UTF8.self)
-        } catch {
-            fatalError()
-        }
+            var jsonString = "error"
+            let typeData = jsonString.data(using: .utf8)
+            var info = try! JSONDecoder().decode(String.self, from: localURL?.dataRepresentation ?? typeData!)
+
+    
         
-        
-        var info = String(decoding: resourceName, as: UTF8.self)
         if info.hasPrefix("Q") {
             print(info)
             info.remove(at: info.startIndex)
