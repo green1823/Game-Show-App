@@ -52,13 +52,11 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
         MCView.isHidden = true
         TFView.isHidden = true
         BZView.isHidden = true
-        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
         //        if(mcSession.connectedPeers.count == 0){
         //            performSegue(withIdentifier: "EnterName", sender: self)
         //        }
         // Do any additional setup after loading the view.
     }
-    
     
     //MARK: - Multipeer delegate functions
     
