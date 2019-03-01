@@ -101,7 +101,7 @@ class SelectQuestionTableViewController: UITableViewController, MCSessionDelegat
     
     func setUpConnectivity() {
         peerID = MCPeerID(displayName: UIDevice.current.name)
-        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
+        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: MCEncryptionPreference.none)
         mcSession.delegate = self
     }
     

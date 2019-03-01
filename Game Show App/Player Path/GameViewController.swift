@@ -65,44 +65,8 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        //NOTE: I think maybe we need to use the didFinishReceivingResourceWithName method since we're sending strings instead of data
-//        do {
-//            let info = String(decoding: data, as: UTF8.self)
-//        } catch {
-//            fatalError()
-//        }
-//
-//
-//        var info = String(decoding: data, as: UTF8.self)
-//        if info.hasPrefix("Q") {
-//            print(info)
-//            info.remove(at: info.startIndex)
-//            questionLabel.text = info
-//        } else if (info.hasPrefix("TF")) {
-//            info.remove(at: info.startIndex)
-//            info.remove(at: info.startIndex)
-//            MCView.isHidden = true
-//            TFView.isHidden = false
-//            BZView.isHidden = true
-//        } else if (info.hasPrefix("BZ")) {
-//            MCView.isHidden = true
-//            TFView.isHidden = true
-//            BZView.isHidden = false
-//
-//            info.remove(at: info.startIndex)
-//            info.remove(at: info.startIndex)
-//        } else if (info.hasPrefix("MC")) {
-//            MCView.isHidden = false
-//            TFView.isHidden = true
-//            BZView.isHidden = true
-//            var tempString = info
-//
-//            //https://github.com/iamjono/SwiftString/blob/master/README.md
-//            //thanks jono this is now installed all the methods in the readme should work as intended
-//
-//            info.remove(at: info.startIndex)
-//            info.remove(at: info.startIndex)
-//        }
+        print("recieved data")
+
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
@@ -114,12 +78,14 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
     }
     
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
-            var jsonString = "error"
-            let typeData = jsonString.data(using: .utf8)
-            var info = try! JSONDecoder().decode(String.self, from: localURL?.dataRepresentation ?? typeData!)
-
-    
-        
+        print("recieved resource")
+        //decoding error "message"
+        let jsonString = "error"
+        let typeData = jsonString.data(using: .utf8)
+        //tries decoding from data url if doesn't work decodes error
+        var info = try! JSONDecoder().decode(String.self, from: localURL?.dataRepresentation ?? typeData!)
+        //info should now have data represented as a string
+        print(info)
         if info.hasPrefix("Q") {
             print(info)
             info.remove(at: info.startIndex)
@@ -166,7 +132,7 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
     func setUpConnectivity() {
         print(name);
         peerID = MCPeerID(displayName: name)
-        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
+        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: MCEncryptionPreference.none)
         mcSession.delegate = self
     }
     
@@ -174,11 +140,9 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
     func session(_ session: MCSession, didReceiveCertificate certificate: [Any]?, fromPeer peerID: MCPeerID, certificateHandler: @escaping (Bool) -> Void) {
         certificateHandler(true)
     }
-    
     func respond(){
         
     }
-    
     @IBAction func a1Pressed(_ sender: Any) {
     }
     @IBAction func a2Pressed(_ sender: Any) {
@@ -187,17 +151,6 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
     }
     @IBAction func a4Pressed(_ sender: Any) {
     }
-    
-    
-    
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
