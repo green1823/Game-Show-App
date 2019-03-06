@@ -11,7 +11,6 @@
 
 /*
  TODO:
- Crashes when a set is selected. Need to fix.
  Need to send the selected QuestionSet object to ManageGameTableViewController.
  */
 import UIKit
