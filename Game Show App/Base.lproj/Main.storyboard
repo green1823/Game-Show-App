@@ -18,14 +18,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zzY-KJ-INq" userLabel="Spacer">
-                                <rect key="frame" x="0.0" y="88" width="414" height="323.5"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="310.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Spotlight" translatesAutoresizingMaskIntoConstraints="NO" id="ntr-MF-EyI">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <rect key="frame" x="0.0" y="34" width="414" height="828"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sign" translatesAutoresizingMaskIntoConstraints="NO" id="rNg-Ju-OVs">
-                                <rect key="frame" x="62" y="411.5" width="290" height="258.5"/>
+                                <rect key="frame" x="62" y="398.5" width="290" height="248.5"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vXa-ye-KA7">
                                 <rect key="frame" x="0.0" y="61" width="414" height="774"/>
@@ -52,7 +52,6 @@
                             <constraint firstItem="zzY-KJ-INq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="aH0-hH-56B"/>
                             <constraint firstItem="zzY-KJ-INq" firstAttribute="width" secondItem="ntr-MF-EyI" secondAttribute="width" id="gLT-E2-Ant"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ntr-MF-EyI" secondAttribute="trailing" id="gqq-Ne-I9t"/>
-                            <constraint firstItem="ntr-MF-EyI" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="wcn-hs-xyw"/>
                             <constraint firstItem="ntr-MF-EyI" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="yEd-aB-ylJ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -72,11 +71,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HMd-r2-3hl" userLabel="Spacer">
-                                <rect key="frame" x="0.0" y="88" width="414" height="323.5"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="310.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Spotlight" translatesAutoresizingMaskIntoConstraints="NO" id="72t-OW-JFx">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <rect key="frame" x="0.0" y="34" width="414" height="828"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wXq-19-G98">
                                 <rect key="frame" x="155.5" y="336" width="103" height="224"/>
@@ -107,7 +106,6 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="72t-OW-JFx" firstAttribute="top" secondItem="ZHw-yc-R8m" secondAttribute="top" id="0PV-Iq-tNe"/>
                             <constraint firstItem="9Af-XW-TJv" firstAttribute="height" secondItem="ZHw-yc-R8m" secondAttribute="height" multiplier="0.25" id="BTv-Jo-OtS"/>
                             <constraint firstItem="wXq-19-G98" firstAttribute="height" secondItem="ZHw-yc-R8m" secondAttribute="height" multiplier="0.25" id="E7m-7m-UAL"/>
                             <constraint firstItem="wXq-19-G98" firstAttribute="centerX" secondItem="ZHw-yc-R8m" secondAttribute="centerX" id="Ga4-Io-TQU"/>
