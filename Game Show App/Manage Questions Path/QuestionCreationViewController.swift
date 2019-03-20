@@ -11,6 +11,9 @@
  TODO:
  When the keyboard comes up it blocks the bottom half of the screen. We need to make the screen pop upwards on top of the keyboard. Otherwise the question answers cant be filled in or the true/false value changed. Also, we should be able to dismiss the keyboard by clicking off the text field and/or hitting return.
  */
+//The only other things taht I could find involved disabling the debugger. To revert what I did go
+//Product -> Scheme -> edit scheme -> check debug executeable.
+// the only other thing that I found was about deleting the certificate. This is supposidly because the certificate is expired. maybe there is a way for us to create a nw ewone without having to delete the old one.
 import UIKit
 
 extension UISegmentedControl {
