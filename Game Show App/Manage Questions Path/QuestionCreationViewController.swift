@@ -71,7 +71,10 @@ class QuestionCreationViewController: UIViewController {
     @IBOutlet weak var trueFalseView: UIView!
     @IBOutlet weak var multipleChoiceView: UIView!
     @IBOutlet weak var saveButton: UIButton!
-
+    //created outlet for scroll view. should give us access to the properties of the scroll view
+    //maybe find information online abour what fields this outlet has
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     var currentQuestion: Question?
     
     /* Updates view when the question is sent in from tableView before it */
