@@ -11,7 +11,7 @@
  TODO:
  When the keyboard comes up it blocks the bottom half of the screen. We need to make the screen pop upwards on top of the keyboard. Otherwise the question answers cant be filled in or the true/false value changed. Also, we should be able to dismiss the keyboard by clicking off the text field and/or hitting return.
  */
-//The only other things taht I could find involved disabling the debugger. To revert what I did go
+//The only other things that I could find involved disabling the debugger. To revert what I did go
 //Product -> Scheme -> edit scheme -> check debug executeable.
 // the only other thing that I found was about deleting the certificate. This is supposidly because the certificate is expired. maybe there is a way for us to create a nw ewone without having to delete the old one.
 import UIKit
@@ -36,7 +36,7 @@ extension UISegmentedControl {
     }
 }
 
-class QuestionCreationViewController: UIViewController {
+class QuestionCreationViewController: UIViewController, UITextFieldDelegate {
 
     struct PropertyKeys {
         
@@ -44,6 +44,22 @@ class QuestionCreationViewController: UIViewController {
         static let unwindCancel = "UnwindToQuestionListTableWithCancel"
     }
     
+    
+    
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var questionTextField: UITextField!
+    @IBOutlet weak var pointValueTextField: UITextField!
+    @IBOutlet weak var questionType: UISegmentedControl!
+    @IBOutlet weak var answerField1: UITextField!
+    @IBOutlet weak var answerField2: UITextField!
+    @IBOutlet weak var answerField3: UITextField!
+    @IBOutlet weak var answerField4: UITextField!
+    @IBOutlet weak var tfSwitch: UISwitch!
+    @IBOutlet weak var trueFalseView: UIView!
+    @IBOutlet weak var multipleChoiceView: UIView!
+    @IBOutlet weak var saveButton: UIButton!
+
+    var currentQuestion: Question?
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -58,22 +74,44 @@ class QuestionCreationViewController: UIViewController {
         multipleChoiceView.isHidden = true
         updateView()
         updateSaveButtonState()
-                
+        
+        //Allow scrolling and keyboard dismissal
+        registerForKeyboardNotifications()
+        self.questionTextField.delegate = self
+        self.pointValueTextField.delegate = self
+        self.answerField1.delegate = self
+        self.answerField2.delegate = self
+        self.answerField3.delegate = self
+        self.answerField4.delegate = self
     }
     
-    @IBOutlet weak var answerField1: UITextField!
-    @IBOutlet weak var answerField2: UITextField!
-    @IBOutlet weak var answerField3: UITextField!
-    @IBOutlet weak var tfSwitch: UISwitch!
-    @IBOutlet weak var answerField4: UITextField!
-    @IBOutlet weak var questionTextField: UITextField!
-    @IBOutlet weak var pointValueTextField: UITextField!
-    @IBOutlet weak var questionType: UISegmentedControl!
-    @IBOutlet weak var trueFalseView: UIView!
-    @IBOutlet weak var multipleChoiceView: UIView!
-    @IBOutlet weak var saveButton: UIButton!
-
-    var currentQuestion: Question?
+    //Enable scrolling when keyboard enters
+    func registerForKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown(_:)), name: .UIKeyboardDidShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillBeHidden(_:)), name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    @objc func keyboardWasShown(_ notificiation: NSNotification) {
+        guard let info = notificiation.userInfo, let keyboardFrameValue = info[UIKeyboardFrameBeginUserInfoKey] as? NSValue else { return }
+        let keyboardFrame = keyboardFrameValue.cgRectValue
+        let keyboardSize = keyboardFrame.size
+        
+        let contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0)
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+    }
+    
+    @objc func keyboardWillBeHidden(_ notification: NSNotification) {
+        let contentInsets = UIEdgeInsets.zero
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+    }
+    
+    //Dismiss keyboard
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
     
     /* Updates view when the question is sent in from tableView before it */
     func updateView() {

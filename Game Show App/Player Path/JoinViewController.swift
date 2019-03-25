@@ -16,7 +16,7 @@
  */
 import UIKit
 
-class JoinViewController: UIViewController{
+class JoinViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var enterButton: UIButton!
@@ -25,6 +25,15 @@ class JoinViewController: UIViewController{
         super.viewDidLoad()
 
         updateEnterButtonState()
+        
+        //Dismiss keyboard
+        self.nameTextField.delegate = self
+    }
+    
+    //Dismiss keyboard
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
     
     /* Activates the enter button if there is text in nameTextField, deactivates if empty */

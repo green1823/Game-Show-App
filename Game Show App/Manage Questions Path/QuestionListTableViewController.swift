@@ -4,7 +4,7 @@
  */
 import UIKit
 
-class QuestionListTableViewController: UITableViewController {
+class QuestionListTableViewController: UITableViewController, UITextFieldDelegate {
     
     struct PropertyKeys {
         static let questionCell = "QuestionCell"
@@ -20,6 +20,27 @@ class QuestionListTableViewController: UITableViewController {
     let documentsDirectory = FileManager.default.urls(for: . documentDirectory, in: .userDomainMask).first!
     
     @IBOutlet weak var setNameTextField: UITextField!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        updateView()
+        
+        //Dismiss keyboard
+        self.setNameTextField.delegate = self
+    }
+    
+    func updateView() {
+        //checks to make sure question is not null
+        guard let set = set else {return}
+        setNameTextField.text = set.name
+        questions = set.questions
+    }
+    
+    //Dismiss keyboard
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
     
     @IBAction func BackButton(_ sender: Any) {
         
@@ -37,17 +58,7 @@ class QuestionListTableViewController: UITableViewController {
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        updateView()
-    }
     
-    func updateView() {
-        //checks to make sure question is not null
-        guard let set = set else {return}
-        setNameTextField.text = set.name
-        questions = set.questions
-    }
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
