@@ -68,7 +68,7 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
         print("recieved data")
         
         //Attempt to recieve question object as data
-        let questionItem = try JSONDecoder().decode(Question.self, from: data)
+        //let questionItem = try JSONDecoder().decode(Question.self, from: data)
 
     }
     
@@ -112,8 +112,6 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
             BZView.isHidden = true
             var tempString = info
             
-            //https://github.com/iamjono/SwiftString/blob/master/README.md
-            //thanks jono this is now installed all the methods in the readme should work as intended
             
             info.remove(at: info.startIndex)
             info.remove(at: info.startIndex)
