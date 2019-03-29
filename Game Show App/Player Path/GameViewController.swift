@@ -66,6 +66,9 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         print("recieved data")
+        
+        //Attempt to recieve question object as data
+        let questionItem = try JSONDecoder().decode(Question.self, from: data)
 
     }
     

@@ -27,7 +27,6 @@ class SelectQuestionTableViewController: UITableViewController, MCSessionDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         if(setUpSession){
-            print("here")
             setUpConnectivity()
             self.mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "connect", discoveryInfo: nil, session: self.mcSession)
             self.mcAdvertiserAssistant.start()
@@ -112,6 +111,13 @@ class SelectQuestionTableViewController: UITableViewController, MCSessionDelegat
     
     func sendQuestion(currQuestion: Question){
         
+        //Attempt to send Q
+//        if mcSession.connectedPeers.count > 0 {
+//            if let questionData22 = DataManager.loadData()
+//        }
+        
+        
+        //String version
         let question = "Q" + currQuestion.question
         let questionData = question.data(using: .utf8)
         

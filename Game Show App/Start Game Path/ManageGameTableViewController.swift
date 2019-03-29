@@ -37,7 +37,20 @@ class ManageGameTableViewController: UITableViewController {
     var mcSession: MCSession!
     var mcAdvertiserAssistant: MCAdvertiserAssistant!
     
-    let cafe: Data = "Café".data(using: .utf8)! // non-nil
+    func sendQuestion (_ questionItem: Question) {
+        if mcSession.connectedPeers.count > 0 {
+            if let questionData = DataManager.loadData(questionItem.itemIdentifier.uuidString) {
+                do {
+                    try mcSession.send(questionData, toPeers: mcSession.connectedPeers, with: .reliable)
+                } catch {
+                    fatalError("Could not send todo item")
+                }
+            }
+        } else {
+            print("you are not connected to another device")
+        }
+    }
+    //let cafe: Data = "Café".data(using: .utf8)! // non-nil
 
     override func viewDidLoad() {
         super.viewDidLoad()

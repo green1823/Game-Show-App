@@ -1409,7 +1409,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Qs-Pn-6TG" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="24F-rq-sSn" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="5469.5652173913049" y="-50.223214285714285"/>
+            <point key="canvasLocation" x="4612" y="-50"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zox-G7-qxd">
