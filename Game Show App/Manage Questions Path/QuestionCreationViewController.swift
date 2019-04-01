@@ -15,6 +15,17 @@
 //Product -> Scheme -> edit scheme -> check debug executeable.
 // the only other thing that I found was about deleting the certificate. This is supposidly because the certificate is expired. maybe there is a way for us to create a nw ewone without having to delete the old one.
 import UIKit
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
 
 extension UISegmentedControl {
 
@@ -68,6 +79,7 @@ class QuestionCreationViewController: UIViewController, UITextFieldDelegate {
         if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad {
             questionType.setFontSize(fontSize: 30)
         }
+        self.hideKeyboardWhenTappedAround()
         
         //Sets up the initial view
         trueFalseView.isHidden = false
@@ -199,7 +211,7 @@ class QuestionCreationViewController: UIViewController, UITextFieldDelegate {
                 qType = Question.QuestionType.buzzer
                 break;
             }
-            currentQuestion = Question(question: question, pointValue: points, type: qType, mcAnswers: mcAns, tfAnswer: tfAns, itemIdentifier: uuid)
+            
             performSegue(withIdentifier: PropertyKeys.unwindSave, sender: self)
         }
     }
