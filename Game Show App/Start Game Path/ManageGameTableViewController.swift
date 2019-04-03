@@ -24,7 +24,6 @@
  A decent tutorial on how to code the hosting, joining, and sending of information.
  */
 import UIKit
-
 import MultipeerConnectivity
 
 class ManageGameTableViewController: UITableViewController {

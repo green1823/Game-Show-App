@@ -36,12 +36,17 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
     var mcSession: MCSession!
     var mcAdvertiserAssistant: MCAdvertiserAssistant!
     var name: String = "";
+    var recievedQuestion: Question!
     //Outlet Variables
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var MCView: UIView!
     @IBOutlet weak var TFView: UIView!
     @IBOutlet weak var BZView: UIView!
-
+    @IBOutlet weak var a1Button: UIButton!
+    @IBOutlet weak var a2Button: UIButton!
+    @IBOutlet weak var a3Button: UIButton!
+    @IBOutlet weak var a4Button: UIButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +63,31 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
         // Do any additional setup after loading the view.
     }
     
+    func displayQuestion(recievedQuestion: Question) {
+        switch recievedQuestion.type {
+        case .trueOrFalse:
+            MCView.isHidden = true
+            TFView.isHidden = false
+            BZView.isHidden = true
+            break;
+        case .buzzer:
+            MCView.isHidden = true
+            TFView.isHidden = true
+            BZView.isHidden = false
+            break;
+        case .multipleChoice:
+            MCView.isHidden = false
+            TFView.isHidden = true
+            BZView.isHidden = true
+            a1Button.setTitle(recievedQuestion.mcAnswers?[0], for: .normal)
+            a2Button.setTitle(recievedQuestion.mcAnswers?[1], for: .normal)
+            a3Button.setTitle(recievedQuestion.mcAnswers?[2], for: .normal)
+            a4Button.setTitle(recievedQuestion.mcAnswers?[3], for: .normal)
+            break;
+            
+        }
+    }
+    
     //MARK: - Multipeer delegate functions
     
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
@@ -68,8 +98,12 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
         print("recieved data")
         
         //Attempt to recieve question object as data
-        //let questionItem = try JSONDecoder().decode(Question.self, from: data)
-
+        do {
+            recievedQuestion = try JSONDecoder().decode(Question.self, from: data)
+            displayQuestion(recievedQuestion: recievedQuestion)
+        } catch {
+            fatalError("Unable to process the recieved data")
+        }
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {

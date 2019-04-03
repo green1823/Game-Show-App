@@ -659,6 +659,10 @@
                         <outlet property="BZView" destination="vhV-SE-RPS" id="GRP-2G-Hgi"/>
                         <outlet property="MCView" destination="wzy-Ll-arr" id="iag-ee-hGt"/>
                         <outlet property="TFView" destination="CJk-KY-qLK" id="9Fy-N4-mwf"/>
+                        <outlet property="a1Button" destination="sMd-dX-bKy" id="6VD-yZ-NP8"/>
+                        <outlet property="a2Button" destination="gWy-xj-3Hv" id="tGu-ch-JTN"/>
+                        <outlet property="a3Button" destination="yJ0-aB-BqF" id="pVi-yM-V1R"/>
+                        <outlet property="a4Button" destination="R5I-yA-YEy" id="h1F-FX-z77"/>
                         <outlet property="questionLabel" destination="ztb-Za-wLa" id="53T-wE-xvZ"/>
                         <segue destination="lXV-uC-Sbc" kind="unwind" identifier="UnwindToJoin" unwindAction="unwindToJoinWithSegue:" id="HoX-fp-thc"/>
                     </connections>
