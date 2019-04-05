@@ -26,7 +26,7 @@
 import UIKit
 import MultipeerConnectivity
 
-class ManageGameTableViewController: UITableViewController {
+class ManageGameTableViewController: UITableViewController, MCSessionDelegate {
     
     var names: [String] = []
     var currentQuestion: Question?
@@ -36,6 +36,22 @@ class ManageGameTableViewController: UITableViewController {
     var mcSession: MCSession!
     var mcAdvertiserAssistant: MCAdvertiserAssistant!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        //hides back button
+        self.navigationItem.setHidesBackButton(true, animated:true)
+        //send the question to players
+        //mcSession.send(cafe, toPeers: peerIDs, with: .reliable)
+        
+        
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+        
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    // Function to send the current question to players
     func sendQuestion (_ questionItem: Question) {
         if mcSession.connectedPeers.count > 0 {
             if let questionData = DataManager.loadData(questionItem.itemIdentifier.uuidString) {
@@ -51,21 +67,6 @@ class ManageGameTableViewController: UITableViewController {
     }
     //let cafe: Data = "Café".data(using: .utf8)! // non-nil
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        //hides back button
-        self.navigationItem.setHidesBackButton(true, animated:true)
-        //send the question to players
-        //mcSession.send(cafe, toPeers: peerIDs, with: .reliable)
-
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-    }
-
 
     // MARK: - Table view data source
 
@@ -77,6 +78,29 @@ class ManageGameTableViewController: UITableViewController {
     @IBAction func Next(_ sender: Any) {
         
         performSegue(withIdentifier: "UnwindToSelectQuestionTableViewController", sender: self)
+    }
+    
+    // MARK: - Multipeer Functions
+    
+    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+        
+    }
+    
+    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+        // This is where we can recieve the usernames with the answer they chose
+        // IFF the answer they chose matches the correct answer the username will display as a cell
+    }
+    
+    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
+        
+    }
+    
+    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
+        
+    }
+    
+    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
+        
     }
     
     /*

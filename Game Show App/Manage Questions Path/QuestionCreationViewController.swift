@@ -212,7 +212,7 @@ class QuestionCreationViewController: UIViewController, UITextFieldDelegate {
                 qType = Question.QuestionType.buzzer
                 break;
             }
-            
+            currentQuestion = Question(question: question, pointValue: points, type: qType, mcAnswers: mcAns, tfAnswer: tfAns, itemIdentifier: UUID())
             performSegue(withIdentifier: PropertyKeys.unwindSave, sender: self)
         }
     }
