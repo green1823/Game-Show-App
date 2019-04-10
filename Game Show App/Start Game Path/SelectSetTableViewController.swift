@@ -69,8 +69,7 @@ class SelectSetTableViewController: UITableViewController {
         if let indexPath = tableView.indexPathForSelectedRow {
             ManageGameTableViewController.set = questionSets[indexPath.row].questions
         }
-//        let vc = segue.destination as? ManageGameTableViewController
-//        vc!.setUpSession = true;
+
         
 //        if segue.destination is SelectQuestionTableViewController {
 //            let vc = segue.destination as? SelectQuestionTableViewController

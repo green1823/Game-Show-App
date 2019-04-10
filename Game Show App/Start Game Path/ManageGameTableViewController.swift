@@ -33,6 +33,14 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate {
     var set: [Question]?
     var questionIndex = 0
     
+    var currentQuestion: Question?
+    /*
+        these two arrays should be updated at the same time and hold data in parallel
+        I would use a map but I dont think that swift has map built in
+    */
+    var ansPeers : [MCPeerID] = [];
+    var answers : [Answer] = [];
+    var questions : [Question] = [];
     var peerIDs:[MCPeerID] = []
     var peerID: MCPeerID!
     var mcSession: MCSession!
@@ -74,7 +82,7 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return questions.count;
     }
 
     @IBAction func Next(_ sender: Any) {
@@ -109,6 +117,11 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate {
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         // This is where we can recieve the usernames with the answer they chose
         // IFF the answer they chose matches the correct answer the username will display as a cell
+        var incomingPeer = peerID
+        ansPeers.append(incomingPeer);
+        let decoder = JSONDecoder();
+        var decodedAns : Answer = try decoder.decode(data.self, from: json)
+        answers.append(decodedAns)
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
@@ -123,7 +136,7 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate {
         
     }
     
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
@@ -131,7 +144,7 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate {
 
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.

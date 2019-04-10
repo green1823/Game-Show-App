@@ -23,6 +23,7 @@
 		49AEC51721669B39008A6C52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49AEC51621669B39008A6C52 /* Assets.xcassets */; };
 		49AEC51A21669B39008A6C52 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49AEC51821669B39008A6C52 /* LaunchScreen.storyboard */; };
 		560E295E21B074DF00E10F5E /* SelectSetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560E295D21B074DF00E10F5E /* SelectSetTableViewController.swift */; };
+		5654D27C2257C1AC00E34846 /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5654D27B2257C1AC00E34846 /* Answer.swift */; };
 		56C2D66A219F3D0100D9CD33 /* QuestionSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C2D669219F3D0100D9CD33 /* QuestionSet.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,7 @@
 		49AEC51921669B39008A6C52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		49AEC51B21669B39008A6C52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		560E295D21B074DF00E10F5E /* SelectSetTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSetTableViewController.swift; sourceTree = "<group>"; };
+		5654D27B2257C1AC00E34846 /* Answer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
 		56C2D669219F3D0100D9CD33 /* QuestionSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionSet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,6 +89,7 @@
 				49AEC51621669B39008A6C52 /* Assets.xcassets */,
 				495BA7B02177E41900DDC1C7 /* Question.swift */,
 				494A1D7E224E7091006C6A7C /* DataManager.swift */,
+				5654D27B2257C1AC00E34846 /* Answer.swift */,
 				56C2D669219F3D0100D9CD33 /* QuestionSet.swift */,
 				49AEC51821669B39008A6C52 /* LaunchScreen.storyboard */,
 				49AEC51B21669B39008A6C52 /* Info.plist */,
@@ -209,6 +212,7 @@
 				49AEC51021669B39008A6C52 /* AppDelegate.swift in Sources */,
 				560E295E21B074DF00E10F5E /* SelectSetTableViewController.swift in Sources */,
 				493CF714217E6A1B0088EDDC /* QuestionCreationViewController.swift in Sources */,
+				5654D27C2257C1AC00E34846 /* Answer.swift in Sources */,
 				498FA219218B7678002E5B06 /* QuestionListTableViewController.swift in Sources */,
 				49ACE17021B70357007541A2 /* ManageGameTableViewController.swift in Sources */,
 			);
