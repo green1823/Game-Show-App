@@ -161,7 +161,7 @@ class SelectQuestionTableViewController: UITableViewController, MCSessionDelegat
         if let indexPath = tableView.indexPathForSelectedRow {
             //Send variables to
             sendQuestion(currQuestion: questions[indexPath.row])
-            ManageGameTableViewController.currentQuestion = questions[indexPath.row]
+            //ManageGameTableViewController.currentQuestion = questions[indexPath.row]
             ManageGameTableViewController.peerIDs = peerIDs
             ManageGameTableViewController.peerID = peerID
             ManageGameTableViewController.mcSession = mcSession

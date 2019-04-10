@@ -61,16 +61,16 @@ class SelectSetTableViewController: UITableViewController {
         return cell
     }
 
-    /* Sends the selected question set to SelectQuestionViewController */
+    /* Sends the selected question set to ManageGameTableViewController */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        guard let SelectQuestionTableViewController = segue.destination as? SelectQuestionTableViewController else {return}
+        guard let ManageGameTableViewController = segue.destination as? ManageGameTableViewController else {return}
         
         if let indexPath = tableView.indexPathForSelectedRow {
-            SelectQuestionTableViewController.set = questionSets[indexPath.row]
+            ManageGameTableViewController.set = questionSets[indexPath.row].questions
         }
-        let vc = segue.destination as? SelectQuestionTableViewController
-        vc!.setUpSession = true;
+//        let vc = segue.destination as? ManageGameTableViewController
+//        vc!.setUpSession = true;
         
 //        if segue.destination is SelectQuestionTableViewController {
 //            let vc = segue.destination as? SelectQuestionTableViewController
@@ -80,7 +80,7 @@ class SelectSetTableViewController: UITableViewController {
     
     
     @IBAction func unwindToSelectSetTableViewController(segue: UIStoryboardSegue) {
-        guard segue.source is SelectQuestionTableViewController else {return}
+        guard segue.source is ManageGameTableViewController else {return}
     }
     
     

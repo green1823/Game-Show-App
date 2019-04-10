@@ -29,7 +29,9 @@ import MultipeerConnectivity
 class ManageGameTableViewController: UITableViewController, MCSessionDelegate {
     
     var names: [String] = []
-    var currentQuestion: Question?
+    //var currentQuestion: Question?
+    var set: [Question]?
+    var questionIndex = 0
     
     var peerIDs:[MCPeerID] = []
     var peerID: MCPeerID!
@@ -76,8 +78,26 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate {
     }
 
     @IBAction func Next(_ sender: Any) {
+        //cycle through questions and reset table and send question
+    }
+    
+    @IBAction func endGame(_ sender: Any) {
+        let alertController = UIAlertController(title: nil, message: "Are you sure you want to end the game?", preferredStyle: .alert)
         
-        performSegue(withIdentifier: "UnwindToSelectQuestionTableViewController", sender: self)
+        let endGameAction = UIAlertAction(title: "End Game", style: .default) { (action) in
+            print("end game selected")
+            self.performSegue(withIdentifier: "UnwindToSelectSet", sender: self)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+            print("cancel selected")
+        }
+        
+        alertController.addAction(endGameAction)
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+        
+        
     }
     
     // MARK: - Multipeer Functions
