@@ -29,11 +29,10 @@ import MultipeerConnectivity
 class ManageGameTableViewController: UITableViewController, MCSessionDelegate {
     
     var names: [String] = []
-    //var currentQuestion: Question?
     var set: [Question]?
     var questionIndex = 0
     
-    var currentQuestion: Question?
+    //var currentQuestion: Question?
     /*
         these two arrays should be updated at the same time and hold data in parallel
         I would use a map but I dont think that swift has map built in
@@ -48,8 +47,15 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //hides back button
+        // Hides back button
         self.navigationItem.setHidesBackButton(true, animated:true)
+        
+        // Connectivity actions
+        setUpConnectivity()
+        self.mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "connect", discoveryInfo: nil, session: self.mcSession)
+        self.mcAdvertiserAssistant.start()
+        
+        
         //send the question to players
         //mcSession.send(cafe, toPeers: peerIDs, with: .reliable)
         
@@ -68,13 +74,15 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate {
                 do {
                     try mcSession.send(questionData, toPeers: mcSession.connectedPeers, with: .reliable)
                 } catch {
-                    fatalError("Could not send todo item")
+                    fatalError("Could not send question item")
                 }
             }
         } else {
             print("you are not connected to another device")
         }
     }
+    
+    
     //let cafe: Data = "Café".data(using: .utf8)! // non-nil
 
 
@@ -87,6 +95,8 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate {
 
     @IBAction func Next(_ sender: Any) {
         //cycle through questions and reset table and send question
+        questionIndex += 1
+        tableView.reloadData()
     }
     
     @IBAction func endGame(_ sender: Any) {
@@ -110,6 +120,13 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate {
     
     // MARK: - Multipeer Functions
     
+    /* Begin session */
+    func setUpConnectivity() {
+        peerID = MCPeerID(displayName: UIDevice.current.name)
+        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: MCEncryptionPreference.none)
+        mcSession.delegate = self
+    }
+    
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         
     }
@@ -120,20 +137,21 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate {
         var incomingPeer = peerID
         ansPeers.append(incomingPeer);
         let decoder = JSONDecoder();
-        var decodedAns : Answer = try decoder.decode(data.self, from: json)
-        answers.append(decodedAns)
+        //UNCOMMENT and fix error
+        //var decodedAns : Answer = try decoder.decode(data.self, from: json)
+        //answers.append(decodedAns)
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
-        
+        //keep empty
     }
     
     func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
-        
+        //keep empty
     }
     
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
-        
+        //keep empty
     }
     
     

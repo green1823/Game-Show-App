@@ -12,14 +12,15 @@ import CloudKit
 struct Answer: Codable {
     
     enum QuestionType: String, Codable {case multipleChoice, trueOrFalse, buzzer}
-    enum multipleChoiceAns : Int, Codable {case 0,1,2,3,4}
+    var multipleChoiceAns : Int//, Codable {case 0,1,2,3,4}
     var tfAns: Bool
     var type: QuestionType
-    var choiceAns: multipleChoiceAns
+    //var choiceAns: multipleChoiceAns
     var itemIdentifier: UUID
-    init(multAns: multipleChoiceAns, tfAnsIn: Bool, type: QuestionType, itemIdentifier: UUID) {
-        self.tfAns = tfAnsIn
-        self.choiceAns = multAns
+    //init(multAns: multipleChoiceAns, tfAnsIn: Bool, type: QuestionType, itemIdentifier: UUID) {
+    init(multipleChoiceAns: Int, tfAns: Bool, type: QuestionType, itemIdentifier: UUID) {
+        self.tfAns = tfAns
+        self.multipleChoiceAns = multipleChoiceAns
         self.type = type
         self.itemIdentifier = itemIdentifier
     }
