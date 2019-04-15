@@ -1223,11 +1223,11 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FYY-v6-vVu" userLabel="multipleChoiceView">
                                                 <rect key="frame" x="16" y="438.5" width="382" height="358"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LvY-PU-k2U">
-                                                        <rect key="frame" x="0.0" y="0.0" width="382" height="89.5"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LvY-PU-k2U" userLabel="A1View">
+                                                        <rect key="frame" x="0.0" y="0.0" width="382" height="71.5"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Answer 1" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Eo7-PD-cBl" userLabel="answerField1">
-                                                                <rect key="frame" x="8" y="29.5" width="366" height="30"/>
+                                                                <rect key="frame" x="8" y="20.5" width="366" height="30"/>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
@@ -1240,11 +1240,11 @@
                                                             <constraint firstAttribute="trailing" secondItem="Eo7-PD-cBl" secondAttribute="trailing" constant="8" id="qlY-7m-LFU"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yTe-ub-YzQ">
-                                                        <rect key="frame" x="0.0" y="89.5" width="382" height="89.5"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yTe-ub-YzQ" userLabel="A2View">
+                                                        <rect key="frame" x="0.0" y="71.5" width="382" height="71.5"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Answer 2" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oiZ-7W-jxS" userLabel="answerField2">
-                                                                <rect key="frame" x="8" y="29.5" width="366" height="30"/>
+                                                                <rect key="frame" x="8" y="21" width="366" height="30"/>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
@@ -1257,11 +1257,11 @@
                                                             <constraint firstAttribute="trailing" secondItem="oiZ-7W-jxS" secondAttribute="trailing" constant="8" id="Ppp-53-unZ"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TKR-cL-OPq">
-                                                        <rect key="frame" x="0.0" y="179" width="382" height="89.5"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TKR-cL-OPq" userLabel="A3View">
+                                                        <rect key="frame" x="0.0" y="143" width="382" height="72"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Answer 3" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="p0X-ed-kfJ" userLabel="answerField3">
-                                                                <rect key="frame" x="8" y="30" width="366" height="30"/>
+                                                                <rect key="frame" x="8" y="21" width="366" height="30"/>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
@@ -1274,11 +1274,11 @@
                                                             <constraint firstItem="p0X-ed-kfJ" firstAttribute="centerY" secondItem="TKR-cL-OPq" secondAttribute="centerY" id="z4m-1Z-MgV"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bPr-GM-9mL">
-                                                        <rect key="frame" x="0.0" y="268.5" width="382" height="89.5"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bPr-GM-9mL" userLabel="A4View">
+                                                        <rect key="frame" x="0.0" y="215" width="382" height="71.5"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Answer 4" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yns-wD-qce" userLabel="answerField4">
-                                                                <rect key="frame" x="0.0" y="30" width="382" height="30"/>
+                                                                <rect key="frame" x="0.0" y="20.5" width="382" height="30"/>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
@@ -1291,14 +1291,42 @@
                                                             <constraint firstItem="Yns-wD-qce" firstAttribute="centerY" secondItem="bPr-GM-9mL" secondAttribute="centerY" id="kLy-pW-sWF"/>
                                                         </constraints>
                                                     </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PEc-07-kZn" userLabel="CorrectView">
+                                                        <rect key="frame" x="0.0" y="286.5" width="382" height="71.5"/>
+                                                        <subviews>
+                                                            <segmentedControl opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="4MD-3s-zRE">
+                                                                <rect key="frame" x="144" y="22" width="230" height="29"/>
+                                                                <segments>
+                                                                    <segment title="1"/>
+                                                                    <segment title="2"/>
+                                                                    <segment title="3"/>
+                                                                    <segment title="4"/>
+                                                                </segments>
+                                                            </segmentedControl>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Correct Answer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tsC-WV-icM">
+                                                                <rect key="frame" x="8" y="25.5" width="120" height="21"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstItem="4MD-3s-zRE" firstAttribute="leading" secondItem="tsC-WV-icM" secondAttribute="trailing" constant="16" id="639-Ex-yWM"/>
+                                                            <constraint firstItem="4MD-3s-zRE" firstAttribute="centerY" secondItem="PEc-07-kZn" secondAttribute="centerY" id="RYl-v7-MIG"/>
+                                                            <constraint firstItem="tsC-WV-icM" firstAttribute="centerY" secondItem="PEc-07-kZn" secondAttribute="centerY" id="i2l-Wp-BaR"/>
+                                                            <constraint firstAttribute="trailing" secondItem="4MD-3s-zRE" secondAttribute="trailing" constant="8" id="kCr-TX-PQH"/>
+                                                            <constraint firstItem="tsC-WV-icM" firstAttribute="leading" secondItem="PEc-07-kZn" secondAttribute="leading" constant="8" id="x0g-0e-gYS"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="TKR-cL-OPq" secondAttribute="trailing" id="0ta-C0-d4h"/>
-                                                    <constraint firstItem="LvY-PU-k2U" firstAttribute="height" secondItem="FYY-v6-vVu" secondAttribute="height" multiplier="0.25" id="90P-Yf-xCe"/>
+                                                    <constraint firstItem="PEc-07-kZn" firstAttribute="top" secondItem="bPr-GM-9mL" secondAttribute="bottom" id="5Z7-IE-vaP"/>
+                                                    <constraint firstItem="LvY-PU-k2U" firstAttribute="height" secondItem="FYY-v6-vVu" secondAttribute="height" multiplier="0.2" id="90P-Yf-xCe"/>
                                                     <constraint firstItem="yTe-ub-YzQ" firstAttribute="top" secondItem="LvY-PU-k2U" secondAttribute="bottom" id="B39-fU-b8u"/>
-                                                    <constraint firstAttribute="bottom" secondItem="bPr-GM-9mL" secondAttribute="bottom" id="FO0-xs-BaI"/>
-                                                    <constraint firstItem="bPr-GM-9mL" firstAttribute="height" secondItem="FYY-v6-vVu" secondAttribute="height" multiplier="0.25" id="K9a-dy-eot"/>
+                                                    <constraint firstItem="bPr-GM-9mL" firstAttribute="height" secondItem="FYY-v6-vVu" secondAttribute="height" multiplier="0.2" id="K9a-dy-eot"/>
                                                     <constraint firstAttribute="trailing" secondItem="LvY-PU-k2U" secondAttribute="trailing" id="KWl-8i-gNZ"/>
                                                     <constraint firstAttribute="trailing" secondItem="yTe-ub-YzQ" secondAttribute="trailing" id="Lyt-YP-sGt"/>
                                                     <constraint firstItem="TKR-cL-OPq" firstAttribute="leading" secondItem="FYY-v6-vVu" secondAttribute="leading" id="NMG-fr-AHq"/>
@@ -1307,12 +1335,16 @@
                                                     <constraint firstItem="LvY-PU-k2U" firstAttribute="leading" secondItem="FYY-v6-vVu" secondAttribute="leading" id="STr-rI-rVV"/>
                                                     <constraint firstItem="bPr-GM-9mL" firstAttribute="top" secondItem="TKR-cL-OPq" secondAttribute="bottom" id="TEc-UV-UF4"/>
                                                     <constraint firstAttribute="trailing" secondItem="bPr-GM-9mL" secondAttribute="trailing" id="XIN-XJ-21S"/>
+                                                    <constraint firstItem="PEc-07-kZn" firstAttribute="height" secondItem="FYY-v6-vVu" secondAttribute="height" multiplier="0.2" id="XXr-07-faw"/>
                                                     <constraint firstItem="TKR-cL-OPq" firstAttribute="width" secondItem="FYY-v6-vVu" secondAttribute="width" id="YAd-eb-pBG"/>
                                                     <constraint firstItem="TKR-cL-OPq" firstAttribute="top" secondItem="yTe-ub-YzQ" secondAttribute="bottom" id="Zf1-42-mqA"/>
+                                                    <constraint firstAttribute="bottom" secondItem="PEc-07-kZn" secondAttribute="bottom" id="g8i-Nt-EBV"/>
+                                                    <constraint firstItem="PEc-07-kZn" firstAttribute="width" secondItem="FYY-v6-vVu" secondAttribute="width" id="ic1-iE-9Dp"/>
                                                     <constraint firstItem="bPr-GM-9mL" firstAttribute="leading" secondItem="FYY-v6-vVu" secondAttribute="leading" id="jHQ-IK-5Gf"/>
-                                                    <constraint firstItem="yTe-ub-YzQ" firstAttribute="height" secondItem="FYY-v6-vVu" secondAttribute="height" multiplier="0.25" id="kWc-uP-dlc"/>
+                                                    <constraint firstItem="yTe-ub-YzQ" firstAttribute="height" secondItem="FYY-v6-vVu" secondAttribute="height" multiplier="0.2" id="kWc-uP-dlc"/>
                                                     <constraint firstItem="LvY-PU-k2U" firstAttribute="width" secondItem="FYY-v6-vVu" secondAttribute="width" id="onE-iz-ceJ"/>
-                                                    <constraint firstItem="TKR-cL-OPq" firstAttribute="height" secondItem="FYY-v6-vVu" secondAttribute="height" multiplier="0.25" id="q7a-rn-az8"/>
+                                                    <constraint firstItem="TKR-cL-OPq" firstAttribute="height" secondItem="FYY-v6-vVu" secondAttribute="height" multiplier="0.2" id="q7a-rn-az8"/>
+                                                    <constraint firstItem="PEc-07-kZn" firstAttribute="centerX" secondItem="FYY-v6-vVu" secondAttribute="centerX" id="uaf-sP-mGt"/>
                                                     <constraint firstItem="yTe-ub-YzQ" firstAttribute="leading" secondItem="FYY-v6-vVu" secondAttribute="leading" id="wT0-qJ-mZQ"/>
                                                     <constraint firstItem="bPr-GM-9mL" firstAttribute="width" secondItem="FYY-v6-vVu" secondAttribute="width" id="wzc-WL-dmF"/>
                                                 </constraints>
@@ -1405,6 +1437,7 @@
                         <outlet property="answerField2" destination="oiZ-7W-jxS" id="CQB-xf-7lD"/>
                         <outlet property="answerField3" destination="p0X-ed-kfJ" id="MB8-cB-cJQ"/>
                         <outlet property="answerField4" destination="Yns-wD-qce" id="hkX-le-Rlo"/>
+                        <outlet property="correctAnswerSegmentedControl" destination="4MD-3s-zRE" id="UtZ-kZ-gqa"/>
                         <outlet property="multipleChoiceView" destination="FYY-v6-vVu" id="ipP-7b-CQe"/>
                         <outlet property="pointValueTextField" destination="0OY-3b-IlP" id="HTb-OZ-7Pf"/>
                         <outlet property="questionTextField" destination="HoY-c8-IDT" id="xqV-xr-Ea3"/>
@@ -1420,7 +1453,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Qs-Pn-6TG" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="24F-rq-sSn" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4612" y="-50"/>
+            <point key="canvasLocation" x="4611.594202898551" y="-50.223214285714285"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zox-G7-qxd">

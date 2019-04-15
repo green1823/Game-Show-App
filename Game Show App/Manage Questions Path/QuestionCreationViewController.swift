@@ -66,6 +66,7 @@ class QuestionCreationViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var answerField2: UITextField!
     @IBOutlet weak var answerField3: UITextField!
     @IBOutlet weak var answerField4: UITextField!
+    @IBOutlet weak var correctAnswerSegmentedControl: UISegmentedControl!
     @IBOutlet weak var tfSwitch: UISwitch!
     @IBOutlet weak var trueFalseView: UIView!
     @IBOutlet weak var multipleChoiceView: UIView!
@@ -153,6 +154,7 @@ class QuestionCreationViewController: UIViewController, UITextFieldDelegate {
             answerField4.text = currentQuestion.mcAnswers?[3]
             break
         }
+        correctAnswerSegmentedControl.selectedSegmentIndex = currentQuestion.correctMCIndex!
         questionTypeChanged(questionType)
     }
     
@@ -195,6 +197,7 @@ class QuestionCreationViewController: UIViewController, UITextFieldDelegate {
             var qType: Question.QuestionType
             var tfAns: Bool = false
             var mcAns: [String] = []
+            let mcIndex: Int = correctAnswerSegmentedControl.selectedSegmentIndex
             switch questionType.selectedSegmentIndex {
             case 0:
                 qType = Question.QuestionType.trueOrFalse
@@ -212,7 +215,7 @@ class QuestionCreationViewController: UIViewController, UITextFieldDelegate {
                 qType = Question.QuestionType.buzzer
                 break;
             }
-            currentQuestion = Question(question: question, pointValue: points, type: qType, mcAnswers: mcAns, tfAnswer: tfAns, itemIdentifier: UUID())
+            currentQuestion = Question(question: question, pointValue: points, type: qType, mcAnswers: mcAns, correctMCIndex: mcIndex, tfAnswer: tfAns, itemIdentifier: UUID())
             performSegue(withIdentifier: PropertyKeys.unwindSave, sender: self)
         }
     }

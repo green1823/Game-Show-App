@@ -117,7 +117,7 @@ class QuestionListTableViewController: UITableViewController, UITextFieldDelegat
     }
     
     @IBAction func unwindToQuestionListWithCancel(segue: UIStoryboardSegue) {
-        guard let source = segue.source as? QuestionCreationViewController else {return}
+        guard segue.source is QuestionCreationViewController else {return}
         
     }
     

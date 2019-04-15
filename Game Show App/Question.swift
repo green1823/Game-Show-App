@@ -36,13 +36,15 @@ struct Question: Codable {
     var pointValue: Int
     var type: QuestionType
     var mcAnswers: [String]?
+    var correctMCIndex: Int?
     var tfAnswer: Bool?
     var itemIdentifier: UUID
-    init(question: String, pointValue: Int, type: QuestionType, mcAnswers: [String]?, tfAnswer: Bool?, itemIdentifier: UUID) {
+    init(question: String, pointValue: Int, type: QuestionType, mcAnswers: [String]?, correctMCIndex: Int?, tfAnswer: Bool?, itemIdentifier: UUID) {
         self.question = question
         self.pointValue = pointValue
         self.type = type
         self.mcAnswers = mcAnswers
+        self.correctMCIndex = correctMCIndex
         self.tfAnswer = tfAnswer
         self.itemIdentifier = itemIdentifier
     }
