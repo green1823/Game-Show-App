@@ -144,7 +144,6 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
             MCView.isHidden = false
             TFView.isHidden = true
             BZView.isHidden = true
-            var tempString = info
             
             
             info.remove(at: info.startIndex)

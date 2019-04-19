@@ -81,9 +81,6 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
             print("you are not connected to another device")
         }
     }
-    
-    
-    //let cafe: Data = "Café".data(using: .utf8)! // non-nil
 
 
     // MARK: - Table view data source
@@ -127,7 +124,6 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
         mcSession.delegate = self
     }
     
-    ////
     func session(_ session: MCSession, didReceiveCertificate certificate: [Any]?, fromPeer peerID: MCPeerID, certificateHandler: @escaping (Bool) -> Void) {
         certificateHandler(true)
     }
@@ -151,7 +147,6 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
     func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
         dismiss(animated: true, completion: nil)
     }
-    ////
     
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         
@@ -160,10 +155,9 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         // This is where we can recieve the usernames with the answer they chose
         // IFF the answer they chose matches the correct answer the username will display as a cell
-        var incomingPeer = peerID
+        let incomingPeer = peerID
         ansPeers.append(incomingPeer);
         let decoder = JSONDecoder();
-        //UNCOMMENT and fix error
         var decodedAns : Answer?
         do{
             decodedAns = try decoder.decode(Answer.self, from: data)
