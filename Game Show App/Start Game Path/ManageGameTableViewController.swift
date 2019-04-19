@@ -164,8 +164,13 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
         ansPeers.append(incomingPeer);
         let decoder = JSONDecoder();
         //UNCOMMENT and fix error
-        //var decodedAns : Answer = try decoder.decode(data.self, from: json)
-        //answers.append(decodedAns)
+        var decodedAns : Answer?
+        do{
+            decodedAns = try decoder.decode(Answer.self, from: data)
+        }catch{
+            print("error decoding answer")
+        }
+        answers.append(decodedAns!)
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
