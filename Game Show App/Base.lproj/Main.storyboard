@@ -392,7 +392,7 @@
                                 </connections>
                             </button>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Next" id="8eW-RS-P5z">
+                        <barButtonItem key="rightBarButtonItem" title="Start" id="8eW-RS-P5z">
                             <connections>
                                 <action selector="Next:" destination="Oqv-fd-73S" id="ILV-4M-3Ke"/>
                             </connections>
@@ -510,11 +510,17 @@
                                         <rect key="frame" x="0.0" y="0.0" width="183" height="269"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="True"/>
+                                        <connections>
+                                            <action selector="truePressed:" destination="J6Q-cl-R4c" eventType="touchUpInside" id="FKf-dX-0MI"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KfY-Z4-et9">
                                         <rect key="frame" x="190" y="0.0" width="183" height="269"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="False"/>
+                                        <connections>
+                                            <action selector="falsePressed:" destination="J6Q-cl-R4c" eventType="touchUpInside" id="Deh-af-ZF9"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -542,8 +548,20 @@
                                         <rect key="frame" x="-0.5" y="0.0" width="373" height="448"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xws-92-ETW" userLabel="Buzzer">
+                                        <rect key="frame" x="0.0" y="0.0" width="373" height="448"/>
+                                        <connections>
+                                            <action selector="buzzerPressed:" destination="J6Q-cl-R4c" eventType="touchUpInside" id="jQF-e2-12I"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="xws-92-ETW" firstAttribute="height" secondItem="vhV-SE-RPS" secondAttribute="height" id="26g-Mr-WY9"/>
+                                    <constraint firstItem="xws-92-ETW" firstAttribute="width" secondItem="vhV-SE-RPS" secondAttribute="width" id="gFV-ic-Op0"/>
+                                    <constraint firstItem="xws-92-ETW" firstAttribute="centerY" secondItem="vhV-SE-RPS" secondAttribute="centerY" id="rbH-Jr-Pkw"/>
+                                    <constraint firstItem="xws-92-ETW" firstAttribute="centerX" secondItem="vhV-SE-RPS" secondAttribute="centerX" id="riI-5X-NSi"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wzy-Ll-arr" userLabel="MCView">
                                 <rect key="frame" x="20.5" y="229" width="373" height="448"/>
@@ -646,12 +664,6 @@
                             <constraint firstItem="CJk-KY-qLK" firstAttribute="centerX" secondItem="22M-Cj-VQv" secondAttribute="centerX" id="zNk-BJ-k5z"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="22M-Cj-VQv"/>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="CJk-KY-qLK"/>
-                                <exclude reference="vhV-SE-RPS"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="hT8-r1-9ds">
                         <barButtonItem key="rightBarButtonItem" title="Leaderboard" id="SFF-6D-PIx">
@@ -670,7 +682,10 @@
                         <outlet property="a2Button" destination="gWy-xj-3Hv" id="tGu-ch-JTN"/>
                         <outlet property="a3Button" destination="yJ0-aB-BqF" id="pVi-yM-V1R"/>
                         <outlet property="a4Button" destination="R5I-yA-YEy" id="h1F-FX-z77"/>
+                        <outlet property="buzzerButton" destination="xws-92-ETW" id="web-N7-JRm"/>
+                        <outlet property="falseButton" destination="KfY-Z4-et9" id="uOL-JB-AJH"/>
                         <outlet property="questionLabel" destination="ztb-Za-wLa" id="53T-wE-xvZ"/>
+                        <outlet property="trueButton" destination="a9f-bZ-Cs4" id="oE9-Pb-fFC"/>
                         <segue destination="lXV-uC-Sbc" kind="unwind" identifier="UnwindToJoin" unwindAction="unwindToJoinWithSegue:" id="HoX-fp-thc"/>
                     </connections>
                 </viewController>

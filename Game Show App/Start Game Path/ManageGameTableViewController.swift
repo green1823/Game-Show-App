@@ -26,7 +26,7 @@
 import UIKit
 import MultipeerConnectivity
 
-class ManageGameTableViewController: UITableViewController, MCSessionDelegate, MCNearbyServiceBrowserDelegate, MCNearbyServiceAdvertiserDelegate {
+class ManageGameTableViewController: UITableViewController, MCSessionDelegate, MCBrowserViewControllerDelegate {
     
     var names: [String] = []
     var set: [Question]?
@@ -47,6 +47,7 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.reloadData()
         // Hides back button
         self.navigationItem.setHidesBackButton(true, animated:true)
         
@@ -88,15 +89,23 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
 
     // MARK: - Table view data source
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return questions.count;
-    }
-
-    @IBAction func Next(_ sender: Any) {
+    @IBAction func Next(_ sender: UIButton) {
         //cycle through questions and reset table and send question
-        questionIndex += 1
-        tableView.reloadData()
+        sender.setTitle("Next", for: .normal)
+        if set!.count > questionIndex {
+            names = []
+            tableView.reloadData()
+            //sendQuestion(set![questionIndex])
+            questionIndex += 1
+        } else {
+            let gameOverAlertController = UIAlertController(title: "Game Over", message: "", preferredStyle: .alert)
+            self.present(gameOverAlertController, animated: true, completion: nil)
+            sender.isHidden = true
+            for peer in peerIDs {
+                names.append(peer.displayName)
+                tableView.reloadData()
+            }
+        }
     }
     
     @IBAction func endGame(_ sender: Any) {
@@ -127,45 +136,39 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
         mcSession.delegate = self
     }
     
-    ////
-    func session(_ session: MCSession, didReceiveCertificate certificate: [Any]?, fromPeer peerID: MCPeerID, certificateHandler: @escaping (Bool) -> Void) {
-        certificateHandler(true)
-    }
     
-    func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
-        peerIDs.append(peerID);
-    }
-    
-    func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
-        
-    }
-    
-    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
-        
-    }
-    
-    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController){
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
-        dismiss(animated: true, completion: nil)
-    }
-    ////
     
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-        
+        switch state {
+        case MCSessionState.connected:
+            print("Connected: \(peerID.displayName)")
+            
+        case MCSessionState.connecting:
+            print("Connecting: \(peerID.displayName)")
+            
+        case MCSessionState.notConnected:
+            print("Not Connected: \(peerID.displayName)")
+        }
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        // This is where we can recieve the usernames with the answer they chose
-        // IFF the answer they chose matches the correct answer the username will display as a cell
-        var incomingPeer = peerID
-        ansPeers.append(incomingPeer);
-        let decoder = JSONDecoder();
-        //UNCOMMENT and fix error
-        //var decodedAns : Answer = try decoder.decode(data.self, from: json)
-        //answers.append(decodedAns)
+        print("recieved data")
+        
+        //Attempt to recieve name object as data
+        do {
+            let recievedName = try JSONDecoder().decode(String.self, from: data)
+            names.append(recievedName)
+        } catch {
+            fatalError("Unable to process the recieved data")
+        }
+//        // This is where we can recieve the usernames with the answer they chose
+//        // IFF the answer they chose matches the correct answer the username will display as a cell
+//        var incomingPeer = peerID
+//        ansPeers.append(incomingPeer);
+//        let decoder = JSONDecoder();
+//        //UNCOMMENT and fix error
+//        //var decodedAns : Answer = try decoder.decode(data.self, from: json)
+//        //answers.append(decodedAns)
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
@@ -180,13 +183,12 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
         //keep empty
     }
     
+    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
+        dismiss(animated: true, completion: nil)
+    }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
+    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
+        dismiss(animated: true, completion: nil)
     }
     
 
@@ -236,4 +238,22 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
     */
     
     /* Methods to conform to multipeer protocols */
+    
+    
+    // MARK: - Tableview functions
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return names.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerCell", for: indexPath)
+        
+        // Configure the cell...
+        
+        
+        return cell
+    }
+    
+    
 }
