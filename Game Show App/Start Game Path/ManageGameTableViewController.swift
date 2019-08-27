@@ -217,14 +217,6 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
         //keep empty
     }
     
-    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
-        dismiss(animated: true, completion: nil)
-    }
-    
 
     /*
     // Override to support conditional editing of the table view.
