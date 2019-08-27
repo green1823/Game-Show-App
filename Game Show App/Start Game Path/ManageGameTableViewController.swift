@@ -84,6 +84,7 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
         }
     }
 
+
     // MARK: - Table view data source
 
     @IBAction func Next(_ sender: UIButton) {
@@ -132,6 +133,30 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
         peerID = MCPeerID(displayName: UIDevice.current.name)
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: MCEncryptionPreference.none)
         mcSession.delegate = self
+    }
+    
+    func session(_ session: MCSession, didReceiveCertificate certificate: [Any]?, fromPeer peerID: MCPeerID, certificateHandler: @escaping (Bool) -> Void) {
+        certificateHandler(true)
+    }
+    
+    func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
+        peerIDs.append(peerID);
+    }
+    
+    func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
+        
+    }
+    
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
+        
+    }
+    
+    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController){
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
+        dismiss(animated: true, completion: nil)
     }
     
     
