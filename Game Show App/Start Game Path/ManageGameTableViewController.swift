@@ -44,6 +44,7 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
     var peerID: MCPeerID!
     var mcSession: MCSession!
     var mcAdvertiserAssistant: MCAdvertiserAssistant!
+    @IBOutlet weak var StartNextButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,16 +83,13 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
             print("you are not connected to another device")
         }
     }
-    
-    
-    //let cafe: Data = "Café".data(using: .utf8)! // non-nil
-
 
     // MARK: - Table view data source
 
     @IBAction func Next(_ sender: UIButton) {
         //cycle through questions and reset table and send question
-        sender.setTitle("Next", for: .normal)
+        StartNextButton.title = "Next"
+        //TO FIX: does not stop when it reaches the end of the set. Tries to access beyond the last index
         if set!.count > questionIndex {
             names = []
             tableView.reloadData()
@@ -152,15 +150,15 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        print("recieved data")
-        
-        //Attempt to recieve name object as data
-        do {
-            let recievedName = try JSONDecoder().decode(String.self, from: data)
-            names.append(recievedName)
-        } catch {
-            fatalError("Unable to process the recieved data")
-        }
+//        print("recieved data")
+//
+//        //Attempt to recieve name object as data
+//        do {
+//            let recievedName = try JSONDecoder().decode(String.self, from: data)
+//            names.append(recievedName)
+//        } catch {
+//            fatalError("Unable to process the recieved data")
+//        }
 //        // This is where we can recieve the usernames with the answer they chose
 //        // IFF the answer they chose matches the correct answer the username will display as a cell
 //        var incomingPeer = peerID
@@ -169,6 +167,17 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
 //        //UNCOMMENT and fix error
 //        //var decodedAns : Answer = try decoder.decode(data.self, from: json)
 //        //answers.append(decodedAns)
+        
+        let incomingPeer = peerID
+        ansPeers.append(incomingPeer)
+        let decoder = JSONDecoder()
+        var decodedAns: Answer?
+        do {
+            decodedAns = try decoder.decode(Answer.self, from: data)
+        } catch {
+            print("error decoding answer")
+        }
+        answers.append(decodedAns!)
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
