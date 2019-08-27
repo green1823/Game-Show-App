@@ -94,7 +94,7 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
         if set!.count > questionIndex {
             names = []
             tableView.reloadData()
-            //sendQuestion(set![questionIndex])
+            sendQuestion(set![questionIndex])
             questionIndex += 1
         } else {
             let gameOverAlertController = UIAlertController(title: "Game Over", message: "", preferredStyle: .alert)
