@@ -215,7 +215,15 @@ class QuestionCreationViewController: UIViewController, UITextFieldDelegate {
                 qType = Question.QuestionType.buzzer
                 break;
             }
+
             currentQuestion = Question(question: question, pointValue: points, type: qType, mcAnswers: mcAns, correctMCIndex: mcIndex, tfAnswer: tfAns, itemIdentifier: UUID())
+//            currentQuestion?.changeQuestion(newQuestion: question)
+//            currentQuestion?.changePointValue(newPointValue: points)
+//            currentQuestion?.changeType(newType: qType)
+//            currentQuestion?.changeMCAnswers(newMCAnswers: mcAns)
+//            currentQuestion?.changeCorrectMCIndex(newMCIndex: mcIndex)
+//            currentQuestion?.changeTFAnswer(newTFAnswer: tfAns)
+            
             performSegue(withIdentifier: PropertyKeys.unwindSave, sender: self)
         }
     }

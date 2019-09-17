@@ -29,11 +29,13 @@ class QuestionSetsTableViewController: UITableViewController {
     //need for decoding
     let documentsDirectory = FileManager.default.urls(for: . documentDirectory, in: .userDomainMask).first!
     //end
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Uncomment the following line to preserve selection between presentations
         self.clearsSelectionOnViewWillAppear = false
+        
         
         //Declares a global instance of QuestionSets, allows it to be accessed from other view controllers
         let userDefaults = UserDefaults.standard

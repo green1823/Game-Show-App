@@ -39,6 +39,7 @@ struct Question: Codable {
     var correctMCIndex: Int?
     var tfAnswer: Bool?
     var itemIdentifier: UUID
+
     init(question: String, pointValue: Int, type: QuestionType, mcAnswers: [String]?, correctMCIndex: Int?, tfAnswer: Bool?, itemIdentifier: UUID) {
         self.question = question
         self.pointValue = pointValue
@@ -47,7 +48,11 @@ struct Question: Codable {
         self.correctMCIndex = correctMCIndex
         self.tfAnswer = tfAnswer
         self.itemIdentifier = itemIdentifier
+        //self.createdAt = Date
     }
+    
+    /* DATAMANAGER ATTEMPT - following code can be deleted if it fails */
+    //var createdAt: Date
     
     func saveItem() {
         DataManager.save(self, with: "\(itemIdentifier.uuidString)")
@@ -56,6 +61,32 @@ struct Question: Codable {
     func deleteItem() {
         DataManager.delete(itemIdentifier.uuidString)
     }
+    
+    mutating func changeQuestion(newQuestion: String){
+        self.question = newQuestion
+        DataManager.save(self, with: "\(itemIdentifier.uuidString)")
+    }
+    mutating func changePointValue(newPointValue: Int){
+        self.pointValue = newPointValue
+        DataManager.save(self, with: "\(itemIdentifier.uuidString)")
+    }
+    mutating func changeType(newType: QuestionType){
+        self.type = newType
+        DataManager.save(self, with: "\(itemIdentifier.uuidString)")
+    }
+    mutating func changeMCAnswers(newMCAnswers: [String]){
+        self.mcAnswers = newMCAnswers
+        DataManager.save(self, with: "\(itemIdentifier.uuidString)")
+    }
+    mutating func changeCorrectMCIndex(newMCIndex: Int){
+        self.correctMCIndex = newMCIndex
+        DataManager.save(self, with: "\(itemIdentifier.uuidString)")
+    }
+    mutating func changeTFAnswer(newTFAnswer: Bool){
+        self.tfAnswer = newTFAnswer
+        DataManager.save(self, with: "\(itemIdentifier.uuidString)")
+    }
+    
 
 }
 //THIS IS WHERE THE STRuCT ATTEMPT  ENDS

@@ -84,11 +84,11 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
             MCView.isHidden = false
             TFView.isHidden = true
             BZView.isHidden = true
+            enableButtons()
             a1Button.setTitle(recievedQuestion.mcAnswers?[0], for: .normal)
             a2Button.setTitle(recievedQuestion.mcAnswers?[1], for: .normal)
             a3Button.setTitle(recievedQuestion.mcAnswers?[2], for: .normal)
             a4Button.setTitle(recievedQuestion.mcAnswers?[3], for: .normal)
-            enableButtons()
             break;
         }
         questionLabel.text = recievedQuestion.question
@@ -116,6 +116,7 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
     /* Sends the user's name to the host */
     func sendName() {
         if mcSession.connectedPeers.count > 0 {
+            //The name is not saved to datamanager - one way os to send it and then append the string on the host end. Otherwise I could send anything just to ping the host and take the peerid property as the name --- peerId.displayName = String
             if let nameData = DataManager.loadData(name) {
                 do {
                     try mcSession.send(nameData, toPeers: mcSession.connectedPeers, with: .reliable)

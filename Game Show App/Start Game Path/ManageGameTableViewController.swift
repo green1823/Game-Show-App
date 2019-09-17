@@ -40,6 +40,7 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
     var ansPeers : [MCPeerID] = [];
     var answers : [Answer] = [];
     var questions : [Question] = [];
+    var currentQuestion: Question?
     var peerIDs:[MCPeerID] = []
     var peerID: MCPeerID!
     var mcSession: MCSession!
@@ -90,16 +91,20 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
     @IBAction func Next(_ sender: UIButton) {
         //cycle through questions and reset table and send question
         StartNextButton.title = "Next"
-        //TO FIX: does not stop when it reaches the end of the set. Tries to access beyond the last index
         if set!.count > questionIndex {
             names = []
             tableView.reloadData()
-            sendQuestion(set![questionIndex])
+            currentQuestion = set![questionIndex]
+            currentQuestion?.saveItem()
+            sendQuestion(currentQuestion!)
             questionIndex += 1
         } else {
             let gameOverAlertController = UIAlertController(title: "Game Over", message: "", preferredStyle: .alert)
+            gameOverAlertController.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: { _ in
+                self.performSegue(withIdentifier: "UnwindToSelectSet", sender: self)
+            }))
             self.present(gameOverAlertController, animated: true, completion: nil)
-            sender.isHidden = true
+            //sender.isHidden = true
             for peer in peerIDs {
                 names.append(peer.displayName)
                 tableView.reloadData()
