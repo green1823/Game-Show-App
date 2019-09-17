@@ -97,6 +97,7 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
             currentQuestion = set![questionIndex]
             currentQuestion?.saveItem()
             sendQuestion(currentQuestion!)
+            currentQuestion?.deleteItem()
             questionIndex += 1
         } else {
             let gameOverAlertController = UIAlertController(title: "Game Over", message: "", preferredStyle: .alert)
@@ -135,7 +136,8 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
     
     /* Begin session */
     func setUpConnectivity() {
-        peerID = MCPeerID(displayName: UIDevice.current.name)
+        //peerID = MCPeerID(displayName: UIDevice.current.name)
+        peerID = MCPeerID(displayName: "Host")
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: MCEncryptionPreference.none)
         mcSession.delegate = self
     }

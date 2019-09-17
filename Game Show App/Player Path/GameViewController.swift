@@ -119,6 +119,7 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
             //The name is not saved to datamanager - one way os to send it and then append the string on the host end. Otherwise I could send anything just to ping the host and take the peerid property as the name --- peerId.displayName = String
             if let nameData = DataManager.loadData(name) {
                 do {
+                    //Maybe change to "Host" but toPeers takes [MCPeerID] so that may not work
                     try mcSession.send(nameData, toPeers: mcSession.connectedPeers, with: .reliable)
                 } catch {
                     fatalError("Could not send question item")
