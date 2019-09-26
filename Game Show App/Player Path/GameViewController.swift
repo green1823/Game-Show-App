@@ -89,6 +89,7 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
             a2Button.setTitle(recievedQuestion.mcAnswers?[1], for: .normal)
             a3Button.setTitle(recievedQuestion.mcAnswers?[2], for: .normal)
             a4Button.setTitle(recievedQuestion.mcAnswers?[3], for: .normal)
+
             break;
         }
         questionLabel.text = recievedQuestion.question
@@ -117,6 +118,8 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
     func sendName() {
         if mcSession.connectedPeers.count > 0 {
             //The name is not saved to datamanager - one way os to send it and then append the string on the host end. Otherwise I could send anything just to ping the host and take the peerid property as the name --- peerId.displayName = String
+            currentQuestion?.saveItem()
+            DataManager.save(name, with: name)
             if let nameData = DataManager.loadData(name) {
                 do {
                     //Maybe change to "Host" but toPeers takes [MCPeerID] so that may not work
@@ -125,6 +128,8 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
                     fatalError("Could not send question item")
                 }
             }
+            currentQuestion?.deleteItem()
+            
         } else {
             print("you are not connected to another device")
         }

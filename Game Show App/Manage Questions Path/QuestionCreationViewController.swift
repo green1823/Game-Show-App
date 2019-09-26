@@ -84,6 +84,8 @@ class QuestionCreationViewController: UIViewController, UITextFieldDelegate {
         self.hideKeyboardWhenTappedAround()
         
         //Sets up the initial view
+        //self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.navigationController?.navigationBar.isHidden = true
         trueFalseView.isHidden = false
         multipleChoiceView.isHidden = true
         updateView()
@@ -223,12 +225,13 @@ class QuestionCreationViewController: UIViewController, UITextFieldDelegate {
 //            currentQuestion?.changeMCAnswers(newMCAnswers: mcAns)
 //            currentQuestion?.changeCorrectMCIndex(newMCIndex: mcIndex)
 //            currentQuestion?.changeTFAnswer(newTFAnswer: tfAns)
-            
+            self.navigationController?.navigationBar.isHidden = false
             performSegue(withIdentifier: PropertyKeys.unwindSave, sender: self)
         }
     }
     
     @IBAction func cancel(_ sender: Any) {
+        self.navigationController?.navigationBar.isHidden = false
         performSegue(withIdentifier: PropertyKeys.unwindCancel, sender: self)
     }
     
