@@ -38,7 +38,7 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
         I would use a map but I dont think that swift has map built in
     */
     var ansPeers : [MCPeerID] = [];
-    var answers : [Answer] = [];
+    //var answers : [Answer] = [];
     var questions : [Question] = [];
     var currentQuestion: Question?
     var peerIDs:[MCPeerID] = []
@@ -203,13 +203,13 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
         let incomingPeer = peerID
         ansPeers.append(incomingPeer)
         let decoder = JSONDecoder()
-        var decodedAns: Answer?
-        do {
-            decodedAns = try decoder.decode(Answer.self, from: data)
-        } catch {
-            print("error decoding answer")
-        }
-        answers.append(decodedAns!)
+//        var decodedAns: Answer?
+//        do {
+//            decodedAns = try decoder.decode(Answer.self, from: data)
+//        } catch {
+//            print("error decoding answer")
+//        }
+//        answers.append(decodedAns!)
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
