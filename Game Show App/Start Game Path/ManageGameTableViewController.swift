@@ -26,25 +26,29 @@
 import UIKit
 import MultipeerConnectivity
 
-class ManageGameTableViewController: UITableViewController, MCSessionDelegate, MCBrowserViewControllerDelegate {
+class ManageGameTableViewController: UITableViewController, MCSessionDelegate, MCBrowserViewControllerDelegate, PlayerCellDelegate {
+    func didRequestDelete(_ cell: PlayerCell) {
+        
+    }
     
-    var names: [String] = []
+    
+    //var names: [String] = []
     var set: [Question]?
     var questionIndex = 0
     
-    //var currentQuestion: Question?
-    /*
-        these two arrays should be updated at the same time and hold data in parallel
-        I would use a map but I dont think that swift has map built in
-    */
+    var correctPlayers: [PlayerName] = []
+    var playerScoresDictionary: [String: Int] = [:]
+    
     var ansPeers : [MCPeerID] = [];
     //var answers : [Answer] = [];
     var questions : [Question] = [];
     var currentQuestion: Question?
     var peerIDs:[MCPeerID] = []
-    var peerID: MCPeerID!
+    
+    var hostPeerID: MCPeerID!
     var mcSession: MCSession!
     var mcAdvertiserAssistant: MCAdvertiserAssistant!
+    
     @IBOutlet weak var StartNextButton: UIBarButtonItem!
     
     override func viewDidLoad() {
@@ -92,7 +96,8 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
         //cycle through questions and reset table and send question
         StartNextButton.title = "Next"
         if set!.count > questionIndex {
-            names = []
+            //names = []
+            correctPlayers = []
             tableView.reloadData()
             currentQuestion = set![questionIndex]
             currentQuestion?.saveItem()
@@ -106,10 +111,10 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
             }))
             self.present(gameOverAlertController, animated: true, completion: nil)
             //sender.isHidden = true
-            for peer in peerIDs {
-                names.append(peer.displayName)
-                tableView.reloadData()
-            }
+//            for peer in peerIDs {
+//                names.append(peer.displayName)
+//                tableView.reloadData()
+//            }
         }
     }
     
@@ -137,8 +142,8 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
     /* Begin session */
     func setUpConnectivity() {
         //peerID = MCPeerID(displayName: UIDevice.current.name)
-        peerID = MCPeerID(displayName: "Host")
-        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: MCEncryptionPreference.none)
+        hostPeerID = MCPeerID(displayName: "Host")
+        mcSession = MCSession(peer: hostPeerID, securityIdentity: nil, encryptionPreference: MCEncryptionPreference.none)
         mcSession.delegate = self
     }
     
@@ -148,10 +153,11 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
     
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         peerIDs.append(peerID);
+        playerScoresDictionary[peerID.displayName] = 0
     }
     
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
-        
+        peerIDs = peerIDs.filter {$0 != peerID}
     }
     
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
@@ -200,9 +206,23 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
 //        //var decodedAns : Answer = try decoder.decode(data.self, from: json)
 //        //answers.append(decodedAns)
         
-        let incomingPeer = peerID
-        ansPeers.append(incomingPeer)
-        let decoder = JSONDecoder()
+        print("recieved data")
+        //Attempt to recieve name object as data
+        do {
+            let recievedName = try JSONDecoder().decode(PlayerName.self, from: data)
+            
+            DispatchQueue.main.async {
+                self.correctPlayers.append(recievedName)
+                let indexPath = IndexPath(row: self.tableView.numberOfRows(inSection: 0), section: 0)
+                self.tableView.insertRows(at: [indexPath], with: .automatic)
+            }
+        } catch {
+            fatalError("Unable to process the recieved data")
+        }
+        
+//        let incomingPeer = peerID
+//        ansPeers.append(incomingPeer)
+//        let decoder = JSONDecoder()
 //        var decodedAns: Answer?
 //        do {
 //            decodedAns = try decoder.decode(Answer.self, from: data)
@@ -276,13 +296,16 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
     // MARK: - Tableview functions
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return names.count
+        return correctPlayers.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PlayerCell
         
         // Configure the cell...
+        let playerItem = correctPlayers[indexPath.row]
+        cell.playerNameLabel.text = playerItem.name
+        cell.pointsLabel.text = "\(playerScoresDictionary[playerItem.name] ?? 0)"
         
         
         return cell

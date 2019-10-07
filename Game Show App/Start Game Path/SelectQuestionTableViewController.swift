@@ -163,7 +163,7 @@ class SelectQuestionTableViewController: UITableViewController, MCSessionDelegat
             sendQuestion(currQuestion: questions[indexPath.row])
             //ManageGameTableViewController.currentQuestion = questions[indexPath.row]
             ManageGameTableViewController.peerIDs = peerIDs
-            ManageGameTableViewController.peerID = peerID
+            ManageGameTableViewController.hostPeerID = peerID
             ManageGameTableViewController.mcSession = mcSession
             ManageGameTableViewController.mcAdvertiserAssistant = mcAdvertiserAssistant
         }
