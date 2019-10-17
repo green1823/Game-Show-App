@@ -28,6 +28,7 @@ class PlayerCell: UITableViewCell {
     }
     
     @IBAction func subtractPoints(_ sender: Any) {
+        
     }
     
     

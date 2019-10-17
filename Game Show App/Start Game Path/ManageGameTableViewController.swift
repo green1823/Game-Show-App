@@ -9,16 +9,12 @@
 
 /*
  TODO:
- We need Multipeer to work for this viewcontroller's functionality.
  Recieve the user names from all the users and store them in an array of User objects.
  We need to create this User object with two elements: a String for their name and an Int for the number of points they have.
  The view controller will recieve all the strings and then create an array of these user name strings, with all their points initialized to zero.
  The table cells will fill with all these array elements.
  The plus and minus buttons will add and subtract the amount of points the current question is worth from that User object's points.
  The view controller will also use multipeer to send the array of Users to the leaderboard when students select it, as well as to send the current question to the players' screens.
- 
- Needs to send the current question to users through Multipeer.
- Hitting next will increment the array of questions to the next.
  
  https://www.hackingwithswift.com/example-code/system/how-to-create-a-peer-to-peer-network-using-the-multipeer-connectivity-framework
  A decent tutorial on how to code the hosting, joining, and sending of information.
@@ -141,7 +137,6 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
     
     /* Begin session */
     func setUpConnectivity() {
-        //peerID = MCPeerID(displayName: UIDevice.current.name)
         hostPeerID = MCPeerID(displayName: "Host")
         mcSession = MCSession(peer: hostPeerID, securityIdentity: nil, encryptionPreference: MCEncryptionPreference.none)
         mcSession.delegate = self
@@ -188,48 +183,30 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-//        print("recieved data")
-//
-//        //Attempt to recieve name object as data
-//        do {
-//            let recievedName = try JSONDecoder().decode(String.self, from: data)
-//            names.append(recievedName)
-//        } catch {
-//            fatalError("Unable to process the recieved data")
-//        }
-//        // This is where we can recieve the usernames with the answer they chose
-//        // IFF the answer they chose matches the correct answer the username will display as a cell
-//        var incomingPeer = peerID
-//        ansPeers.append(incomingPeer);
-//        let decoder = JSONDecoder();
-//        //UNCOMMENT and fix error
-//        //var decodedAns : Answer = try decoder.decode(data.self, from: json)
-//        //answers.append(decodedAns)
         
         print("recieved data")
         //Attempt to recieve name object as data
         do {
             let recievedName = try JSONDecoder().decode(PlayerName.self, from: data)
+            correctPlayers.append(recievedName)
+            playerScoresDictionary[recievedName.name] = 0
             
             DispatchQueue.main.async {
-                self.correctPlayers.append(recievedName)
-                let indexPath = IndexPath(row: self.tableView.numberOfRows(inSection: 0), section: 0)
-                self.tableView.insertRows(at: [indexPath], with: .automatic)
+                //let indexPath = IndexPath(row: self.tableView.numberOfRows(inSection: 0), section: 0)
+                //self.tableView.insertRows(at: [indexPath], with: .automatic)
+                self.tableView.reloadData()
+                print("main")
             }
+            
+            
+//            DispatchQueue.main.async {
+//                self.correctPlayers.append(recievedName)
+//                let indexPath = IndexPath(row: self.tableView.numberOfRows(inSection: 0), section: 0)
+//                self.tableView.insertRows(at: [indexPath], with: .automatic)
+//            }
         } catch {
             fatalError("Unable to process the recieved data")
         }
-        
-//        let incomingPeer = peerID
-//        ansPeers.append(incomingPeer)
-//        let decoder = JSONDecoder()
-//        var decodedAns: Answer?
-//        do {
-//            decodedAns = try decoder.decode(Answer.self, from: data)
-//        } catch {
-//            print("error decoding answer")
-//        }
-//        answers.append(decodedAns!)
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
