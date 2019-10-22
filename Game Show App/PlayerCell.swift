@@ -10,14 +10,7 @@ import Foundation
 
 import UIKit
 
-protocol PlayerCellDelegate {
-    func didRequestDelete(_ cell:PlayerCell)
-}
-
 class PlayerCell: UITableViewCell {
-
-    var delegate:PlayerCellDelegate?
-    
     
     @IBOutlet weak var playerNameLabel: UILabel!
     @IBOutlet weak var pointsLabel: UILabel!
@@ -33,12 +26,11 @@ class PlayerCell: UITableViewCell {
     
     
     @IBAction func addPoints(_ sender: Any) {
+        
     }
     
     @IBAction func deletePlayer(_ sender: Any) {
-        if let delegateObject = self.delegate {
-            delegateObject.didRequestDelete(self)
-        }
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

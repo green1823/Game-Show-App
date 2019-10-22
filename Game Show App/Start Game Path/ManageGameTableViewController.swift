@@ -269,6 +269,31 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
     
     /* Methods to conform to multipeer protocols */
     
+    // MARK: - Point Button Actions
+    
+    @IBAction func addButtonPressed(_ sender: AnyObject?) {
+        let tag:NSInteger = sender!.tag
+        let indexPath = IndexPath(row: tag, section: 0)
+        let cell = tableView.cellForRow(at: indexPath as IndexPath) as! PlayerCell
+        //let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PlayerCell
+        let name: String = cell.playerNameLabel.text!
+        var points: Int = playerScoresDictionary[name]!
+        points += currentQuestion!.pointValue
+        playerScoresDictionary[name] = points
+        cell.pointsLabel.text = "\(points)"
+    }
+    
+    @IBAction func subtractButtonPressed(_ sender: AnyObject?) {
+        let tag:NSInteger = sender!.tag
+        let indexPath = IndexPath(row: tag, section: 0)
+        let cell = tableView.cellForRow(at: indexPath as IndexPath) as! PlayerCell
+        //let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PlayerCell
+        let name: String = cell.playerNameLabel.text!
+        var points: Int = playerScoresDictionary[name]!
+        points -= currentQuestion!.pointValue
+        playerScoresDictionary[name] = points
+        cell.pointsLabel.text = "\(points)"
+    }
     
     // MARK: - Tableview functions
     
@@ -283,6 +308,7 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
         let playerItem = correctPlayers[indexPath.row]
         cell.playerNameLabel.text = playerItem.name
         cell.pointsLabel.text = "\(playerScoresDictionary[playerItem.name] ?? 0)"
+        //cell.delegate = self
         
         
         return cell
