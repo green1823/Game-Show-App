@@ -28,22 +28,15 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
     var peerID: MCPeerID!
     var mcSession: MCSession!
     var mcAdvertiserAssistant: MCAdvertiserAssistant!
+    
+    //Information Variables
     var name: String!
-    var playerName: PlayerName?
-    var recievedQuestion: Question!
+    var playerName: SendData!
+    var recievedQuestion: SendData!
+    
     //Outlet Variables
     @IBOutlet weak var questionLabel: UILabel!
-    @IBOutlet weak var MCView: UIView!
-    @IBOutlet weak var TFView: UIView!
-    @IBOutlet weak var BZView: UIView!
-    @IBOutlet weak var a1Button: UIButton!
-    @IBOutlet weak var a2Button: UIButton!
-    @IBOutlet weak var a3Button: UIButton!
-    @IBOutlet weak var a4Button: UIButton!
     @IBOutlet weak var buzzerButton: UIButton!
-    @IBOutlet weak var trueButton: UIButton!
-    @IBOutlet weak var falseButton: UIButton!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,43 +44,63 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
         let mcBrowser = MCBrowserViewController(serviceType: "connect", session: self.mcSession)
         mcBrowser.delegate = self
         self.present(mcBrowser, animated: true, completion: nil)
-        MCView.isHidden = true
-        TFView.isHidden = true
-        BZView.isHidden = true
+        buzzerButton.isEnabled = false
     }
     
-    func displayQuestion(recievedQuestion: Question) {
-        switch recievedQuestion.type {
-        case .trueOrFalse:
-            MCView.isHidden = true
-            TFView.isHidden = false
-            BZView.isHidden = true
-            enableTrueFalse()
-            break;
-        case .buzzer:
-            MCView.isHidden = true
-            TFView.isHidden = true
-            BZView.isHidden = false
-            enableBuzzer()
-            break;
-        case .multipleChoice:
-            MCView.isHidden = false
-            TFView.isHidden = true
-            BZView.isHidden = true
-            enableButtons()
-            a1Button.setTitle(recievedQuestion.mcAnswers?[0], for: .normal)
-            a2Button.setTitle(recievedQuestion.mcAnswers?[1], for: .normal)
-            a3Button.setTitle(recievedQuestion.mcAnswers?[2], for: .normal)
-            a4Button.setTitle(recievedQuestion.mcAnswers?[3], for: .normal)
-
-            break;
+    func displayQuestion(recievedQuestion: SendData) {
+        DispatchQueue.main.async {
+            self.buzzerButton.isEnabled = true
+            self.questionLabel.text = recievedQuestion.content
         }
-        questionLabel.text = recievedQuestion.question
+    }
+    
+    
+    @IBAction func buzzerPressed(_ sender: Any) {
+        DispatchQueue.main.async {
+            self.buzzerButton.isEnabled = false
+        }
+        sendName()
+    }
+    
+    //MARK: - Additional Multipeer Functions
+    
+    func sendName() {
+        if mcSession.connectedPeers.count > 0 {
+            playerName = SendData(content: name, createdAt: Date(), itemIdentifier: UUID())
+            playerName?.saveItem()
+            if let nameData = DataManager.loadData((playerName?.itemIdentifier.uuidString)!) {
+                do {
+                    try mcSession.send(nameData, toPeers: mcSession.connectedPeers, with: .reliable)
+                } catch {
+                    fatalError("could not send question item")
+                }
+            }
+            playerName?.deleteItem()
+        } else {
+            print("you are not connected to another device")
+        }
+    }
+    
+    func setUpConnectivity() {
+        print(name!);
+        peerID = MCPeerID(displayName: name)
+        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: MCEncryptionPreference.none)
+        mcSession.delegate = self
     }
     
     //MARK: - Multipeer delegate functions
     
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+        if (peerID.displayName == "Host" && state == MCSessionState.notConnected) {
+            print("connection ended")
+            let gameEndedAlertController = UIAlertController(title: nil, message: "Game Ended", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
+                self.mcSession.disconnect()
+                self.performSegue(withIdentifier: "UnwindToJoin", sender: self)
+            }
+            gameEndedAlertController.addAction(okAction)
+            self.present(gameEndedAlertController, animated: true, completion: nil)
+        }
     }
     
     /* Recieves and handles the question sent by the host */
@@ -96,38 +109,17 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
         
         //Attempt to recieve question object as data
         do {
-            recievedQuestion = try JSONDecoder().decode(Question.self, from: data)
+            recievedQuestion = try JSONDecoder().decode(SendData.self, from: data)
             displayQuestion(recievedQuestion: recievedQuestion)
         } catch {
             fatalError("Unable to process the recieved data")
         }
     }
     
-    /* Sends the user's name to the host */
-    func sendName() {
-        if mcSession.connectedPeers.count > 0 {
-            playerName = PlayerName(name: name, itemIdentifier: UUID())
-            playerName?.saveItem()
-            if let nameData = DataManager.loadData((playerName?.itemIdentifier.uuidString)!) {
-                do {
-                    try mcSession.send(nameData, toPeers: mcSession.connectedPeers, with: .reliable)
-                } catch {
-                    fatalError("Could not send question item")
-                }
-            }
-            playerName?.deleteItem()
-            
-        } else {
-            print("you are not connected to another device")
-        }
-    }
-    
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
-        // keep empty
     }
     
     func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
-        // keep empty
     }
     
     func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
@@ -141,104 +133,4 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
         dismiss(animated: true, completion: nil)
         performSegue(withIdentifier: "UnwindToJoin", sender: self)
     }
-    
-    //MARK: - Additional Multipeer functions
-    
-    func setUpConnectivity() {
-        print(name);
-        peerID = MCPeerID(displayName: name)
-        mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: MCEncryptionPreference.none)
-        mcSession.delegate = self
-    }
-        
-    //MARK: - Actions for when all buttons are pressed
-    
-    @IBAction func a1Pressed(_ sender: Any) {
-        disableButtons()
-        if recievedQuestion.correctMCIndex == 0 {
-            sendName()
-        }
-    }
-    
-    @IBAction func a2Pressed(_ sender: Any) {
-        disableButtons()
-        if recievedQuestion.correctMCIndex == 1 {
-            sendName()
-        }
-    }
-    
-    @IBAction func a3Pressed(_ sender: Any) {
-        disableButtons()
-        if recievedQuestion.correctMCIndex == 2 {
-            sendName()
-        }
-    }
-    
-    @IBAction func a4Pressed(_ sender: Any) {
-        disableButtons()
-        if recievedQuestion.correctMCIndex == 3 {
-            sendName()
-        }
-    }
-    
-    @IBAction func buzzerPressed(_ sender: Any) {
-        disableBuzzer()
-        sendName()
-    }
-    
-    @IBAction func truePressed(_ sender: Any) {
-        disableTrueFalse()
-        if recievedQuestion.tfAnswer == true {
-            sendName()
-        }
-    }
-    
-    @IBAction func falsePressed(_ sender: Any) {
-        disableTrueFalse()
-        if recievedQuestion.tfAnswer == false {
-            sendName()
-        }
-    }
-    
-    
-    // MARK: - functions to activate and deactivate buttons
-    
-    /* Disables multiple choice buttons */
-    func disableButtons () {
-        a1Button.isEnabled = false
-        a2Button.isEnabled = false
-        a3Button.isEnabled = false
-        a4Button.isEnabled = false
-    }
-
-    /* Enables multiple choice buttons */
-    func enableButtons () {
-        a1Button.isEnabled = true
-        a2Button.isEnabled = true
-        a3Button.isEnabled = true
-        a4Button.isEnabled = true
-    }
-    
-    /* Disables buzzer button */
-    func disableBuzzer() {
-        buzzerButton.isEnabled = false
-    }
-    
-    /* Enables buzzer button */
-    func enableBuzzer() {
-        buzzerButton.isEnabled = true
-    }
-
-    /* Disables true/false buttons */
-    func disableTrueFalse() {
-        trueButton.isEnabled = false
-        falseButton.isEnabled = false
-    }
-    
-    /* Enables true/false buttons */
-    func enableTrueFalse() {
-        trueButton.isEnabled = true
-        falseButton.isEnabled = true
-    }
-    
 }

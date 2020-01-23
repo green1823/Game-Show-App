@@ -10,10 +10,17 @@ import Foundation
 
 import UIKit
 
+protocol PlayerCellDelegate {
+    func didRequestSubtractPoints(playerName : String)
+    func didRequestAddPoints(playerName : String)
+}
+
 class PlayerCell: UITableViewCell {
     
     @IBOutlet weak var playerNameLabel: UILabel!
     @IBOutlet weak var pointsLabel: UILabel!
+    
+    var delegate : PlayerCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,16 +28,12 @@ class PlayerCell: UITableViewCell {
     }
     
     @IBAction func subtractPoints(_ sender: Any) {
-        
+        delegate?.didRequestSubtractPoints(playerName: playerNameLabel.text ?? "")
     }
     
     
     @IBAction func addPoints(_ sender: Any) {
-        
-    }
-    
-    @IBAction func deletePlayer(_ sender: Any) {
-        
+        delegate?.didRequestAddPoints(playerName: playerNameLabel.text ?? "")
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

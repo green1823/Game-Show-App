@@ -1,77 +1,51 @@
 //
 //  ManageGameTableViewController.swift
-//  test game show interfaces
+//  Buzzer Game Show
 //
-//  Created by Green, Jackie on 12/4/18.
-//  Copyright © 2018 Green, Jackie. All rights reserved.
+//  Created by Green, Jackie on 11/14/19.
+//  Copyright © 2019 Green, Jackie. All rights reserved.
 //
 
-
-/*
- TODO:
- Recieve the user names from all the users and store them in an array of User objects.
- We need to create this User object with two elements: a String for their name and an Int for the number of points they have.
- The view controller will recieve all the strings and then create an array of these user name strings, with all their points initialized to zero.
- The table cells will fill with all these array elements.
- The plus and minus buttons will add and subtract the amount of points the current question is worth from that User object's points.
- The view controller will also use multipeer to send the array of Users to the leaderboard when students select it, as well as to send the current question to the players' screens.
- 
- https://www.hackingwithswift.com/example-code/system/how-to-create-a-peer-to-peer-network-using-the-multipeer-connectivity-framework
- A decent tutorial on how to code the hosting, joining, and sending of information.
- */
 import UIKit
 import MultipeerConnectivity
 
 class ManageGameTableViewController: UITableViewController, MCSessionDelegate, MCBrowserViewControllerDelegate, PlayerCellDelegate {
-    func didRequestDelete(_ cell: PlayerCell) {
-        
-    }
-    
-    
-    //var names: [String] = []
-    var set: [Question]?
+
+    var set: [SendData]?
     var questionIndex = 0
     
-    var correctPlayers: [PlayerName] = []
-    var playerScoresDictionary: [String: Int] = [:]
+    var correctPlayers: [SendData] = []
+    var playerScoresDictionary: [String:Int] = [:]
+        
+    var currentQuestion : SendData?
+    var peerIDs : [MCPeerID] = []
     
-    var ansPeers : [MCPeerID] = [];
-    //var answers : [Answer] = [];
-    var questions : [Question] = [];
-    var currentQuestion: Question?
-    var peerIDs:[MCPeerID] = []
-    
-    var hostPeerID: MCPeerID!
+    var hostPeerID : MCPeerID!
     var mcSession: MCSession!
-    var mcAdvertiserAssistant: MCAdvertiserAssistant!
+    var mcAdvertiserAssistant : MCAdvertiserAssistant!
     
     @IBOutlet weak var StartNextButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.reloadData()
-        // Hides back button
-        self.navigationItem.setHidesBackButton(true, animated:true)
+        //Hides back button
+        self.navigationItem.setHidesBackButton(true, animated: true)
         
-        // Connectivity actions
+        //Connectivity actions
         setUpConnectivity()
         self.mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "connect", discoveryInfo: nil, session: self.mcSession)
         self.mcAdvertiserAssistant.start()
-        
-        
-        //send the question to players
-        //mcSession.send(cafe, toPeers: peerIDs, with: .reliable)
-        
-        
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-        
+
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     // Function to send the current question to players
-    func sendQuestion (_ questionItem: Question) {
+    func sendQuestion (_ questionItem: SendData) {
         if mcSession.connectedPeers.count > 0 {
             if let questionData = DataManager.loadData(questionItem.itemIdentifier.uuidString) {
                 do {
@@ -84,16 +58,12 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
             print("you are not connected to another device")
         }
     }
-
-
-    // MARK: - Table view data source
-
-    @IBAction func Next(_ sender: UIButton) {
-        //cycle through questions and reset table and send question
+    
+    @IBAction func Next(_ sender: Any) {
+        // Cycle through questions and reset table and send question
         StartNextButton.title = "Next"
         if set!.count > questionIndex {
-            //names = []
-            correctPlayers = []
+            correctPlayers = []     //clear the array
             tableView.reloadData()
             currentQuestion = set![questionIndex]
             currentQuestion?.saveItem()
@@ -103,14 +73,12 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
         } else {
             let gameOverAlertController = UIAlertController(title: "Game Over", message: "", preferredStyle: .alert)
             gameOverAlertController.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: { _ in
+                // End Session and unwind
+                self.mcAdvertiserAssistant.stop()
+                self.mcSession.disconnect()
                 self.performSegue(withIdentifier: "UnwindToSelectSet", sender: self)
             }))
             self.present(gameOverAlertController, animated: true, completion: nil)
-            //sender.isHidden = true
-//            for peer in peerIDs {
-//                names.append(peer.displayName)
-//                tableView.reloadData()
-//            }
         }
     }
     
@@ -118,109 +86,158 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
         let alertController = UIAlertController(title: nil, message: "Are you sure you want to end the game?", preferredStyle: .alert)
         
         let endGameAction = UIAlertAction(title: "End Game", style: .default) { (action) in
-            print("end game selected")
+            // End Session and unwind
+            self.mcAdvertiserAssistant.stop()
+            self.mcSession.disconnect()
             self.performSegue(withIdentifier: "UnwindToSelectSet", sender: self)
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
-            print("cancel selected")
         }
         
         alertController.addAction(endGameAction)
         alertController.addAction(cancelAction)
         
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+
+    // MARK: - Table view data source
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return correctPlayers.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PlayerCell
+        
+        // Configure the cell...
+        let playerItem = correctPlayers[indexPath.row]
+        cell.playerNameLabel.text = playerItem.content
+        cell.pointsLabel.text = "\(playerScoresDictionary[playerItem.content] ?? 0)"
+        //cell.delegate = self
+        cell.delegate = self
         
         
+        return cell
+    }
+    
+    // MARK: - Player Cell Delegate Functions
+
+    func didRequestSubtractPoints(playerName: String) {
+        playerScoresDictionary[playerName]! -= 1
+        tableView.reloadData()
+    }
+    
+    func didRequestAddPoints(playerName: String) {
+        playerScoresDictionary[playerName]! += 1
+        tableView.reloadData()
     }
     
     // MARK: - Multipeer Functions
-    
-    /* Begin session */
-    func setUpConnectivity() {
-        hostPeerID = MCPeerID(displayName: "Host")
-        mcSession = MCSession(peer: hostPeerID, securityIdentity: nil, encryptionPreference: MCEncryptionPreference.none)
-        mcSession.delegate = self
-    }
-    
-    func session(_ session: MCSession, didReceiveCertificate certificate: [Any]?, fromPeer peerID: MCPeerID, certificateHandler: @escaping (Bool) -> Void) {
-        certificateHandler(true)
-    }
-    
-    func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
-        peerIDs.append(peerID);
-        playerScoresDictionary[peerID.displayName] = 0
-    }
-    
-    func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
-        peerIDs = peerIDs.filter {$0 != peerID}
-    }
-    
-    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         
-    }
-    
-    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController){
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    
-    
-    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-        switch state {
-        case MCSessionState.connected:
-            print("Connected: \(peerID.displayName)")
-            
-        case MCSessionState.connecting:
-            print("Connecting: \(peerID.displayName)")
-            
-        case MCSessionState.notConnected:
-            print("Not Connected: \(peerID.displayName)")
+        /* Begin session */
+        func setUpConnectivity() {
+            hostPeerID = MCPeerID(displayName: "Host")
+            mcSession = MCSession(peer: hostPeerID, securityIdentity: nil, encryptionPreference: MCEncryptionPreference.none)
+            mcSession.delegate = self
         }
-    }
-    
-    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         
-        print("recieved data")
-        //Attempt to recieve name object as data
-        do {
-            let recievedName = try JSONDecoder().decode(PlayerName.self, from: data)
-            correctPlayers.append(recievedName)
-            playerScoresDictionary[recievedName.name] = 0
-            
-            DispatchQueue.main.async {
-                //let indexPath = IndexPath(row: self.tableView.numberOfRows(inSection: 0), section: 0)
-                //self.tableView.insertRows(at: [indexPath], with: .automatic)
-                self.tableView.reloadData()
-                print("main")
-            }
-            
-            
-//            DispatchQueue.main.async {
-//                self.correctPlayers.append(recievedName)
-//                let indexPath = IndexPath(row: self.tableView.numberOfRows(inSection: 0), section: 0)
-//                self.tableView.insertRows(at: [indexPath], with: .automatic)
+        func session(_ session: MCSession, didReceiveCertificate certificate: [Any]?, fromPeer peerID: MCPeerID, certificateHandler: @escaping (Bool) -> Void) {
+            certificateHandler(true)
+        }
+        
+//        func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
+//            peerIDs.append(peerID);
+//            if (playerScoresDictionary[peerID.displayName] == nil) {
+//                playerScoresDictionary[peerID.displayName] = 0
 //            }
-        } catch {
-            fatalError("Unable to process the recieved data")
+//        }
+//
+//        func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
+//            peerIDs = peerIDs.filter {$0 != peerID}
+//        }
+//
+//        func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
+//
+//        }
+        
+        func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController){
+            dismiss(animated: true, completion: nil)
         }
+        
+        func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
+            dismiss(animated: true, completion: nil)
+        }
+        
+        
+        
+        func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+            switch state {
+            case MCSessionState.connected:
+                print("Connected: \(peerID.displayName)")
+                
+            case MCSessionState.connecting:
+                print("Connecting: \(peerID.displayName)")
+                
+            case MCSessionState.notConnected:
+                print("Not Connected: \(peerID.displayName)")
+            @unknown default:
+                print("Unknown Case")
+            }
+        }
+        
+        func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+            
+            print("recieved data")
+            //Attempt to recieve name object as data
+            do {
+                let recievedName = try JSONDecoder().decode(SendData.self, from: data)
+                correctPlayers.append(recievedName)
+                if let _ = playerScoresDictionary[recievedName.content] {
+                }
+                else {
+                    playerScoresDictionary[recievedName.content] = 0
+                }
+                
+                DispatchQueue.main.async {
+                    //let indexPath = IndexPath(row: self.tableView.numberOfRows(inSection: 0), section: 0)
+                    //self.tableView.insertRows(at: [indexPath], with: .automatic)
+                    self.tableView.reloadData()
+                    print("main")
+                }
+                
+                
+    //            DispatchQueue.main.async {
+    //                self.correctPlayers.append(recievedName)
+    //                let indexPath = IndexPath(row: self.tableView.numberOfRows(inSection: 0), section: 0)
+    //                self.tableView.insertRows(at: [indexPath], with: .automatic)
+    //            }
+            } catch {
+                fatalError("Unable to process the recieved data")
+            }
+        }
+        
+        func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
+            //keep empty
+        }
+        
+        func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
+            //keep empty
+        }
+        
+        func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
+            //keep empty
+        }
+
+    /*
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+
+        // Configure the cell...
+
+        return cell
     }
-    
-    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
-        //keep empty
-    }
-    
-    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
-        //keep empty
-    }
-    
-    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
-        //keep empty
-    }
-    
+    */
 
     /*
     // Override to support conditional editing of the table view.
@@ -232,13 +249,13 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
 
     /*
     // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
     */
 
@@ -266,53 +283,5 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
         // Pass the selected object to the new view controller.
     }
     */
-    
-    /* Methods to conform to multipeer protocols */
-    
-    // MARK: - Point Button Actions
-    
-    @IBAction func addButtonPressed(_ sender: AnyObject?) {
-        let tag:NSInteger = sender!.tag
-        let indexPath = IndexPath(row: tag, section: 0)
-        let cell = tableView.cellForRow(at: indexPath as IndexPath) as! PlayerCell
-        //let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PlayerCell
-        let name: String = cell.playerNameLabel.text!
-        var points: Int = playerScoresDictionary[name]!
-        points += currentQuestion!.pointValue
-        playerScoresDictionary[name] = points
-        cell.pointsLabel.text = "\(points)"
-    }
-    
-    @IBAction func subtractButtonPressed(_ sender: AnyObject?) {
-        let tag:NSInteger = sender!.tag
-        let indexPath = IndexPath(row: tag, section: 0)
-        let cell = tableView.cellForRow(at: indexPath as IndexPath) as! PlayerCell
-        //let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PlayerCell
-        let name: String = cell.playerNameLabel.text!
-        var points: Int = playerScoresDictionary[name]!
-        points -= currentQuestion!.pointValue
-        playerScoresDictionary[name] = points
-        cell.pointsLabel.text = "\(points)"
-    }
-    
-    // MARK: - Tableview functions
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return correctPlayers.count
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PlayerCell
-        
-        // Configure the cell...
-        let playerItem = correctPlayers[indexPath.row]
-        cell.playerNameLabel.text = playerItem.name
-        cell.pointsLabel.text = "\(playerScoresDictionary[playerItem.name] ?? 0)"
-        //cell.delegate = self
-        
-        
-        return cell
-    }
-    
-    
+
 }

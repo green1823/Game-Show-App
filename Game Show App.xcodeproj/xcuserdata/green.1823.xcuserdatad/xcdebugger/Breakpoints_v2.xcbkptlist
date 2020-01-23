@@ -177,98 +177,80 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D6ADCCEC-8435-4F1B-8A61-A9ACC0CF9F59"
+            uuid = "861D9F9F-B0B7-49C0-9E34-457DD6D46228"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Game Show App/Start Game Path/ManageGameTableViewController.swift"
-            timestampString = "590363722.568131"
+            filePath = "Game Show App/Start Game Path/SelectSetTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
-            landmarkName = "Next(_:)"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "loadData()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "861D9F9F-B0B7-49C0-9E34-457DD6D46228 - fba04511f1945f99"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Game_Show_App.SelectSetTableViewController.loadData() -&gt; ()"
+                  moduleName = "Game Show App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/Groups/Shared/old%20stuff/StudioCT/NAS/StudioCT/StudioCT%20Staff/Jackie/AU19-SP20/Game-Show-App/Game%20Show%20App/Start%20Game%20Path/SelectSetTableViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "31">
+               </Location>
+               <Location
+                  uuid = "861D9F9F-B0B7-49C0-9E34-457DD6D46228 - b63ce1060940a03f"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Game_Show_App.QuestionSet, Game_Show_App.QuestionSet) -&gt; Swift.Bool in Game_Show_App.SelectSetTableViewController.loadData() -&gt; ()"
+                  moduleName = "Game Show App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/Groups/Shared/old%20stuff/StudioCT/NAS/StudioCT/StudioCT%20Staff/Jackie/AU19-SP20/Game-Show-App/Game%20Show%20App/Start%20Game%20Path/SelectSetTableViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "109">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B3846A37-C6CF-4D7A-A5C8-67BC1CB80DD4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Game Show App/Manage Questions Path/QuestionListTableViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "BackSaveButton(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "01A7E4F1-125F-4335-A5DF-0E1BF06EF4F3"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Game Show App/Start Game Path/ManageGameTableViewController.swift"
-            timestampString = "590363722.568213"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
-            landmarkName = "sendQuestion(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "A2D2EEC1-17B6-4957-B5C5-AC4FEB391672"
-            shouldBeEnabled = "No"
+            uuid = "366A1DAC-432C-4C9B-AFFF-A12B89527972"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Game Show App/Player Path/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
-            landmarkName = "sendName()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "077E784C-39BF-48D3-BB29-B20D6EA28D14"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Game Show App/Start Game Path/ManageGameTableViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "190"
-            endingLineNumber = "190"
-            landmarkName = "session(_:didReceive:fromPeer:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "61A8A1FB-25FE-4272-866B-B081D3C7CF6B"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Game Show App/Start Game Path/ManageGameTableViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195"
-            landmarkName = "session(_:didReceive:fromPeer:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "44B5149F-B472-456F-92AF-713B6BB7000B"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Game Show App/Start Game Path/ManageGameTableViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "280"
-            endingLineNumber = "280"
-            landmarkName = "addButtonPressed(_:)"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "session(_:peer:didChange:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
