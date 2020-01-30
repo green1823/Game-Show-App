@@ -50,16 +50,30 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
     func displayQuestion(recievedQuestion: SendData) {
         DispatchQueue.main.async {
             self.buzzerButton.isEnabled = true
+            self.buzzerButton.setImage(UIImage(named: "Unpressed"), for: .normal)
             self.questionLabel.text = recievedQuestion.content
         }
     }
     
+    //MARK: - Buzzer Actions
     
-    @IBAction func buzzerPressed(_ sender: Any) {
+    // Changes the image of the buzzer when being pressed and sends name to host
+    @IBAction func buzzerPushed(_ sender: Any) {
+        buzzerButton.setImage(UIImage(named: "Pressing"), for: .normal)
         DispatchQueue.main.async {
             self.buzzerButton.isEnabled = false
         }
         sendName()
+    }
+    
+    // Changes the image of the buzzer back to unpressed when releasing outside
+    @IBAction func buzzerReleasedOutside(_ sender: Any) {
+        buzzerButton.setImage(UIImage(named: "Pressed"), for: .normal)
+    }
+    
+    // Changes the image of the buzzer to pressed when releasing inside
+    @IBAction func buzzerReleasedInside(_ sender: Any) {
+        buzzerButton.setImage(UIImage(named: "Pressed"), for: .normal)
     }
     
     //MARK: - Additional Multipeer Functions
@@ -99,7 +113,9 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
                 self.performSegue(withIdentifier: "UnwindToJoin", sender: self)
             }
             gameEndedAlertController.addAction(okAction)
-            self.present(gameEndedAlertController, animated: true, completion: nil)
+            DispatchQueue.main.async {
+                self.present(gameEndedAlertController, animated: true, completion: nil)
+            }
         }
     }
     

@@ -13,9 +13,11 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
 
     var set: [SendData]?
     var questionIndex = 0
+    var questionsRemaining = true
     
-    var correctPlayers: [SendData] = []
+    var correctPlayers: [String] = []
     var playerScoresDictionary: [String:Int] = [:]
+    var playerScoresArray: [(String, Int)] = []
         
     var currentQuestion : SendData?
     var peerIDs : [MCPeerID] = []
@@ -25,6 +27,8 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
     var mcAdvertiserAssistant : MCAdvertiserAssistant!
     
     @IBOutlet weak var StartNextButton: UIBarButtonItem!
+    @IBOutlet weak var NavigationItem: UINavigationItem!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,22 +68,22 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
         StartNextButton.title = "Next"
         if set!.count > questionIndex {
             correctPlayers = []     //clear the array
-            tableView.reloadData()
+            //tableView.reloadData()
             currentQuestion = set![questionIndex]
             currentQuestion?.saveItem()
             sendQuestion(currentQuestion!)
             currentQuestion?.deleteItem()
             questionIndex += 1
         } else {
-            let gameOverAlertController = UIAlertController(title: "Game Over", message: "", preferredStyle: .alert)
-            gameOverAlertController.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: { _ in
-                // End Session and unwind
-                self.mcAdvertiserAssistant.stop()
-                self.mcSession.disconnect()
-                self.performSegue(withIdentifier: "UnwindToSelectSet", sender: self)
-            }))
-            self.present(gameOverAlertController, animated: true, completion: nil)
+            // Fill array with all players
+            playerScoresArray = playerScoresDictionary.map { $0 }.sorted { $0.value > $1.value }
+            questionsRemaining = false
+            NavigationItem.title = "Leaderboard"
+            StartNextButton.title = ""
+            StartNextButton.isEnabled = false
+            correctPlayers = Array(playerScoresDictionary.keys)
         }
+        tableView.reloadData()
     }
     
     @IBAction func endGame(_ sender: Any) {
@@ -111,12 +115,18 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! PlayerCell
         
         // Configure the cell...
-        let playerItem = correctPlayers[indexPath.row]
-        cell.playerNameLabel.text = playerItem.content
-        cell.pointsLabel.text = "\(playerScoresDictionary[playerItem.content] ?? 0)"
-        //cell.delegate = self
-        cell.delegate = self
-        
+        if questionsRemaining {
+            let playerName = correctPlayers[indexPath.row]
+            cell.playerNameLabel.text = playerName
+            cell.pointsLabel.text = "\(playerScoresDictionary[playerName] ?? 0)"
+            //cell.delegate = self
+            cell.delegate = self
+        } else {
+            let playerItem = playerScoresArray[indexPath.row]
+            cell.playerNameLabel.text = playerItem.0
+            cell.pointsLabel.text = "\(playerItem.1)"
+            cell.delegate = self
+        }
         
         return cell
     }
@@ -188,32 +198,35 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
         
         func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
             
-            print("recieved data")
-            //Attempt to recieve name object as data
-            do {
-                let recievedName = try JSONDecoder().decode(SendData.self, from: data)
-                correctPlayers.append(recievedName)
-                if let _ = playerScoresDictionary[recievedName.content] {
-                }
-                else {
-                    playerScoresDictionary[recievedName.content] = 0
-                }
-                
-                DispatchQueue.main.async {
-                    //let indexPath = IndexPath(row: self.tableView.numberOfRows(inSection: 0), section: 0)
-                    //self.tableView.insertRows(at: [indexPath], with: .automatic)
-                    self.tableView.reloadData()
-                    print("main")
-                }
-                
-                
-    //            DispatchQueue.main.async {
-    //                self.correctPlayers.append(recievedName)
-    //                let indexPath = IndexPath(row: self.tableView.numberOfRows(inSection: 0), section: 0)
-    //                self.tableView.insertRows(at: [indexPath], with: .automatic)
-    //            }
-            } catch {
-                fatalError("Unable to process the recieved data")
+            //TODO: see if this if statement works
+            if questionsRemaining == true {
+                print("recieved data")
+                        //Attempt to recieve name object as data
+                        do {
+                            let recievedName = try JSONDecoder().decode(SendData.self, from: data)
+                            correctPlayers.append(recievedName.content)
+                            if let _ = playerScoresDictionary[recievedName.content] {
+                            }
+                            else {
+                                playerScoresDictionary[recievedName.content] = 0
+                            }
+                            
+                            DispatchQueue.main.async {
+                                //let indexPath = IndexPath(row: self.tableView.numberOfRows(inSection: 0), section: 0)
+                                //self.tableView.insertRows(at: [indexPath], with: .automatic)
+                                self.tableView.reloadData()
+                                print("main")
+                            }
+                            
+                            
+                //            DispatchQueue.main.async {
+                //                self.correctPlayers.append(recievedName)
+                //                let indexPath = IndexPath(row: self.tableView.numberOfRows(inSection: 0), section: 0)
+                //                self.tableView.insertRows(at: [indexPath], with: .automatic)
+                //            }
+                        } catch {
+                            fatalError("Unable to process the recieved data")
+                        }
             }
         }
         
