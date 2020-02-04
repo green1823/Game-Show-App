@@ -45,12 +45,14 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
         mcBrowser.delegate = self
         self.present(mcBrowser, animated: true, completion: nil)
         buzzerButton.isEnabled = false
+        //TRY??
+        buzzerButton.imageView?.contentMode = .scaleAspectFit
     }
     
     func displayQuestion(recievedQuestion: SendData) {
         DispatchQueue.main.async {
             self.buzzerButton.isEnabled = true
-            self.buzzerButton.setImage(UIImage(named: "Unpressed"), for: .normal)
+            //self.buzzerButton.setImage(UIImage(named: "Unpressed"), for: .normal)
             self.questionLabel.text = recievedQuestion.content
         }
     }
@@ -59,7 +61,7 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
     
     // Changes the image of the buzzer when being pressed and sends name to host
     @IBAction func buzzerPushed(_ sender: Any) {
-        buzzerButton.setImage(UIImage(named: "Pressing"), for: .normal)
+        //buzzerButton.setImage(UIImage(named: "Pressing"), for: .normal)
         DispatchQueue.main.async {
             self.buzzerButton.isEnabled = false
         }
@@ -68,12 +70,14 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
     
     // Changes the image of the buzzer back to unpressed when releasing outside
     @IBAction func buzzerReleasedOutside(_ sender: Any) {
-        buzzerButton.setImage(UIImage(named: "Pressed"), for: .normal)
+        //buzzerButton.setImage(UIImage(named: "Pressed"), for: .normal)
+        //buzzerButton.setImage(UIImage(named: "Blue"), for: .normal)
     }
     
     // Changes the image of the buzzer to pressed when releasing inside
     @IBAction func buzzerReleasedInside(_ sender: Any) {
-        buzzerButton.setImage(UIImage(named: "Pressed"), for: .normal)
+        //buzzerButton.setImage(UIImage(named: "Pressed"), for: .normal)
+        //buzzerButton.setImage(UIImage(named: "Blue"), for: .normal)
     }
     
     //MARK: - Additional Multipeer Functions

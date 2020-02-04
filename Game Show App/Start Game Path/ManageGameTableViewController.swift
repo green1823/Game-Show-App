@@ -28,6 +28,7 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
     
     @IBOutlet weak var StartNextButton: UIBarButtonItem!
     @IBOutlet weak var NavigationItem: UINavigationItem!
+    @IBOutlet weak var questionLabel: UILabel!
     
     
     override func viewDidLoad() {
@@ -71,6 +72,7 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
             //tableView.reloadData()
             currentQuestion = set![questionIndex]
             currentQuestion?.saveItem()
+            questionLabel.text = currentQuestion?.content
             sendQuestion(currentQuestion!)
             currentQuestion?.deleteItem()
             questionIndex += 1
@@ -79,6 +81,7 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
             playerScoresArray = playerScoresDictionary.map { $0 }.sorted { $0.value > $1.value }
             questionsRemaining = false
             NavigationItem.title = "Leaderboard"
+            questionLabel.text = ""
             StartNextButton.title = ""
             StartNextButton.isEnabled = false
             correctPlayers = Array(playerScoresDictionary.keys)

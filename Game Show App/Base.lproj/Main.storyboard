@@ -220,16 +220,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="SEb-lJ-lfi" userLabel="QuestionDisplayView">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="58"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="GTc-oP-ge0">
+                                    <rect key="frame" x="8" y="2" width="398" height="54"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <constraints>
+                                <constraint firstItem="GTc-oP-ge0" firstAttribute="leading" secondItem="SEb-lJ-lfi" secondAttribute="leading" constant="8" id="LOP-aA-wQK"/>
+                                <constraint firstAttribute="trailing" secondItem="GTc-oP-ge0" secondAttribute="trailing" constant="8" id="Ua3-1k-pYn"/>
+                                <constraint firstItem="GTc-oP-ge0" firstAttribute="top" secondItem="SEb-lJ-lfi" secondAttribute="top" constant="2" id="m8K-fP-NeE"/>
+                                <constraint firstAttribute="bottom" secondItem="GTc-oP-ge0" secondAttribute="bottom" constant="2" id="xNM-kU-fFm"/>
+                            </constraints>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="Yvj-Ts-E0i" customClass="PlayerCell" customModule="Game_Show_App" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.666667938232422"/>
+                                <rect key="frame" x="0.0" y="86" width="414" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Yvj-Ts-E0i" id="A2a-Qu-nae">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GSr-8U-Kyw">
-                                            <rect key="frame" x="282.33333333333331" y="-2.3333333333333321" width="30" height="48.333333333333329"/>
+                                            <rect key="frame" x="282" y="-2.3333333333333321" width="30" height="48.333333333333329"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                             <state key="normal" title="-"/>
                                             <connections>
@@ -243,7 +262,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mAd-rS-kRV" userLabel="Score">
-                                            <rect key="frame" x="322.33333333333331" y="11.333333333333336" width="41.666666666666686" height="21"/>
+                                            <rect key="frame" x="322" y="11.333333333333336" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -301,13 +320,14 @@
                     <connections>
                         <outlet property="NavigationItem" destination="2oY-4f-Qgc" id="ELn-Sr-UdG"/>
                         <outlet property="StartNextButton" destination="8eW-RS-P5z" id="3CW-Td-g7T"/>
+                        <outlet property="questionLabel" destination="GTc-oP-ge0" id="EAC-gK-Nb8"/>
                         <segue destination="8i2-oo-PmR" kind="unwind" identifier="UnwindToSelectSet" unwindAction="unwindToSelectSetTableViewControllerWithSegue:" id="YKK-5m-1Lq"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="40L-4b-cm1" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="8i2-oo-PmR" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1858" y="-900"/>
+            <point key="canvasLocation" x="1857.9710144927537" y="-900"/>
         </scene>
         <!--Join View Controller-->
         <scene sceneID="8nB-A5-Lvc">
@@ -411,12 +431,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i9V-H4-7kT">
-                                <rect key="frame" x="84.666666666666686" y="188" width="245" height="448"/>
-                                <state key="normal" image="Unpressed"/>
+                                <rect key="frame" x="16" y="188" width="382" height="448"/>
+                                <state key="normal" image="Blue"/>
                                 <connections>
                                     <action selector="buzzerPushed:" destination="J6Q-cl-R4c" eventType="touchDown" id="WOx-md-rFJ"/>
-                                    <action selector="buzzerReleasedInside:" destination="J6Q-cl-R4c" eventType="touchUpInside" id="vGT-fd-9k8"/>
-                                    <action selector="buzzerReleasedOutside:" destination="J6Q-cl-R4c" eventType="touchDragExit" id="goS-6T-nnf"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -644,8 +662,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Blue" width="1098" height="1098"/>
         <image name="Spotlight" width="750" height="1334"/>
-        <image name="Unpressed" width="245" height="251"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Iu3-2n-c8p"/>
