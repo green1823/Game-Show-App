@@ -177,54 +177,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "861D9F9F-B0B7-49C0-9E34-457DD6D46228"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Game Show App/Start Game Path/SelectSetTableViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "loadData()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "861D9F9F-B0B7-49C0-9E34-457DD6D46228 - fba04511f1945f99"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Game_Show_App.SelectSetTableViewController.loadData() -&gt; ()"
-                  moduleName = "Game Show App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/Groups/Shared/old%20stuff/StudioCT/NAS/StudioCT/StudioCT%20Staff/Jackie/AU19-SP20/Game-Show-App/Game%20Show%20App/Start%20Game%20Path/SelectSetTableViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "28"
-                  endingLineNumber = "28"
-                  offsetFromSymbolStart = "31">
-               </Location>
-               <Location
-                  uuid = "861D9F9F-B0B7-49C0-9E34-457DD6D46228 - b63ce1060940a03f"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Game_Show_App.QuestionSet, Game_Show_App.QuestionSet) -&gt; Swift.Bool in Game_Show_App.SelectSetTableViewController.loadData() -&gt; ()"
-                  moduleName = "Game Show App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/Groups/Shared/old%20stuff/StudioCT/NAS/StudioCT/StudioCT%20Staff/Jackie/AU19-SP20/Game-Show-App/Game%20Show%20App/Start%20Game%20Path/SelectSetTableViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "28"
-                  endingLineNumber = "28"
-                  offsetFromSymbolStart = "109">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "B3846A37-C6CF-4D7A-A5C8-67BC1CB80DD4"
             shouldBeEnabled = "No"
             ignoreCount = "0"

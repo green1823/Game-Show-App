@@ -78,15 +78,9 @@ class QuestionSetsTableViewController: UITableViewController {
         } else {
             questionSets.append(set)
         }
-//        var index = 0
-//        for set in questionSets {
-//            DataManager.save(set, with: "qsid" + "\(index)")
-//            index += 1
-//        }
     }
     
     @IBAction func unwindToQuestionSetCancel(segue: UIStoryboardSegue) {
-//        guard let source = segue.source as? QuestionListTableViewController, let set = source.set else {return}
     }
     
     /* Sends the selected Question Set to QuestionListTableViewController IFF an existing set is selected */

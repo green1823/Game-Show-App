@@ -122,7 +122,6 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
             let playerName = correctPlayers[indexPath.row]
             cell.playerNameLabel.text = playerName
             cell.pointsLabel.text = "\(playerScoresDictionary[playerName] ?? 0)"
-            //cell.delegate = self
             cell.delegate = self
         } else {
             let playerItem = playerScoresArray[indexPath.row]
@@ -220,13 +219,6 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
                                 self.tableView.reloadData()
                                 print("main")
                             }
-                            
-                            
-                //            DispatchQueue.main.async {
-                //                self.correctPlayers.append(recievedName)
-                //                let indexPath = IndexPath(row: self.tableView.numberOfRows(inSection: 0), section: 0)
-                //                self.tableView.insertRows(at: [indexPath], with: .automatic)
-                //            }
                         } catch {
                             fatalError("Unable to process the recieved data")
                         }
