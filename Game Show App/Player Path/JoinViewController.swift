@@ -6,14 +6,6 @@
 //  Copyright © 2019 Green, Jackie. All rights reserved.
 //
 
-
-
-/*
- TODO:
- Need Multipeer
- If room codes are necessary to join a game they will be entered here. If not anything else needed to join the game will be done.
- Send name to host in ManageGameTableViewController
- */
 import UIKit
 
 class JoinViewController: UIViewController, UITextFieldDelegate {
@@ -54,7 +46,6 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
         performSegue(withIdentifier: "JoinGame", sender: self)
     }
     
-
     override func prepare(for segue: UIStoryboardSegue, sender: (Any)?){
         if segue.destination is GameViewController {
             let vc = segue.destination as? GameViewController
@@ -67,7 +58,6 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-
     /*
     // MARK: - Navigation
 
@@ -77,5 +67,4 @@ class JoinViewController: UIViewController, UITextFieldDelegate {
         // Pass the selected object to the new view controller.
     }
     */
-
 }

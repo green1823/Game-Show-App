@@ -61,7 +61,6 @@ class QuestionCreationViewController: UIViewController, UITextFieldDelegate {
         updateSaveButtonState()
     }
     
-    
     @IBAction func save(_ sender: Any) {
         let question = questionTextField.text
         currentQuestion = SendData(content: question!, createdAt: Date(), itemIdentifier: UUID())
@@ -69,13 +68,11 @@ class QuestionCreationViewController: UIViewController, UITextFieldDelegate {
         performSegue(withIdentifier: PropertyKeys.unwindSave, sender: self)
     }
     
-    
     @IBAction func cancel(_ sender: Any) {
         self.navigationController?.navigationBar.isHidden = false
         performSegue(withIdentifier: PropertyKeys.unwindCancel, sender: self)
     }
     
-
     /*
     // MARK: - Navigation
 

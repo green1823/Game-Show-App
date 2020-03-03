@@ -158,21 +158,6 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
             certificateHandler(true)
         }
         
-//        func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
-//            peerIDs.append(peerID);
-//            if (playerScoresDictionary[peerID.displayName] == nil) {
-//                playerScoresDictionary[peerID.displayName] = 0
-//            }
-//        }
-//
-//        func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
-//            peerIDs = peerIDs.filter {$0 != peerID}
-//        }
-//
-//        func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
-//
-//        }
-        
         func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController){
             dismiss(animated: true, completion: nil)
         }
@@ -200,7 +185,6 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
         
         func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
             
-            //TODO: see if this if statement works
             if questionsRemaining == true {
                 print("recieved data")
                         //Attempt to recieve name object as data
@@ -214,8 +198,6 @@ class ManageGameTableViewController: UITableViewController, MCSessionDelegate, M
                             }
                             
                             DispatchQueue.main.async {
-                                //let indexPath = IndexPath(row: self.tableView.numberOfRows(inSection: 0), section: 0)
-                                //self.tableView.insertRows(at: [indexPath], with: .automatic)
                                 self.tableView.reloadData()
                                 print("main")
                             }

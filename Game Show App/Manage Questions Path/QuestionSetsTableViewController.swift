@@ -6,8 +6,6 @@
 //  Copyright © 2019 Green, Jackie. All rights reserved.
 //
 
-
-//TODO: Deleting isn't permanent right now, sets reappear after segueing away and back. When returning from editing, the set is double saved, fix this by deleting the set after loading into the next view
 import UIKit
 
 class QuestionSetsTableViewController: UITableViewController {
@@ -23,8 +21,6 @@ class QuestionSetsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //loadData()
-
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -46,12 +42,10 @@ class QuestionSetsTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return questionSets.count
     }
 

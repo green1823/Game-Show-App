@@ -45,8 +45,8 @@ class GameViewController: UIViewController, MCSessionDelegate, MCBrowserViewCont
         mcBrowser.delegate = self
         self.present(mcBrowser, animated: true, completion: nil)
         buzzerButton.isEnabled = false
-        //TRY??
-        buzzerButton.imageView?.contentMode = .scaleAspectFit
+        //TRY??If buzzer is messed up uncomment
+        //buzzerButton.imageView?.contentMode = .scaleAspectFit
     }
     
     func displayQuestion(recievedQuestion: SendData) {
